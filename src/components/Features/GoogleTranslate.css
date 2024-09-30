@@ -1,0 +1,81 @@
+/* Hide Google branding */
+.goog-te-gadget {
+    color: transparent !important;
+}
+
+.goog-te-gadget-icon {
+    display: none !important;
+}
+
+/* Style the dropdown */
+.goog-te-combo {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 4px;
+    font-size: 14px;
+    color: #333;
+    width: 300px; /* Increase width as needed */
+    max-width: 100%; /* Ensure it adapts to container width */
+}
+
+.goog-te-combo:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.goog-te-combo option {
+    padding: 10px;
+}
+
+/* Target the Google Translate dropdown container */
+#google_translate_element {
+    font-family: Arial, sans-serif; /* Customize font */
+    font-size: 14px; /* Customize font size */
+    border-radius: 5px; /* Add rounded corners */
+    overflow: hidden; /* Hide overflow for a cleaner look */
+}
+
+/* Style the dropdown button */
+#google_translate_element .goog-te-menu {
+    background-color: #ffffff; /* Background color */
+    border: 1px solid #ccc; /* Border color */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+}
+
+/* Style individual items in the dropdown */
+#google_translate_element .goog-te-menu2-item {
+    padding: 10px 15px; /* Padding for each item */
+    color: #333; /* Text color */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+/* Style the selected item */
+#google_translate_element .goog-te-menu2-item-selected {
+    background-color: #f1f1f1; /* Background color for selected item */
+}
+
+/* Style the hover effect for items */
+#google_translate_element .goog-te-menu2-item:hover {
+    background-color: #e41010 !important; 
+    box-shadow: none; 
+    /* Background color on hover */
+}
+
+.goog-te-gadget-simple{
+    width: 100vw;
+    height: 2rem;
+}
+
+.goog-te-gadget{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.VIpgJd-ZVi9od-xl07Ob-lTBxed{
+   
+   
+}
+

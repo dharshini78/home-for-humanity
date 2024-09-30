@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+@font-face {
+  font-family: 'Unica';
+  src: url('/fonts/Unica.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'UnicaBold';
+  src: url('/fonts/UnicaBold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+
+.ff-xl {
+  font-family: "Unica";
+  font-size: 20px;
+  color: #3A3A3A;
+
+  
+}
+
+.mini{
+  color: #3A3A3A;
+  font-size: 18px; 
+  font-family: "Unica";
+
+}
+
+.text-smm{
+  font-size: 16px;
+  font-family: "Unica";
+  color: #3A3A3A;
+
+
+}
+
+.materials-font{
+  font-size: 14px;
+  font-family: "Unica";
+  color: #3A3A3A;
+
+
+}
