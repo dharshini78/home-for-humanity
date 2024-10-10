@@ -4,8 +4,6 @@ import { useTranslation } from "react-i18next";
 import data from "../Data/PTSData.jsx";
 import { RiArrowRightDoubleFill, RiArrowLeftDoubleFill } from "react-icons/ri";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { FaUser } from "react-icons/fa";
-import { GoClockFill } from "react-icons/go";
 import SkeletonLoader from "../Skeletons/SkeletonMaterialOne.jsx";
 import "../Home.css";
 import { FaCircleArrowUp } from "react-icons/fa6";
@@ -425,7 +423,7 @@ const Materials = () => {
           className="flex items-center p-2 rounded-[6rem] justify-center bg-gray-100 border border-black h-9 mr-4 mt-4 text-smm"
           onClick={toggleSteps}
         >
-          <RiArrowRightDoubleFill size={24} />
+          <RiArrowLeftDoubleFill size={24} />
           <h1 className="mt-[0.2rem] text-smm">{t("Steps")}</h1>
         </button>
       )}
@@ -473,14 +471,12 @@ const Materials = () => {
                   <>
                     <div className="flex text-smm p-2">
                       <PiMicrophoneSlashFill size={24} />
-                      <p>Speak</p>
                     </div>
                   </>
                 ) : (
                   <>
                     <div className="flex text-smm p-2">
                       <PiMicrophoneFill size={24} />
-                      <p>Speak</p>
                     </div>
                   </>
                 )}
@@ -491,7 +487,6 @@ const Materials = () => {
               >
                 <div className="flex text-smm p-1">
                   <BsArrowRepeat size={24} />
-                  <p>Repeat</p>
                 </div>
               </button>
             </div>
@@ -596,7 +591,7 @@ const Materials = () => {
                 onClick={toggleSteps}
               >
                 <h1 className="text-smm">{t("Close")}</h1>
-                <RiArrowLeftDoubleFill size={24} />
+                <RiArrowRightDoubleFill size={24} />
               </button>
             </div>
 
