@@ -24,12 +24,12 @@ const TextToTextChat = () => {
   const [textToSpeechResponse, setTextToSpeechResponse] = useState(null);
 
   useEffect(() => {
-    const socket = io("http://localhost:5000", {
+    const socket = io("https://api.homeforhumanity.xrvizion.com", {
       reconnection: true,
       reconnectionDelay: 1000,
       reconnectionDelayMax: 5000,
       reconnectionAttempts: Infinity,
-      transports: ['websocket', 'polling'] // Try WebSocket first, then fallback to polling
+      // transports: ['websocket', 'polling']
     });
     socketRef.current = socket;
 
@@ -84,32 +84,11 @@ const TextToTextChat = () => {
   useEffect(() => {
     if (textToSpeechResponse) {
       const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-      audioContext.decodeAudioData(textToSpeechResponse.buffer, (buffer) => {
-        const source = audioContext.createBufferSource();
-        source.buffer = buffer;
-        source.connect(audioContext.destination);
-        source.start();
-      }, (error) => {
-        console.error("Error decoding audio data:", error);
-      });
+      const audioElement = new Audio();
+      audioElement.src = URL.createObjectURL(new Blob([textToSpeechResponse], { type: 'audio/mp3' }));
+      audioElement.play();
     }
   }, [textToSpeechResponse]);
-
-  useEffect(() => {
-    const storedSessionId = localStorage.getItem("sessionId");
-    const storedChatMessages = localStorage.getItem("chatMessages");
-    if (storedSessionId) {
-      setSessionId(parseInt(storedSessionId, 10));
-    }
-    if (storedChatMessages) {
-      setChatMessages(JSON.parse(storedChatMessages));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("sessionId", sessionId);
-    localStorage.setItem("chatMessages", JSON.stringify(chatMessages));
-  }, [sessionId, chatMessages]);
 
   const toggleMute = () => {
     setIsMuted(!isMuted);
@@ -294,7 +273,7 @@ const TextToTextChat = () => {
         </div>
       )}
       <footer className="fixed bottom-4 left-4 z-50 flex space-x-2">
-        {/* Add your footer content here */}
+     
       </footer>
     </div>
   );

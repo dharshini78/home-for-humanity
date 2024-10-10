@@ -516,7 +516,7 @@ const data = [
     img: shelter1,
     Tent: imageTent,
     title: "Timber Shelter",
-    headcounts: "2-3",
+    headcounts: "2",
     weather: {
       sunny: true,
       snowy: true,
@@ -1872,7 +1872,7 @@ const data = [
     img: shelter3,
     Tent: bsreal,
     title: "Temporary Shelter",
-    headcounts: "3-4",
+    headcounts: "4",
     weather: {
       sunny: true,
       snowy: true,
@@ -2963,7 +2963,7 @@ const data = [
   img: shelter5,
   Tent: ssreal,
   title: "Superadobe Shelter",
-  headcounts: "3-4",
+  headcounts: "3",
   weather: {
     sunny: true,
     snowy: false,

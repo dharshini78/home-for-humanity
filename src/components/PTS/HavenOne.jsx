@@ -5,9 +5,8 @@ import data from "../Data/PTSData.jsx";
 import { FaUser, FaClipboardList } from "react-icons/fa";
 import { GoClockFill } from "react-icons/go";
 import { IoDownload } from "react-icons/io5";
-import { IoMdArrowBack, IoMdArrowDropleft, IoMdArrowDropright, IoMdClose, IoMdVolumeOff, IoMdVolumeHigh } from "react-icons/io";
+import { IoMdArrowBack, IoMdArrowDropleft, IoMdArrowDropright, IoMdClose } from "react-icons/io";
 import './HavenOne.css';
-import { useMute } from "../Features/muteContext.jsx"
 import { FaBookReader } from "react-icons/fa";
 import SkeletonLoader from "../Skeletons/SkeletonHavenOne.jsx";
 import CommentTS from "../Features/CommentTS.jsx";
@@ -15,17 +14,6 @@ import CommentLOG from "../Features/CommentLOG.jsx";
 import CommentTem from "../Features/CommentTem.jsx";
 import CommentBS from "../Features/CommentBS.jsx";
 import CommentSS from "../Features/CommentSS.jsx";
-
-const speakText = (text, isMuted) => {
-  if (isMuted) return;
-
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.onstart = () => console.log('Speech started');
-  utterance.onend = () => console.log('Speech ended');
-  utterance.onerror = (event) => console.error('Speech error:', event);
-
-  window.speechSynthesis.speak(utterance);
-};
 
 const HavenOne = () => {
   const { t } = useTranslation();
@@ -35,12 +23,8 @@ const HavenOne = () => {
   const [comments, setComments] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageIndex, setImageIndex] = useState(0);
-  const { isMuted, toggleMute } = useMute();
   const itemWithId = data.find(item => item.id === id);
 
-
-
-  
   const goBack = () => {
     navigate('/');
   };
@@ -55,12 +39,6 @@ const HavenOne = () => {
     };
   }, [id]);
 
-  useEffect(() => {
-    if (isMuted) {
-      window.speechSynthesis.cancel();
-    }
-  }, [isMuted]);
-
   if (!itemWithId) {
     return <div>Home not found</div>;
   }
@@ -68,11 +46,6 @@ const HavenOne = () => {
   if (loading) {
     return <SkeletonLoader />;
   }
-
-  // const handleImageClick = (image, index) => {
-  //   setSelectedImage(image);
-  //   setImageIndex(index);
-  // };
 
   const closeImagePopup = () => {
     setSelectedImage(null);
@@ -97,30 +70,10 @@ const HavenOne = () => {
     setComments([...comments, comment]);
   };
 
-  const speakHeadCount = () => {
-    speakText(`Headcount: ${itemWithId.headcounts}`, isMuted);
-  };
-
-  const speakDuration = () => {
-    speakText(`Duration: ${itemWithId.duration} ${t("weeks")}`, isMuted);
-  };
-
-  const speakMaterialList = () => {
-    speakText(`Material list`, isMuted);
-  };
-
-  const speakOpenInstructions = () => {
-    speakText(`Opening instructions`, isMuted);
-  };
-
-  const speakDownloadPDF = () => {
-    speakText(`Downloading as PDF`, isMuted);
-  };
-
   const renderCommentComponent = () => {
     switch (id) {
       case "0":
-        return <CommentTS comments={comments} onSubmit={handleCommentSubmit} />;
+        return <CommentTS comments={comments} onSubmit={handleCommentSubmit} className='underline' />;
       case "1":
         return <CommentLOG comments={comments} onSubmit={handleCommentSubmit} />;
       case "2":
@@ -147,12 +100,12 @@ const HavenOne = () => {
       <div className="flex flex-col px-6">
         <div className="flex flex-col">
           <div key={itemWithId.id} className="flex">
-            <button className="border flex items-center p-2 rounded-[6rem] w-auto justify-center bg-gray-100 border-black h-8 mr-2" onClick={speakHeadCount}>
+            <button className="border flex items-center p-2 rounded-[6rem] w-auto justify-center bg-gray-100 border-black h-8 mr-2">
               <FaUser size={14} className="text-black" />
               <h1 className="ml-2 mt-[.2rem] materials-font">{itemWithId.headcounts}</h1>
             </button>
 
-            <button className="border flex items-center p-2 rounded-[6rem] w-auto justify-center bg-gray-100 border-black h-8 ml-2" onClick={speakDuration}>
+            <button className="border flex items-center p-2 rounded-[6rem] w-auto justify-center bg-gray-100 border-black h-8 ml-2">
               <GoClockFill />
               <h1 className="ml-2 mt-[.2rem] materials-font">
                 {itemWithId.duration} {t("weeks")}
@@ -163,37 +116,34 @@ const HavenOne = () => {
         <div className="mt-6 flex flex-col justify-normal items-start min-h-svh">
           <img src={itemWithId.Tent} alt="Tent" className="w-full h-auto" />
           <div className="w-full flex flex-col justify-between h-[180px] mt-5">
-
             <Link to={`/haven/${itemWithId.id}/materials`}>
-              <button className="border-b-[0.6px] w-full flex pb-5 border-gray-400 text-smm items-center mt-5" onClick={speakOpenInstructions}>
+              <button className="border-b-[0.6px] w-full flex pb-5 border-gray-400 text-smm items-center mt-5">
+                <FaBookReader size={16} className="mr-4" />
                 {t("Instructions")}
-                <FaBookReader size={16} className="ml-4" />
-
               </button>
             </Link>
             <Link to={`/haven/${itemWithId.id}/list`}>
-              <button className="border-b-[0.6px] w-full flex pb-5 border-gray-400 text-smm items-center mt-5" onClick={speakMaterialList}>
+              <button className="border-b-[0.6px] w-full flex pb-5 border-gray-400 text-smm items-center mt-5">
+                <FaClipboardList size={18} className="mr-3" />
                 {t("material list")}
-                <FaClipboardList  size={18} className="ml-3"/>
-
               </button>
             </Link>
 
             <a
               href="/Timber_Pakistan_Instructions.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               download="Timber_Pakistan_Instructions.pdf"
               className="border-b-[0.6px] w-full flex pb-5 border-gray-400 text-smm items-center mt-5"
-              onClick={speakDownloadPDF}
             >
+              <IoDownload size={24} className="mr-2 text-gray-800 mb-1" />
               {t("Download as PDF")}
-              <IoDownload size={24} className="ml-2 text-gray-800 mb-1" />
             </a>
           </div>
           <div className="w-full mt-4">
             {comments.length === 0 && <p className="mt-4 text-smm"></p>}
 
             {renderCommentComponent()}
-
           </div>
         </div>
       </div>
@@ -214,12 +164,7 @@ const HavenOne = () => {
       )}
 
       <footer className="fixed bottom-4 right-4 z-50">
-        <button
-          onClick={toggleMute}
-          className="p-2 bg-gray-200 rounded-full shadow-lg"
-        >
-          {isMuted ? <IoMdVolumeOff size={24} /> : <IoMdVolumeHigh size={24} />}
-        </button>
+
       </footer>
     </>
   );

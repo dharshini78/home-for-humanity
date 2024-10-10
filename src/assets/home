@@ -1,0 +1,32 @@
+  <div className="w-full p-5">
+        <img src={shelter} alt="" />
+      </div>
+
+      <div className="flex items-center">
+        <h1 className="ff-xl font-bold ml-7 mr-6">Haven of hope shelter</h1>
+        <div className="flex">
+          <BsCloudRainFill className="mr-2" />
+          <IoIosSunny className="mr-2" />
+          <BsCloudSnowFill />
+        </div>
+      </div>
+
+      <div className="pl-5 flex mt-4">
+        <button className="border flex items-center p-2 rounded-[6rem] w-[5rem] justify-center bg-gray-100 border-black h-10 mr-4">
+          <FaUser size={14} className="text-black" />
+          <h1 className="ml-2">2 - 4</h1>
+        </button>
+
+        <button className="border flex items-center p-2 rounded-[6rem] w-[5rem] justify-center bg-gray-100 border-black h-10 mr-4">
+          <AiFillDollarCircle size={18} className="text-black" />
+          <AiFillDollarCircle size={18} className="text-gray-400" />
+          <AiFillDollarCircle size={18} className="text-gray-400" />
+          <p>Price: 3000</p>
+        </button>
+
+        <button className="border flex items-center p-2 rounded-[6rem] w-[8rem] justify-center bg-gray-100 border-black h-10 mr-4">
+          <GoClockFill />
+
+          <h1 className="ml-2">3 - 4 weeks</h1>
+        </button>
+      </div>

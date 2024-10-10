@@ -1,9 +1,6 @@
 import { IoMdClose } from "react-icons/io";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
-import io from "socket.io-client";
-
-const socket = io("http://localhost:5000");
 
 const speakText = (text, isMuted, language) => {
   if (isMuted) return;
@@ -11,7 +8,7 @@ const speakText = (text, isMuted, language) => {
   window.speechSynthesis.cancel(); // Cancel any ongoing speech
 
   const utterance = new SpeechSynthesisUtterance(text);
-
+  
   // Define language codes with fallbacks
   const languageCodes = {
     'en': ['en-US', 'en-GB', 'en'],
@@ -145,7 +142,6 @@ const LanguagePopUp = ({ onClose, onSelectLanguage }) => {
   const handleLanguageSelection = (lang) => {
     i18n.changeLanguage(lang);
     onSelectLanguage(lang);
-    socket.emit("startTextInput", lang, 0, "", true); // Send language code to backend
     speakText(i18n.t(`${lang}_welcome`), lang, false); // Speak a welcome message in the selected language
   };
 
