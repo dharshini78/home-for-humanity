@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import SkeletonLoader from "../Skeletons/SkeletonAbout.jsx";
-
+import Navbar from "../Features/navbar.jsx";
 
 const About = () => {
   const { t } = useTranslation();
@@ -25,22 +25,20 @@ const About = () => {
 
   return (
     <>
+      <Navbar />
+
       <div className="p-6 flex flex-col justify-evenly leading-7">
+        <h1 className="ff-xl font-bold mb-6 text-left">About</h1>
         <div>
-          <h1 className="ff-xl text-2xl mb-4 mini">{t("about_title")}</h1>
-          <p className="ff-xl text-[1.1rem] mb-8 mini">{t("about_text")}</p>
-        </div>
-
-        <div>
-          <h1 className="ff-xl text-2xl mb-4 mini">{t("our_vision_title")}</h1>
           <p className="ff-xl text-[1.1rem] mb-8 mini">
-            {t("our_vision_text")}
+            Home for Humanity is a community-driven initiative aimed at addressing the global housing crisis by empowering individuals with the tools and knowledge to build sustainable, low-cost shelters. Our mission is to provide accessible, DIY solutions for those facing homelessness and housing insecurity, allowing communities to take action and make a real impact in their local environments.
           </p>
-        </div>
-
-        <div>
-          <h1 className="ff-xl text-2xl mini mb-4">{t("our_mission_title")}</h1>
-          <p className="ff-xl text-[1.1rem] mini">{t("our_mission_text")}</p>
+          <p className="ff-xl text-[1.1rem] mb-8 mini">
+            We are starting with basic shelters that have already been built and proven to be effective. As we grow, we will be adding more shelter designs and tutorials to meet diverse needs. Whether you’re a volunteer, student, or an architect, Home for Humanity equips you with the resources needed to create safe and affordable housing for people in need. By fostering collaboration and leveraging technology, we aim to make dignified living spaces accessible to all, one home at a time.
+          </p>
+          <p className="ff-xl text-[1.1rem] mb-8 mini">
+            With your help and the dedication of volunteer builders, we can continue to grow and make a difference. Share your DIY shelter creations using the hashtag <b>#HomeForHumanity</b>  to inspire others and join our movement!
+          </p>
         </div>
       </div>
 
@@ -49,24 +47,6 @@ const About = () => {
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <Link
-          to="/"
-          className="underline-animation p-7 w-full flex items-center justify-start border-b border-gray-300 ff-xl"
-        >
-          {t("shelters")}
-        </Link>
-        <Link
-          to="/about"
-          className="underline-animation p-7 w-full flex items-center justify-start border-b border-gray-300 ff-xl"
-        >
-          {t("about_title")}
-        </Link>
-        <Link
-          to="/faqs"
-          className="underline-animation p-7 w-full flex items-center justify-start border-b border-gray-300 ff-xl"
-        >
-          {t("faqs")}
-        </Link>
       </div>
     </>
   );

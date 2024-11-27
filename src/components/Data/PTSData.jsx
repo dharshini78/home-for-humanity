@@ -418,14 +418,29 @@ import loggie14 from '../../assets/LOG/Materialsimg/014.png';
 
 import imageTent from "../../assets/PTS/imageTent.png";
 import LogReal from "../../assets/LOG/LogReal.png";
-import shelter1 from "../../assets/PTS/shelter.png";
-import shelter2 from "../../assets/LOG/LogBnW.png";
-import shelter3 from "../../assets/BS/BS.png";
+// import shelter1 from "../../assets/PTS/shelter.png";
+// import shelter2 from "../../assets/LOG/LogBnW.png";
+// import shelter3 from "../../assets/BS/BS.png";
 import bsreal from "../../assets/BS/BSReal.jpg"
-import shelter4 from "../../assets/BS_indo/BS_indo.png";
+// import shelter4 from "../../assets/BS_indo/BS_indo.png";
 import bsindoreal from '../../assets/BS_indo/BSIndoReal.jpg'
-import shelter5 from "../../assets/SS/superDoble.png";
-import ssreal from '../../assets/SS/SSReal.jpg'
+// import shelter5 from "../../assets/SS/superDoble.png";
+import ssreal from '../../assets/SS/SSReal.jpg';
+
+const shelter1 = "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/shelter.png"
+const shelter2 = "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/LogBnW.png"
+const shelter3 = "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/BS.png"
+const shelter4 = "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/BS_indo.png"
+const shelter5 = "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/superDoble.png"
+
+
+
+
+
+
+
+
+
 
 
 
@@ -516,7 +531,8 @@ const data = [
     img: shelter1,
     Tent: imageTent,
     title: "Timber Shelter",
-    headcounts: "2-3",
+
+    headcounts: "2",
     weather: {
       sunny: true,
       snowy: true,
@@ -524,7 +540,7 @@ const data = [
       rainy: false,
     },
     price: 2, // 2 black icons
-    duration: "2-3",
+    duration: "5-6",
     RealPrice: 2000,
    "steps": [
     {
@@ -848,8 +864,8 @@ const data = [
     id: "1",
     img: shelter2,
     Tent: LogReal,
-    title: "Lari Octagreen Shelter",
-    headcounts: "3-4",
+    title: "Octagreen Shelter",
+    headcounts: "3",
     weather: {
       sunny: true,
       snowy: true,
@@ -857,7 +873,7 @@ const data = [
       rainy: false,
     },
     price: 1, // 3 black icons
-    duration: "3-4",
+    duration: "4-5",
     RealPrice: 1000,
     steps: [
       {
@@ -1872,7 +1888,7 @@ const data = [
     img: shelter3,
     Tent: bsreal,
     title: "Temporary Shelter",
-    headcounts: "3-4",
+    headcounts: "4",
     weather: {
       sunny: true,
       snowy: true,
@@ -2360,7 +2376,7 @@ const data = [
       rainy: true,
     },
     price: 3, // 3 black icons
-    duration: "3-4",
+    duration: "2-3",
     RealPrice: 3000,
     steps: [
       {
@@ -2963,7 +2979,7 @@ const data = [
   img: shelter5,
   Tent: ssreal,
   title: "Superadobe Shelter",
-  headcounts: "3-4",
+  headcounts: "6",
   weather: {
     sunny: true,
     snowy: false,

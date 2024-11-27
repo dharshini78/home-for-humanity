@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { HiSparkles } from 'react-icons/hi2';
+import { HiSparkles, HiMicrophone, HiX, HiArrowUp, HiArrowDown, HiExpand, HiCompress } from 'react-icons/hi2';
 import axios from 'axios';
 import io from 'socket.io-client';
 import LanguagePopUp from './LanguagePopUp'; // Import the LanguagePopUp component
@@ -13,11 +13,12 @@ const Chatbot = ({ isOpen, onClose }) => {
   const [audioSrc, setAudioSrc] = useState('');
   const [language, setLanguage] = useState('en');
   const [showLanguagePopUp, setShowLanguagePopUp] = useState(false); // State for language popup
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const shouldPlayResponse = useRef(false);
   const audioRef = useRef(new Audio());
 
   useEffect(() => {
-    const socket = io.connect('backkkkkkenddddddddd URLLLLLLLL');
+    const socket = io.connect('https://api.homeforhumanity.xrvizion.com');
     setConnection(socket);
 
     socket.on('connect', () => {
@@ -31,6 +32,7 @@ const Chatbot = ({ isOpen, onClose }) => {
     socket.on('startStream', async (langCode, sessionId, location, newSession, newLocation) => {
       console.log('Start Stream Event', { langCode, sessionId, location, newSession, newLocation });
       // Handle startStream event
+      console.log('is it repeating');
     });
 
     socket.on('endStream', () => {
@@ -73,13 +75,19 @@ const Chatbot = ({ isOpen, onClose }) => {
     setInput('');
   };
 
-  const handleListen = () => {
+  const handleListen = async () => {
     if (isListening) {
       connection.emit('endStream');
+      setIsListening(false);
     } else {
-      connection.emit('startStream', language, 0, 'web', true);
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        connection.emit('startStream', language, 0, 'web', true);
+        setIsListening(true);
+      } catch (error) {
+        console.error("Error accessing microphone:", error);
+      }
     }
-    setIsListening(!isListening);
   };
 
   const playAudio = (url) => {
@@ -99,48 +107,83 @@ const Chatbot = ({ isOpen, onClose }) => {
     stream.getTracks().forEach(track => track.stop());
   };
 
+  const toggleFullscreen = () => {
+    setIsFullscreen(!isFullscreen);
+  };
+
   if (!isOpen) return null;
 
   return (
-    <div className="fixed bottom-4 right-4 w-96 h-96 bg-white border border-gray-300 shadow-lg p-4 z-50 flex flex-col">
+    <div 
+      className={`fixed left-1/2 transform -translate-x-1/2 bg-gray-800 border border-gray-700 shadow-lg p-4 z-50 flex flex-col transition-all duration-500 ease-in-out
+        ${isOpen ? 'top-4' : 'top-full'}
+        ${isFullscreen ? 'w-full h-full inset-0' : 'w-1/2 h-96'}
+        md:w-1/2 w-full`}
+    >
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg font-bold">Chatbot</h2>
-        <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
-          <HiSparkles size={24} />
-        </button>
-        <button onClick={() => setShowLanguagePopUp(true)} className="text-gray-500 hover:text-gray-700">
-          {language}
-        </button>
+        <h2 className="text-lg font-bold text-white">Chatbot</h2>
+        <div className="flex items-center space-x-2">
+          <button 
+            className="text-gray-500 hover:text-gray-300 transition-colors"
+            onClick={() => setShowLanguagePopUp(true)}
+          >
+            {language}
+          </button>
+          <button 
+            className="text-gray-500 hover:text-gray-300 transition-colors"
+            onClick={toggleFullscreen}
+          >
+            {isFullscreen ? <HiCompress size={24} /> : <HiExpand size={24} />}
+          </button>
+          <button 
+            className="text-gray-500 hover:text-gray-300 transition-colors"
+            onClick={onClose}
+          >
+            <HiX size={24} />
+          </button>
+        </div>
       </div>
+
       {showLanguagePopUp && (
-        <LanguagePopUp onClose={() => setShowLanguagePopUp(false)} onSelectLanguage={setLanguage} />
+        <LanguagePopUp 
+          onClose={() => setShowLanguagePopUp(false)} 
+          onSelectLanguage={setLanguage} 
+        />
       )}
-      <div className="flex-grow overflow-y-auto mb-4">
+
+      <div className="flex-grow overflow-y-auto mb-4 bg-gray-900 bg-opacity-50 backdrop-blur-lg rounded-lg p-4 w-full">
         {messages.map((msg, index) => (
-          <div key={index} className={`mb-2 ${msg.role === 'user' ? 'text-right' : 'text-left'}`}>
-            <strong>{msg.role}:</strong> {msg.content}
+          <div 
+            key={index} 
+            className={`mb-2 ${msg.role === 'user' ? 'text-right' : 'text-left'}`}
+          >
+            <strong className={`${msg.role === 'user' ? 'text-blue-500' : 'text-green-500'}`}>
+              {msg.role}:
+            </strong> 
+            {msg.content}
           </div>
         ))}
       </div>
+
       <div className="flex items-center">
         <input
           type="text"
           value={input}
           onChange={handleInputChange}
           placeholder="Type your message here"
-          className="flex-grow p-2 border border-gray-300 rounded-l-md"
+          className="flex-grow p-2 border border-gray-700 rounded-l-md bg-gray-900 text-white"
         />
         <button
           onClick={handleSendMessage}
-          className="p-2 bg-blue-500 text-white rounded-r-md hover:bg-blue-600"
+          className="p-2 bg-blue-500 text-white rounded-r-md hover:bg-blue-600 transition-colors"
         >
-          Send
+          <HiArrowUp size={24} />
         </button>
         <button
           onClick={handleListen}
-          className={`ml-2 p-2 ${isListening ? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600'} text-white rounded-md`}
+          className={`ml-2 p-2 ${isListening ? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600'} text-white rounded-md transition-colors`}
         >
-          {isListening ? 'Stop' : 'Listen'}
+          <HiMicrophone size={24} />
         </button>
       </div>
     </div>

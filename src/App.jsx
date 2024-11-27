@@ -8,16 +8,19 @@ import HavenOne from "./components/PTS/HavenOne.jsx";
 import Materials from "./components/PTS/instructions.jsx";
 import MaterialsList from "./components/PTS/MaterialsList.jsx";
 import { MuteProvider } from "./components/Features/muteContext.jsx";
+import Credits from "./components/pages/Credits.jsx";
 
 export default function App() {
   return (
     <>
       <MuteProvider>
-        <Navbar />
+        {/* <Navbar /> */}
         <Routes>
           <Route index element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/faqs" element={<Faqs />} />
+          <Route path="/credits" element={<Credits />} />
+      
           <Route path="/haven/:id" element={<HavenOne />} />
           <Route path="/haven/:id/materials" element={<Materials />} />
           <Route path="/haven/:id/list" element={<MaterialsList />} />

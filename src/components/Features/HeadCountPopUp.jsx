@@ -42,13 +42,13 @@ const HeadCountPopUp = ({ onClose, onSort, onClear, selectedHeadCount }) => {
               type="radio"
               id="headCount2"
               name="headCount"
-              value="2-3"
-              checked={localSelectedHeadCount === '2-3'}
-              onChange={() => handleHeadCountSelect('2-3')}
+              value="2"
+              checked={localSelectedHeadCount === '2'}
+              onChange={() => handleHeadCountSelect('2')}
               className="mr-2"
             />
             <label htmlFor="headCount2" className="flex items-center">
-              <span className='ff-xl text-lg'>2-3</span>
+              <span className='ff-xl text-lg'>2</span>
             </label>
           </div>
 
@@ -57,13 +57,13 @@ const HeadCountPopUp = ({ onClose, onSort, onClear, selectedHeadCount }) => {
               type="radio"
               id="headCount3"
               name="headCount"
-              value="3-4"
-              checked={localSelectedHeadCount === '3-4'}
-              onChange={() => handleHeadCountSelect('3-4')}
+              value="3"
+              checked={localSelectedHeadCount === '3'}
+              onChange={() => handleHeadCountSelect('3')}
               className="mr-2"
             />
             <label htmlFor="headCount3" className="flex items-center">
-              <span className='ff-xl text-lg'>3-4</span>
+              <span className='ff-xl text-lg'>3</span>
             </label>
           </div>
 
@@ -72,13 +72,28 @@ const HeadCountPopUp = ({ onClose, onSort, onClear, selectedHeadCount }) => {
               type="radio"
               id="headCount4"
               name="headCount"
-              value="more than 4"
-              checked={localSelectedHeadCount === 'more than 4'}
-              onChange={() => handleHeadCountSelect('more than 4')}
+              value="4"
+              checked={localSelectedHeadCount === '4'}
+              onChange={() => handleHeadCountSelect('4')}
               className="mr-2"
             />
             <label htmlFor="headCount4" className="flex items-center">
-              <span className='ff-xl text-lg'>More than 4</span>
+              <span className='ff-xl text-lg'>4</span>
+            </label>
+          </div>
+
+          <div className="flex items-center">
+            <input
+              type="radio"
+              id="headCount5"
+              name="headCount"
+              value="5"
+              checked={localSelectedHeadCount === '5'}
+              onChange={() => handleHeadCountSelect('5')}
+              className="mr-2"
+            />
+            <label htmlFor="headCount5" className="flex items-center">
+              <span className='ff-xl text-lg'>5</span>
             </label>
           </div>
         </div>

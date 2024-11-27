@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { IoMdClose } from 'react-icons/io';
 import { RiArrowDropDownFill } from 'react-icons/ri';
 import axios from 'axios';
+import Navbar from "../Features/navbar.jsx";
 
 const FAQs = () => {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -23,7 +24,6 @@ const FAQs = () => {
       question: 'Few more question here',
       answer: 'Description',
     },
-  
   ];
 
   const toggleFAQ = (index) => {
@@ -31,26 +31,28 @@ const FAQs = () => {
   };
 
   return (
-    <div className='p-3'>
-      <h1 className='mini mb-4'>FAQs</h1>
-      {faqs.map((faq, index) => (
-        <div key={index} className=''>
-          <button
-            onClick={() => toggleFAQ(index)}
-            className='w-full text-left px-4 py-[1rem] bg-gray-200 border border-gray-300 flex items-center justify-between'
-          >
-            {faq.question}
-            <RiArrowDropDownFill className={`transition-transform ${activeIndex === index ? 'transform rotate-180' : ''}`} />
-          </button>
+    <>
+      <div className='p-3 max-w-4xl mx-auto'>
+        <h1 className='ff-xl font-bold mb-4 mini'>FAQs</h1>
+        {faqs.map((faq, index) => (
+          <div key={index} className=''>
+            <button
+              onClick={() => toggleFAQ(index)}
+              className='w-full text-left px-4 py-[1rem] bg-gray-200 border border-gray-300 flex items-center justify-between text-smm'
+            >
+              {faq.question}
+              <RiArrowDropDownFill className={`transition-transform ${activeIndex === index ? 'transform rotate-180' : ''}`} />
+            </button>
 
-          {activeIndex === index && (
-            <div className='p-4 bg-gray-100 border border-gray-300 transition-max-height duration-300 ease-in-out max-h-screen overflow-auto'>
-              {faq.answer}
-            </div>
-          )}
-        </div>
-      ))}
-    </div>
+            {activeIndex === index && (
+              <div className='p-4 bg-gray-100 border border-gray-300 transition-max-height duration-300 ease-in-out max-h-screen overflow-auto'>
+                {faq.answer}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </>
   );
 };
 
@@ -80,40 +82,40 @@ const ContactForm = () => {
   };
 
   return (
-    <div className='p-3'>
-      <h2 className='mini mb-4'>Have any more questions?</h2>
+    <div className='p-3 max-w-4xl mx-auto'>
+      <h2 className='text-2xl font-bold mb-4 mini'>Have any more questions?</h2>
       <form onSubmit={handleSubmit}>
-        <div className='mb-4'>
+        <div className='mb-4 text-smm'>
           <label className='block text-gray-700'>Name</label>
           <input
             type='text'
-            className='w-full px-3 py-2 border border-gray-300 rounded-lg'
+            className='w-full md:w-1/2 px-3 py-2 border border-gray-300 rounded-lg'
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
           />
         </div>
-        <div className='mb-4'>
-          <label className='block text-gray-700'>Email</label>
+        <div className=' mb-4 text-smm'>
+          <label className=' block text-gray-700'>Email</label>
           <input
             type='email'
-            className='w-full px-3 py-2 border border-gray-300 rounded-lg'
+            className='w-full md:w-1/2 px-3 py-2 border border-gray-300 rounded-lg'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
-        <div className='mb-4'>
+        <div className='mb-4 text-smm'>
           <label className='block text-gray-700'>Message</label>
           <textarea
-            className='w-full px-3 py-2 border border-gray-300 h-[7rem] rounded-lg'
+            className=' w-full md:w-1/2 px-3 py-2 border border-gray-300 h-[7rem] rounded-lg'
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             required
           />
         </div>
 
-        <button type='submit' className='w-1/2 bg-gray-800 text-white py-2 border border-gray-300'>
+        <button type='submit' className='px-8 bg-gray-800 text-smmm text-white py-2 border border-gray-300'>
           Submit
         </button>
       </form>
@@ -148,7 +150,7 @@ const CommentModal = ({ onClose }) => {
 
   return (
     <div className='fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 p-4'>
-      <div className='bg-white p-6 rounded-lg w-96 relative'>
+      <div className='bg-white p-6 rounded-lg w-full max-w-md relative'>
         <button onClick={onClose} className='absolute top-2 right-2 p-4 text-gray-600 hover:text-gray-900'>
           <IoMdClose size={24} color='black' />
         </button>
@@ -205,11 +207,14 @@ const App = () => {
   };
 
   return (
-    <div className='p-4'>
-      <FAQs />
-      <ContactForm />
-      {isModalOpen && <CommentModal onClose={closeModal} />}
-    </div>
+    <>
+      <Navbar />
+      <div className='p-4 max-w-4xl mx-auto'>
+        <FAQs />
+        <ContactForm />
+        {isModalOpen && <CommentModal onClose={closeModal} />}
+      </div>
+    </>
   );
 };
 

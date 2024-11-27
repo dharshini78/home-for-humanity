@@ -24,12 +24,11 @@ const TextToTextChat = () => {
   const [textToSpeechResponse, setTextToSpeechResponse] = useState(null);
 
   useEffect(() => {
-    const socket = io("http://localhost:5000", {
+    const socket = io("https://api.homeforhumanity.xrvizion.com", {
       reconnection: true,
       reconnectionDelay: 1000,
       reconnectionDelayMax: 5000,
       reconnectionAttempts: Infinity,
-      transports: ['websocket', 'polling'] // Try WebSocket first, then fallback to polling
     });
     socketRef.current = socket;
 
@@ -37,6 +36,10 @@ const TextToTextChat = () => {
       console.log("Connected to the server");
       setIsConnected(true);
       setConnectionError(null);
+
+      if (chatMessages.length === 0) {
+        setChatMessages([{ from: "bot", content: "Hey there! How can I assist you today?" }]);
+      }
     });
 
     socket.on("disconnect", (reason) => {
@@ -67,7 +70,7 @@ const TextToTextChat = () => {
 
     socket.on("serverError", (error) => {
       console.error("Server error:", error);
-      setChatMessages((prevMessages) => [...prevMessages, { from: "bot", content: "Sorry, there was an error processing your request." }]);
+      setChatMessages((prevMessages) => [...prevMessages, { from: "bot", content: "" }]);
     });
 
     socket.on("audio_to_text", (data) => {
@@ -84,32 +87,11 @@ const TextToTextChat = () => {
   useEffect(() => {
     if (textToSpeechResponse) {
       const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-      audioContext.decodeAudioData(textToSpeechResponse.buffer, (buffer) => {
-        const source = audioContext.createBufferSource();
-        source.buffer = buffer;
-        source.connect(audioContext.destination);
-        source.start();
-      }, (error) => {
-        console.error("Error decoding audio data:", error);
-      });
+      const audioElement = new Audio();
+      audioElement.src = URL.createObjectURL(new Blob([textToSpeechResponse], { type: 'audio/mp3' }));
+      audioElement.play();
     }
   }, [textToSpeechResponse]);
-
-  useEffect(() => {
-    const storedSessionId = localStorage.getItem("sessionId");
-    const storedChatMessages = localStorage.getItem("chatMessages");
-    if (storedSessionId) {
-      setSessionId(parseInt(storedSessionId, 10));
-    }
-    if (storedChatMessages) {
-      setChatMessages(JSON.parse(storedChatMessages));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("sessionId", sessionId);
-    localStorage.setItem("chatMessages", JSON.stringify(chatMessages));
-  }, [sessionId, chatMessages]);
 
   const toggleMute = () => {
     setIsMuted(!isMuted);
@@ -126,7 +108,7 @@ const TextToTextChat = () => {
     const newSessionId = 0;
     setSessionId(newSessionId);
     if (isConnected) {
-      socketRef.current.emit("startTextInput", currentLanguage, newSessionId, "", true);
+      socketRef.current.emit("startTextInput", currentLanguage, newSessionId, "Sorry, there was an error processing your request", true);
     } else {
       setChatMessages([{ from: "bot", content: "Sorry, there's a connection issue. Please try again later." }]);
     }
@@ -232,13 +214,13 @@ const TextToTextChat = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen ">
       {!isChatOpen ? (
         <button onClick={startChatSession} className="fixed bottom-4 right-4 bg-gray-300 text-black p-4 rounded-full shadow-lg z-50">
           <HiSparkles size={24} />
         </button>
       ) : (
-        <div className="fixed w-full bottom-0 left-0 sm:w-96 h-[500px] max-h-[80vh] flex flex-col bg-white border border-gray-300 rounded-lg overflow-hidden shadow-lg z-50">
+        <div className="fixed bottom-0 left-0 h-[500px] max-h-[80vh] flex flex-col bg-white border border-gray-300 rounded-lg overflow-hidden shadow-lg z-50">
           <div className="bg-gray-900 text-white p-4 flex justify-between items-center">
             <h2 className="text-lg font-semibold">AI Chat</h2>
             <button onClick={endChatSession} className="text-white">
@@ -294,7 +276,7 @@ const TextToTextChat = () => {
         </div>
       )}
       <footer className="fixed bottom-4 left-4 z-50 flex space-x-2">
-        {/* Add your footer content here */}
+
       </footer>
     </div>
   );

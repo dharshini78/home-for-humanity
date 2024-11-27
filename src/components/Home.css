@@ -60,5 +60,48 @@
   .back-button span {
     margin-left: 0.5rem;
   }
+
+  .search-bar {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+  }
   
+  .search-bar.open {
+    max-height: 200px; /* Adjust this value based on the height of your search bar */
+  }
   
+.text-xss{
+  font-size: 0.75rem;
+  font-family: "Unica";
+}
+
+.sometext{
+  font-family: 'Unica';
+  font-size: 0.875rem;
+}
+
+
+
+.responsive-img {
+  width: 100%;
+  height: auto;
+}
+
+@media (min-width: 640px) {
+  .responsive-img {
+    height: 30vh; /* Adjust this value as needed */
+  }
+}
+
+@media (min-width: 768px) {
+  .responsive-img {
+    height: 40vh; /* Adjust this value as needed */
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-img {
+    height: 50vh; /* Adjust this value as needed */
+  }
+}

@@ -11,7 +11,7 @@ en: {
         "home for humanity": "Home for humanity",
         "Timber Shelter": "Timber Shelter",
         "Lari Octagreen Shelter": "Lari Octagreen Shelter",
-        "Temporary Shelter": "Temporary Shelters",
+        "Temporary Shelter": "Temporary Shelter",
         "Bamboo Shelter":  "Bamboo Shelter",
         "Superdobe Shelter": "Superdobe Shelter",
 
@@ -38,11 +38,11 @@ en: {
 
 
         "About": "About",
-        "about_text": "At Home for Humanity, we believe that everyone deserves a safe and nurturing place to call home. Founded on the principles of compassion, community, and sustainable living, our mission is to create affordable housing solutions that empower individuals and families to thrive.",
-        "our_mission_title": "Our Mission",
-        "our_mission_text": "Our mission is a world where everyone has access to quality housing that meets their needs and supports their well-being.",
-        "our_vision_title": "Our Vision",
-        "our_vision_text": "Our vision is a world where everyone has access to quality housing that meets their needs and supports their well-being.",
+        "about_text": "Home for Humanity is a community-driven initiative aimed at addressing the global housing crisis by empowering individuals with the tools and knowledge to build sustainable, low-cost shelters. Our mission is to provide accessible, DIY solutions for those facing homelessness and housing insecurity, allowing communities to take action and make a real impact in their local environments. We are starting with basic shelters that have already been built and proven to be effective. As we grow, we will be adding more shelter designs and tutorials to meet diverse needs. Whether you’re a volunteer, student, or an architect, Home for Humanity equips you with the resources needed to create safe and affordable housing for people in need. By fostering collaboration and leveraging technology, we aim to make dignified living spaces accessible to all, one home at a time. With your help and the dedication of volunteer builders, we can continue to grow and make a difference. Share your DIY shelter creations using the hashtag #HomeForHumanity to inspire others and join our movement!",
+        // "our_mission_title": "Our Mission",
+        // "our_mission_text": "Our mission is a world where everyone has access to quality housing that meets their needs and supports their well-being.",
+        // "our_vision_title": "Our Vision",
+        // "our_vision_text": "Our vision is a world where everyone has access to quality housing that meets their needs and supports their well-being.",
         "faqs": "FAQs",
         "climate": "Climate",
         "head count": "Head Count",
@@ -139,6 +139,8 @@ en: {
         "No comments yet.": "No comments yet.",
         "Instructions": "Instructions",
         "Download as PDF": "Download as PDF"
+
+        
       }
     },
 
@@ -1268,7 +1270,7 @@ hi: {
     "Bamboo Shelter": "बांस का आश्रय",
     "Superdobe Shelter": "सुपरडोबे आश्रय",
 
-    "Shovel / Spade / Pickaxe":"खुरपा / बेलचा / कुदाल",
+"Shovel / Spade / Pickaxe":"खुरपा / बेलचा / कुदाल",
 "Stones":"पत्थर",
 "Stone Base (16 x 20 x 20 x 10)":"पत्थर का आधार (16 x 20 x 20 x 10)",
 "Vertical columns (2x dia. 75 mm, L=3.05 m)":"वर्टिकल कॉलम (2x व्यास 75 मिमी, L=3.05 मी)",
@@ -1394,7 +1396,17 @@ hi: {
     "Post Comment": "टिप्पणी पोस्ट करें",
     "No comments yet.": "अभी तक कोई टिप्पणी नहीं।",
     "Instructions": "निर्देश",
-    "Download as PDF": "पीडीएफ के रूप में डाउनलोड करें"
+    "Download as PDF": "पीडीएफ के रूप में डाउनलोड करें",
+
+    "Design Credits": "डिज़ाइन क्रेडिट्स",
+    "Timber Shelter Pakistan": "टिम्बर शेल्टर पाकिस्तान",
+    "International Federation of Red Cross and Red Crescent Societies": "अंतर्राष्ट्रीय रेड क्रॉस और रेड क्रीसेंट सोसायटीज",
+    "P.O. Box 372, CH-1211 Geneva 19, Switzerland": "पी.ओ. बॉक्स 372, CH-1211 जेनेवा 19, स्विट्जरलैंड",
+    "from:": "से:",
+    "Transitional shelters - Eight designs": "संक्रमणकालीन आश्रय - आठ डिजाइन",
+    "Geneva, 2011": "जेनेवा, 2011",
+    
+    
   }
 },
 

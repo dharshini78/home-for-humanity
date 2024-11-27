@@ -154,7 +154,7 @@ const CommentTS = () => {
   return (
     <div>
       <div className="mt-[3rem] flex justify-between w-full items-center">
-        <h2 className="mini">Comments</h2>
+        <h2 className="mini underline underline-offset-2">Comments</h2>
         <button
           className="border flex items-center p-2 rounded-[6rem] w-[9rem] justify-center bg-gray-100 mini border-gray-400 h-9 mr-4 text-smm"
           onClick={() => setShowModal(true)}

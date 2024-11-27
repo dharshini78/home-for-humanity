@@ -5,6 +5,8 @@ import data from "../Data/PTSData.jsx";
 import { IoMdArrowBack } from "react-icons/io";
 import SkeletonLoader from "../Skeletons/SkeletonMaterialOne.jsx";
 import "../Home.css";
+import Navbar from "../Features/navbar.jsx";
+
 
 const MaterialsList = () => {
   const { t } = useTranslation();
@@ -33,6 +35,8 @@ const MaterialsList = () => {
 
   return (
     <>
+        <Navbar/>
+
       <div className="border-t border-black ff-xl flex justify-between items-center">
         <div className="flex items-center pl-6 mt-4 mb-2 ff-xl mini">
           <button className="flex items-center" onClick={goBack}>
