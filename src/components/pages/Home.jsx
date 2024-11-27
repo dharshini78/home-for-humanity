@@ -56,7 +56,7 @@ export default function Home() {
           onMouseLeave={() => setShowTooltip(false)}
         >
           <Icon size={14} className="text-black" />
-          <span className="ml-2 mt-1 materials-font">{value}</span>
+          <span className="ml-2 mt-1 materials-font">{value}</span> 
         </div>
       </Tooltip>
     );
