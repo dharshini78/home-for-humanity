@@ -15,6 +15,7 @@ import LanguagePopUp from "../Features/LanguagePopUp.jsx";
 import { FaLanguage } from "react-icons/fa";
 import { useLanguage } from "../Features/languageContext.jsx";
 import he from 'he'; // Import the he library
+import { FaCirclePlus } from "react-icons/fa6";
 
 export default function Home() {
   const [sortedData, setSortedData] = useState(data);
@@ -583,62 +584,23 @@ export default function Home() {
         </footer>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 m-1">
-        {sortedData.map((item) => {
-          // Find the translation key by matching the English title with translation values
-          const shelterKey = translations?.main &&
-            Object.entries(translations.main).find(([key, value]) =>
-              value.toLowerCase() === item.title.toLowerCase()
-            )?.[0];
+      <div className="flex justify-end items-end mr-[5rem] gap-[5rem]">
+      <button className=" p-2 border-none rounded flex justify-center items-center">
+            Create <FaCirclePlus  className="ml-2 mt-1 w-[0.8rem]"/>
+          </button>     
+          
+          <button className=" p-2 border-none rounded flex justify-center items-center">
+            Advanced Filters
+          </button>
 
-          const translatedTitle = shelterKey && translations?.main ?
-            translations.main[shelterKey] : item.title;
 
-          console.log(`Original Title: ${item.title}, Translated Title: ${translatedTitle}`);
 
-          return (
-            <div key={item.id} className="p-5">
-              <Link to={`/haven/${item.id}`} state={{ headcount: headCountSort }} onClick={() => handleShelterClick(translatedTitle)}>
-                <img src={item.img} alt={translatedTitle} className="w-full h-auto" />
-              </Link>
+           </div>
 
-              <div className="flex items-center mt-6">
-                <h1 className="ml-5 mr-6 text-[#3a3a3a] text-sm md:text-base mini">
-                  {translatedTitle}
-                </h1>
-
-                <div className="flex space-x-2">
-                  {Object.entries(item.weather).map(([climate, isSupported]) => (
-                    <React.Fragment key={climate}>
-                      {climate === 'sunny' && <IoIosSunny className={isSupported ? "text-black" : "text-gray-300"} size={20} />}
-                      {climate === 'snowy' && <BsSnow className={isSupported ? "text-black" : "text-gray-300"} size={18} />}
-                      {climate === 'windy' && <BsWind className={isSupported ? "text-black" : "text-gray-300"} size={20} />}
-                      {climate === 'rainy' && <BsCloudRainHeavyFill className={isSupported ? "text-black" : "text-gray-300"} size={20} />}
-                    </React.Fragment>
-                  ))}
-                </div>
-              </div>
-              <div className="pl-5 flex mt-1 space-x-2">
-                <MetricButton
-                  icon={FaUser}
-                  value={item.headcounts}
-                  tooltipText={translations?.tooltip.occupancy}
-                />
-                <PriceIndicator
-                  price={item.price}
-                  tooltipText={translations?.tooltip.relativeCostIndicator}
-                />
-                <DurationIndicator
-                  duration={item.calculatedDuration}
-                  selectedHeadcount={headCountSort || item.headcounts}
-                  tooltipText={translations?.tooltip.averageConstructionDuration}
-                  isChanged={isDurationChanged}
-                />
-              </div>
-            </div>
-          );
-        })}
-      </div>
+           <div className="flex flex-col justify-center items-center pt-[18rem]">
+            <p className="text-gray-[#3A3A3A]">Looks like there are no existing projects here.</p>
+            <p className="text-gray-[#3A3A3A]">Please click on the create button to add a new project.</p>
+          </div>         
     </>
   );
 }

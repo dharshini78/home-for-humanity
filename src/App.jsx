@@ -9,7 +9,9 @@ import Materials from "./components/PTS/instructions.jsx";
 import MaterialsList from "./components/PTS/MaterialsList.jsx";
 import { MuteProvider } from "./components/Features/muteContext.jsx";
 import Credits from "./components/pages/Credits.jsx";
-
+import Jsontest from "./components/pages/dashboard.jsx";
+import { LanguageProvider } from "./components/Features/languageContext.jsx";
+import Dashhomes from './components/pages/dashhomes.jsx'
 export default function App() {
   return (
     <>
@@ -20,6 +22,10 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/faqs" element={<Faqs />} />
           <Route path="/credits" element={<Credits />} />
+          <Route path="/adminlogin" element={<Jsontest/>}/>
+          <Route path="/dashboard" element={<Dashhomes/>}/>
+
+          
       
           <Route path="/haven/:id" element={<HavenOne />} />
           <Route path="/haven/:id/materials" element={<Materials />} />

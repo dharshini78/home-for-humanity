@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
 import { useNavigate, useParams, Link, useLocation } from "react-router-dom";
-import data from "../Data/PTSData.jsx";
-import { FaUser, FaClipboardList } from "react-icons/fa";
-import { GoClockFill } from "react-icons/go";
-import { IoDownload } from "react-icons/io5";
 import { IoMdArrowBack, IoMdArrowDropleft, IoMdArrowDropright, IoMdClose } from "react-icons/io";
+import { GoClockFill } from "react-icons/go";
+import { FaUser, FaClipboardList, FaBookReader } from "react-icons/fa";
+import { IoDownload } from "react-icons/io5";
 import './HavenOne.css';
-import { FaBookReader } from "react-icons/fa";
 import SkeletonLoader from "../Skeletons/SkeletonHavenOne.jsx";
 import CommentTS from "../Features/CommentTS.jsx";
 import CommentLOG from "../Features/CommentLOG.jsx";
@@ -15,6 +12,10 @@ import CommentTem from "../Features/CommentTem.jsx";
 import CommentBS from "../Features/CommentBS.jsx";
 import CommentSS from "../Features/CommentSS.jsx";
 import Navbar from '../Features/navbar.jsx';
+import { useLanguage } from "../Features/languageContext.jsx";
+import data from "../Data/PTSData.jsx";
+import he from 'he'; // Import the he library
+import axios from "axios";
 
 const Tooltip = ({ children, text, isVisible }) => {
   return (
@@ -30,16 +31,19 @@ const Tooltip = ({ children, text, isVisible }) => {
   );
 };
 
-const DurationIndicator = ({ duration, selectedHeadcount, itemWithId, tooltipText }) => {
+const DurationIndicator = ({ duration, selectedHeadcount, itemWithId, tooltipText, translatedContent }) => {
   const [showTooltip, setShowTooltip] = useState(false);
-  const { t } = useTranslation();
 
   const calculateDuration = (originalDuration, defaultHeadCount, selectedHeadCount) => {
     if (!selectedHeadCount) return originalDuration;
 
     const [minWeeks, maxWeeks] = originalDuration.split('-').map(Number);
-    const defaultCount = parseInt(defaultHeadCount);
-    const selectedCount = selectedHeadcount === '5+' ? 5 : parseInt(selectedHeadcount);
+    const defaultCount = parseInt(defaultHeadCount, 10);
+    const selectedCount = selectedHeadcount === '5+' ? 5 : parseInt(selectedHeadcount, 10);
+
+    if (isNaN(selectedCount) || isNaN(defaultCount) || isNaN(minWeeks) || isNaN(maxWeeks)) {
+      return originalDuration;
+    }
 
     if (selectedCount <= defaultCount) {
       const multiplier = defaultCount / selectedCount;
@@ -54,14 +58,10 @@ const DurationIndicator = ({ duration, selectedHeadcount, itemWithId, tooltipTex
     }
   };
 
-  const generateTooltipText = () => {
-    return `${t("Average construction duration with")} ${selectedHeadcount} ${t("men")}`;
-  };
-
   const calculatedDuration = calculateDuration(duration, itemWithId.headcounts, selectedHeadcount);
 
   return (
-    <Tooltip text={generateTooltipText()} isVisible={showTooltip}>
+    <Tooltip text={tooltipText} isVisible={showTooltip}>
       <div
         className="flex items-center rounded-[6rem] w-[8rem] justify-center border border-gray-600 h-8 text-sm md:text-base md:w-[8rem] hover:bg-gray-200 transition-colors cursor-pointer ml-2"
         onMouseEnter={() => setShowTooltip(true)}
@@ -69,7 +69,7 @@ const DurationIndicator = ({ duration, selectedHeadcount, itemWithId, tooltipTex
       >
         <GoClockFill />
         <span className="ml-2 mt-1 materials-font">
-          {calculatedDuration} {t("weeks")}
+          {calculatedDuration} {translatedContent ? translatedContent.duration : "weeks"}
         </span>
       </div>
     </Tooltip>
@@ -94,16 +94,19 @@ const OccupancyIndicator = ({ occupancy, tooltipText }) => {
 };
 
 const HavenOne = () => {
-  const { t } = useTranslation();
   const navigate = useNavigate();
   const { id } = useParams();
+  const itemWithId = data.find((item) => item.id === id);
+
   const location = useLocation();
   const [loading, setLoading] = useState(true);
   const [comments, setComments] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageIndex, setImageIndex] = useState(0);
-  const itemWithId = data.find(item => item.id === id);
+  const [translatedContent, setTranslatedContent] = useState(null);
+  const { selectedLanguage } = useLanguage(); // Use the LanguageContext
   const [selectedHeadcount, setSelectedHeadcount] = useState(location.state?.headcount || itemWithId.headcounts);
+  const [lastFetchedLanguage, setLastFetchedLanguage] = useState(null);
 
   const goBack = () => {
     navigate('/');
@@ -122,6 +125,89 @@ const HavenOne = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const decodeContent = (content) => {
+    if (typeof content === 'string') {
+      return he.decode(content);
+    } else if (Array.isArray(content)) {
+      return content.map(decodeContent);
+    } else if (typeof content === 'object' && content !== null) {
+      const decodedObject = {};
+      for (const key in content) {
+        if (content.hasOwnProperty(key)) {
+          decodedObject[key] = decodeContent(content[key]);
+        }
+      }
+      return decodedObject;
+    }
+    return content;
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [commentsResponse, translatedContentResponse] = await Promise.all([
+          axios.get(`https://api.homeforhumanity.xrvizion.com/shelter/comments?shelterId=${id}`),
+          fetchTranslatedContent(selectedLanguage)
+        ]);
+
+        const filteredComments = commentsResponse.data.comments.filter(
+          (comment) => comment.posted
+        );
+        setComments(filteredComments);
+
+        const data = await translatedContentResponse;
+        if (data && data.msg === "Success") {
+          const decodedContent = decodeContent(data.translatedContent);
+          setTranslatedContent(decodedContent);
+          setLastFetchedLanguage(selectedLanguage);
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, [id, selectedLanguage, lastFetchedLanguage]);
+
+  const fetchTranslatedContent = async (language) => {
+    try {
+      const fileNameMapping = {
+        "Timber Shelter": "timbershelter_homepage_en.json",
+        "Temporary Shelter": "temporaryshelter_homepage_en.json",
+        "Bamboo Shelter": "bambooshelter_homepage_en.json",
+        "Superadobe Shelter": "superadobeshelter_homepage_en.json",
+        "Octagreen Shelter": "octagreenshelter_homepage_en.json"
+      };
+
+      const fileName = fileNameMapping[itemWithId.title] || 'default_homepage_en.json';
+
+      const response = await axios.post(
+        `https://api.homeforhumanity.xrvizion.com/shelter/gettranslation`,
+        {
+          shelterName: itemWithId.title.replace(/\s+/g, ''), // Remove spaces
+          langCode: language,
+          fileName: fileName,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching translated content:', error);
+      throw error;
+    }
+  };
+
+  useEffect(() => {
+    if (selectedLanguage !== lastFetchedLanguage) {
+      fetchTranslatedContent(selectedLanguage);
+    }
+  }, [selectedLanguage, lastFetchedLanguage]);
 
   if (!itemWithId) {
     return <div>Home not found</div>;
@@ -181,25 +267,6 @@ const HavenOne = () => {
 
   const pdfPath = pdfMapping[id];
 
-  const creditsMapping = {
-    "0": "Timber Shelter Pakistan\nInternational Federation of Red Cross and Red Crescent Societies\nP.O. Box 372, CH-1211 Geneva 19, Switzerland\nfrom:\n\"Transitional shelters - Eight designs\"\nInternational Federation of Red Cross and Red Crescent Societies\nGeneva, 2011",
-    "1": "Lari Octa Green Shelter\nDr. Yasmeen Lari\nHeritage Foundation of Pakistan\nE-6, 4th Gizri Street, DHA 4, Karachi, 75500 Pakistan\nhttps://www.heritagefoundationpak.org",
-    "2": "Temporary Shelter Nepal\nCharles Lai\nAona Architects\n4/F, 1 Jervois Street, Sheung Wan, Hong Kong\nhttps://www.aona-architects.com\nand\nTakehiko Suzuki\nTakehiko Suzuki Architects\n166-0013, 1 Horinouchi, Suginami Ward, Tokyo, Japan\nhttps://www.takehikosuzuki.com",
-    "3": "Bamboo Frame Shelter Indonesia\nInternational Federation of Red Cross and Red Crescent Societies\nP.O. Box 372, CH-1211 Geneva 19, Switzerland\nfrom:\n\"Transitional shelters - Eight designs\"\nInternational Federation of Red Cross and Red Crescent Societies\nGeneva, 2011",
-    "4": "Za'atari Classroom\nEmergency Architecture & Human Rights (EAHR)\nMichal Ulfstjerne\nNørre Allé 7, 2200 København, Danmark\nhttps://ea-hr.com",
-  };
-
-  const bibliographyMapping = {
-    "0": "Books in Zotero Library:\n- Transistional shelters - Eight Designs\nInternational Federation of Red Cross and Red Crescent Societies\nGeneva, 2011\n\nOther Sources:\n- Shelter 5: Structral Assessment - Pakistan\nARUP\nLondon, 26.04.2011",
-    "1": "Books in Zotero Library:\n- ‘LARI OCTA GREEN’: SUSTAINABLE BAMBOO DESIGN FOR FLOOD RELIEF\nDesignboom.com\n26/11/2022\nhttps://www.designboom.com/architecture/lari-octa-green-emergency-bamboo-shelters-flood-relief-heritage-foundation-of-pakistan-10-26-2022/\n\nOther Sources:\n- LOG (Lari OctaGreen)\nYasmeen Lari's Zero Carbon Channel youtube\n12/03/2021\nhttps://www.youtube.com/watch?v=YC5dm2Yl1EE\n\nDocuments and plans\nYasmeen Lari\n\nWorking with Bamboo - Basic Principles and Techniques\nStéphane Schröder\nRetrieved 08.07.2024\nhttps://www.guaduabamboo.com/blog/joining-bamboo\n\nManual de construcción con bambú\nOscar Hidalgo López\nUniversidad Nacional de Colombia\n1981",
-    "2": "Books in Zotero Library:\n- Temporary Shelter in Nepal / Charles Lai + Takehiko Suzuki\narchdaily (curator)\narchdaily.com\n14/07/2015\nhttps://www.archdaily.com/769890/temporary-shelter-in-nepal-charles-lai-plus-takehiko-suzuki\n\nOther Sources:\n- Documents and Plans:\naona architects",
-    "3": "Books in Zotero Library:\n- Transitional shelters - Eight designs\nInternational Federation of Red Cross and Red Crescent Societies\nGeneva, 2011\n\nOther Sources:\n- Bambus als Baustoff\nKlaus Dunkelberg\nHabelt Verlag\nBonn, 1980\n\nWorking with Bamboo - Basic Principles and Techniques\nStéphane Schröder\nRetrieved 08.07.2024\nhttps://www.guaduabamboo.com/blog/joining-bamboo\n\nManual de construcción con bambú\nOscar Hidalgo López\nUniversidad Nacional de Colombia\n1981\n\nPost-disaster shelter: Ten designs\nInternational Federation of Red Cross and Red Crescent Societies\nGeneva, 2013\n\nNipa Palm - Making Roof Panels\nRicky and Reyna Amacna\nPhilppine Life\nRetrieved 15.07.24\nhttps://www.youtube.com/watch?v=G059aijUm38",
-    "4": "Books in Zotero Library:\n- 100 Classrooms for Refugee Children / Emergency Architecture & Human Rights\narchdaily (curator)\narchdaily.com\n29/09/2017\nhttps://www.archdaily.com/880676/100-classrooms-for-refugee-children-emergency-architecture-and-human-rights?ad_source=search&ad_medium=projects_tab\n\nOther Sources:\n- calearth\ncalearth.org\n16/07/2024\nhttps://calearth.org\n\nhttps://www.curvatecture.com\n16/07/2024\n\nHive mind: Refugee classroom in Za’atari Camp, Jordan by Emergency Architecture & Human Rights\nKatrine Bech Taxholm\nThe Architectural Review\n29/06/2018\nhttps://www.architectural-review.com/buildings/hive-mind-refugee-classroom-in-zaatari-camp-jordan-by-emergency-architecture-human-rights\n\nEarthbag Building Guide\nOwen Geiger\nExcellence in Natural Building Series\n2011\nhttps://www.earthbagbuilding.com/articles/ebbuildingguide.htm",
-  };
-
-  const credits = creditsMapping[id];
-  const bibliography = bibliographyMapping[id];
-
   return (
     <>
       <Navbar />
@@ -208,7 +275,7 @@ const HavenOne = () => {
           <button className="flex items-center" onClick={goBack}>
             <IoMdArrowBack size={20} />
           </button>
-          <h1 className="ml-2">{t(itemWithId.title)}</h1>
+          <h1 className="ml-2">{translatedContent ? translatedContent.name : itemWithId.title}</h1>
         </div>
       </div>
       <div className="flex flex-col lg:flex-row px-6">
@@ -216,15 +283,16 @@ const HavenOne = () => {
           <div className="flex flex-col">
             <div key={itemWithId.id} className="flex">
               <OccupancyIndicator
-                occupancy={itemWithId.headcounts}
-                tooltipText={t("Occupancy")}
+                occupancy={translatedContent ? translatedContent.occupancy : itemWithId.headcounts}
+                tooltipText="Occupancy"
               />
 
               <DurationIndicator
-                duration={itemWithId.duration}
+                duration={itemWithId.duration} // Use the original duration from itemWithId
                 selectedHeadcount={selectedHeadcount}
                 itemWithId={itemWithId}
-                tooltipText={t("Estimated construction duration")}
+                tooltipText="Estimated construction duration"
+                translatedContent={translatedContent} // Pass the translated content
               />
             </div>
           </div>
@@ -234,13 +302,13 @@ const HavenOne = () => {
               <Link to={`/haven/${itemWithId.id}/materials`}>
                 <button className="border-b-[0.6px] w-full flex pb-5 border-gray-400 text-smm items-center mt-5">
                   <FaBookReader size={16} className="mr-4" />
-                  {t("Instructions")}
+                  {translatedContent ? translatedContent.instructions : "Instructions"}
                 </button>
               </Link>
               <Link to={`/haven/${itemWithId.id}/list`}>
                 <button className="border-b-[0.6px] w-full flex pb-5 border-gray-400 text-smm items-center mt-5">
                   <FaClipboardList size={18} className="mr-3" />
-                  {t("material list")}
+                  {translatedContent ? translatedContent.materialList : "material list"}
                 </button>
               </Link>
 
@@ -252,19 +320,70 @@ const HavenOne = () => {
                 className="border-b-[0.6px] w-full flex pb-5 border-gray-400 text-smm items-center mt-5"
               >
                 <IoDownload size={24} className="mr-2 text-gray-800 mb-1" />
-                {t("Download as PDF")}
+                {translatedContent ? translatedContent.downloadAsPdf : "Download as PDF"}
               </a>
             </div>
           </div>
         </div>
         <div className="lg:w-1/2 flex flex-col lg:mt-0 lg:pl-6">
           <div className="w-full text-smm">
-            <h2 className="text-lg font-bold">Design Credits</h2>
-            <pre className="whitespace-pre-wrap text-smm">{credits}</pre>
+            <h2 className="text-lg font-bold">{translatedContent ? translatedContent.designCredits.title : "Design Credits"}</h2>
+            <pre className="whitespace-pre-wrap text-smm">
+              {translatedContent ? (
+                <>
+                  {translatedContent.designCredits.content.shelterName}<br />
+                  {translatedContent.designCredits.content.designer}<br />
+                  {translatedContent.designCredits.content.organization}<br />
+                  {translatedContent.designCredits.content.address}<br />
+                  <a href={translatedContent.designCredits.content.website} target="_blank" rel="noopener noreferrer">
+                    {translatedContent.designCredits.content.website}
+                  </a>
+                </>
+              ) : (
+                "Loading..."
+              )}
+            </pre>
           </div>
           <div className="w-full mt-4">
-            <h2 className="text-lg font-bold">Bibliography</h2>
-            <pre className="whitespace-pre-wrap text-smm">{bibliography}</pre>
+            <h2 className="text-lg font-bold">{translatedContent ? translatedContent.bibliography.title : "Bibliography"}</h2>
+            <pre className="whitespace-pre-wrap text-smm">
+              {translatedContent ? (
+                <>
+                  {translatedContent.bibliography.content.zoteroLibrary.map((item, index) => (
+                    <React.Fragment key={index}>
+                      {item.title}<br />
+                      {item.source}<br />
+                      {item.date}<br />
+                      <a href={item.link} target="_blank" rel="noopener noreferrer">
+                        {item.link}
+                      </a>
+                      <br /><br />
+                    </React.Fragment>
+                  ))}
+                  {translatedContent.bibliography.content.otherSources.map((item, index) => (
+                    <React.Fragment key={index}>
+                      {item.title}<br />
+                      {item.source && <>{item.source}<br /></>}
+                      {item.platform && <>{item.platform}<br /></>}
+                      {item.date && <>{item.date}<br /></>}
+                      {item.link && (
+                        <>
+                          <a href={item.link} target="_blank" rel="noopener noreferrer">
+                            {item.link}
+                          </a>
+                          <br />
+                        </>
+                      )}
+                      {item.author && <>{item.author}<br /></>}
+                      {item.publisher && <>{item.publisher}<br /></>}
+                      {item.year && <>{item.year}<br /><br /></>}
+                    </React.Fragment>
+                  ))}
+                </>
+              ) : (
+                "Loading..."
+              )}
+            </pre>
           </div>
           <div className="w-full mt-4">
             {comments.length === 0 && <p className="mt-4 text-smm"></p>}

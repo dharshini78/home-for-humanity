@@ -1,28 +1,24 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { IoMdClose } from "react-icons/io";
-import { Link, useLocation } from "react-router-dom";
-import LanguagePopUp from "./LanguagePopUp.jsx";
-import { useTranslation } from "react-i18next";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { FaLanguage } from "react-icons/fa";
-import { IoClose, IoSearch } from "react-icons/io5";
 import { CiTimer } from "react-icons/ci";
+import { useLanguage } from "../Features/languageContext.jsx";
+import LanguagePopUp from "../Features/LanguagePopUp.jsx";
+import { Link, useLocation } from "react-router-dom";
+import he from 'he'; // Import the he library
 
 const Navbar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isLanguageOpen, setLanguageOpen] = useState(false);
   const [hasSpoken, setHasSpoken] = useState(false);
   const location = useLocation();
-  const { t, i18n } = useTranslation();
   const [isSearchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const { selectedLanguage, setSelectedLanguage } = useLanguage(); // Use the LanguageContext
 
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
-  };
-
-  const toggleSearch = () => {
-    setSearchOpen(!isSearchOpen);
   };
 
   const toggleLanguage = () => {
@@ -33,7 +29,7 @@ const Navbar = () => {
   };
 
   const handleLanguageSelect = (language) => {
-    i18n.changeLanguage(language);
+    setSelectedLanguage(language); // Update the selected language in the context
     setLanguageOpen(false);
   };
 
@@ -57,12 +53,60 @@ const Navbar = () => {
   }, [isMenuOpen]);
 
   const suggestions = [
-    "Timber shelter",
-    "Temporary shelter",
-    "Octagen Shelter",
-    "Bamboo shelter",
-    "SuperAdobe shelter",
+    "Timber Shelter",
+    "Temporary Shelter",
+    "Octagreen Shelter",
+    "Bamboo Shelter",
+    "Superadobe Shelter",
   ];
+
+  const [translations, setTranslations] = useState(null);
+
+  useEffect(() => {
+    const fetchTranslations = async () => {
+      try {
+        const response = await fetch(`https://api.homeforhumanity.xrvizion.com/shelter/gettranslation`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            shelterName: "OtherPages",
+            langCode: selectedLanguage,
+            fileName: 'navbar_en.json',
+          }),
+        });
+        const data = await response.json();
+        if (data.msg === "Success") {
+          const decodedContent = decodeContent(data.translatedContent);
+          setTranslations(decodedContent);
+        } else {
+          console.error('Error in translation response:', data.msg);
+        }
+      } catch (error) {
+        console.error('Error fetching about translations:', error);
+      }
+    };
+
+    fetchTranslations();
+  }, [selectedLanguage]);
+
+  const decodeContent = (content) => {
+    if (typeof content === 'string') {
+      return he.decode(content);
+    } else if (Array.isArray(content)) {
+      return content.map(decodeContent);
+    } else if (typeof content === 'object' && content !== null) {
+      const decodedObject = {};
+      for (const key in content) {
+        if (content.hasOwnProperty(key)) {
+          decodedObject[key] = decodeContent(content[key]);
+        }
+      }
+      return decodedObject;
+    }
+    return content;
+  };
 
   return (
     <>
@@ -75,21 +119,17 @@ const Navbar = () => {
 
         <div className="flex items-center ml-3 md:justify-start w-full md:w-auto">
           <Link to="/" className="text-[1.2rem] mt-1">
-            <h1 className="text-black mini">{t("home for humanity")}</h1>
+            <h1 className="text-black mini">Home for Humanity</h1>
           </Link>
         </div>
         <div className="hidden md:flex items-center space-x-6 mr-[7rem] justify-center">
-          <Link to="/" className="underline-animation p-1 text-smm">{t("Shelters")}</Link>
-          <Link to="/about" className="underline-animation p-1 text-smm">{t("About")}</Link>
-          <Link to="/faqs" className="underline-animation p-1 text-smm">{t("FAQs")}</Link>
-          <Link to="/credits" className="underline-animation p-1 text-smm">{t("Credits")}</Link>
+          <Link to="/" className="underline-animation p-1 text-smm">{translations ? translations["Shelters"] : "Shelters"}</Link>
+          <Link to="/about" className="underline-animation p-1 text-smm">{translations ? translations["About"] : "About"}</Link>
+          <Link to="/faqs" className="underline-animation p-1 text-smm">{translations ? translations["FAQs"] : "FAQs"}</Link>
+          <Link to="/credits" className="underline-animation p-1 text-smm">{translations ? translations["Credits"] : "Credits"}</Link>
         </div>
 
         <div className="flex items-center space-x-4">
-          {/* <button onClick={toggleSearch} className="flex items-center space-x-2">
-            {isSearchOpen ? <IoClose size={25}/> : <IoSearch size={24}/>} 
-          </button> */}
-
           <button onClick={toggleLanguage} className="flex items-center space-x-2">
             <FaLanguage size={35} />
           </button>
@@ -102,19 +142,17 @@ const Navbar = () => {
         }`}
       >
         <Link to="/" className="underline-animation p-7 w-full flex items-center justify-start border-b border-gray-300 mini">
-          {t("Shelters")}
+          {translations ? translations["Shelters"] : "Shelters"}
         </Link>
         <Link to="/about" className="underline-animation p-7 w-full flex items-center justify-start border-b border-gray-300 mini">
-          {t("About")}
+          {translations ? translations["About"] : "About"}
         </Link>
         <Link to="/faqs" className="underline-animation p-7 w-full flex items-center justify-start border-b border-gray-300 mini">
-          {t("FAQs")}
+          {translations ? translations["FAQs"] : "FAQs"}
         </Link>
         <Link to="/credits" className="underline-animation p-7 w-full flex items-center justify-start border-b border-gray-300 mini">
-        {t("Credits")}
-
+          {translations ? translations["Credits"] : "Credits"}
         </Link>
-
       </div>
 
       {isSearchOpen && (
@@ -138,7 +176,6 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
-     
         </div>
       )}
 

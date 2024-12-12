@@ -40,3 +40,12 @@
 .read-the-docs {
   color: #888;
 }
+
+
+@media (max-width: 768px) {
+  .chat-box {
+    width: 100% !important;
+    left: 0 !important;
+    transform: none !important;
+  }
+}

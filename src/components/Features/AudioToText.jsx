@@ -1,9 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
 import { HiSparkles } from "react-icons/hi2";
-import { Send, Mic, MicOff, VolumeX, Volume2 } from 'lucide-react';
+import { Send, Mic, MicOff, VolumeX, Volume2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import io from "socket.io-client";
-import { speakText } from './LanguagePopUp';
+import { speakText } from "./LanguagePopUp";
+import { debounce } from 'lodash'; // Make sure to import debounce
+
 
 const TextToTextChat = () => {
   const { i18n } = useTranslation();
@@ -21,7 +23,69 @@ const TextToTextChat = () => {
   const streamRef = useRef(null);
   const processorRef = useRef(null);
   const timeoutRef = useRef(null);
+  const lastAudioTimeRef = useRef(null);
+  const audioElementRef = useRef(null);
+  const isPlayingRef = useRef(false);
+
+  useEffect(() => {
+    console.log("Chat messages updated:", chatMessages);
+  }, [chatMessages]);
+
   const [textToSpeechResponse, setTextToSpeechResponse] = useState(null);
+
+  const debouncedPlayAudio = useRef(
+    debounce((audioContent) => {
+      if (audioElementRef.current) {
+        // If already playing, don't create a new instance
+        return;
+      }
+
+      const audioElement = new Audio();
+      audioElement.src = URL.createObjectURL(
+        new Blob([audioContent], { type: "audio/mp3" })
+      );
+
+      audioElement.onended = () => {
+        isPlayingRef.current = false;
+        audioElement.src = '';
+        audioElement.load();
+        audioElementRef.current = null;
+      };
+
+      audioElementRef.current = audioElement;
+      isPlayingRef.current = true;
+      audioElement.play().catch(error => {
+        console.error('Audio playback failed:', error);
+        isPlayingRef.current = false;
+      });
+    }, 100)
+  ).current;
+
+  const toggleMute = () => {
+    setIsMuted((prevIsMuted) => {
+      const newIsMuted = !prevIsMuted;
+
+      if (audioElementRef.current) {
+        if (newIsMuted || audioElementRef.current.paused) {
+          // If muting or audio was paused, stop completely
+          audioElementRef.current.pause();
+          audioElementRef.current.src = '';
+          audioElementRef.current.load();
+          audioElementRef.current = null;
+          isPlayingRef.current = false;
+        } else {
+          // If unmuting and audio was playing, just pause
+          audioElementRef.current.pause();
+          isPlayingRef.current = false;
+        }
+      } else if (!newIsMuted && textToSpeechResponse) {
+        // Start new audio only if unmuting and no audio exists
+        debouncedPlayAudio(textToSpeechResponse);
+      }
+
+      return newIsMuted;
+    });
+  };
 
   useEffect(() => {
     const socket = io("https://api.homeforhumanity.xrvizion.com", {
@@ -38,7 +102,10 @@ const TextToTextChat = () => {
       setConnectionError(null);
 
       if (chatMessages.length === 0) {
-        setChatMessages([{ from: "bot", content: "Hey there! How can I assist you today?" }]);
+        console.log("Setting initial bot message");
+        setChatMessages([
+          { from: "bot", content: "Hey there! How can I assist you today?" },
+        ]);
       }
     });
 
@@ -51,32 +118,54 @@ const TextToTextChat = () => {
     socket.on("chatresponse", (data) => {
       console.log("Received chat response:", data);
       setSessionId(data.sessionId);
-      setChatMessages((prevMessages) => {
-        if (prevMessages.length > 0 &&
-            prevMessages[prevMessages.length - 1].from === "bot" &&
-            prevMessages[prevMessages.length - 1].content === data.completedText) {
-          return prevMessages;
-        }
-        return [...prevMessages, { from: "bot", content: data.completedText }];
-      });
-      if (!isMuted) {
-        if (data.ttsResponse && data.ttsResponse.audioContent) {
-          setTextToSpeechResponse(data.ttsResponse.audioContent);
-        } else {
-          speakText(data.completedText, currentLanguage);
-        }
+
+      // Check if the message is already in the chatMessages array
+      const isDuplicate = chatMessages.some(
+        (message) => message.from === "bot" && message.content === data.completedText
+      );
+
+      if (!isDuplicate) {
+        console.log("Adding new bot message to chatMessages");
+        setChatMessages((prevMessages) => [
+          ...prevMessages,
+          { from: "bot", content: data.completedText },
+        ]);
+      } else {
+        console.log("Duplicate message detected, not adding to chatMessages");
+      }
+
+      if (data.ttsResponse && data.ttsResponse.audioContent) {
+        console.log("Setting text-to-speech response");
+        setTextToSpeechResponse(data.ttsResponse.audioContent);
       }
     });
 
     socket.on("serverError", (error) => {
       console.error("Server error:", error);
-      setChatMessages((prevMessages) => [...prevMessages, { from: "bot", content: "" }]);
+      setChatMessages((prevMessages) => [
+        ...prevMessages,
+        { from: "bot", content: "" },
+      ]);
     });
 
     socket.on("audio_to_text", (data) => {
       console.log("Received audio to text:", data);
-      setInputMsg(data.text);
-      handleSendMessage(data.text);
+
+      // Ensure the text is not empty and is a valid string
+      if (
+        data.text &&
+        typeof data.text === "string" &&
+        data.text.trim() !== ""
+      ) {
+        // Directly update chat messages with the transcribed text
+        setChatMessages((prevMessages) => [
+          ...prevMessages,
+          { from: "user", content: data.text.trim() },
+        ]);
+
+        // Emit the message to the server
+        //  socketRef.current.emit("startTextInput", currentLanguage, sessionId, data.text.trim(), "", false);
+      }
     });
 
     return () => {
@@ -85,37 +174,84 @@ const TextToTextChat = () => {
   }, [currentLanguage, isMuted]);
 
   useEffect(() => {
-    if (textToSpeechResponse) {
-      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-      const audioElement = new Audio();
-      audioElement.src = URL.createObjectURL(new Blob([textToSpeechResponse], { type: 'audio/mp3' }));
-      audioElement.play();
+    if (textToSpeechResponse && !isMuted) {
+      debouncedPlayAudio(textToSpeechResponse);
     }
-  }, [textToSpeechResponse]);
 
-  const toggleMute = () => {
-    setIsMuted(!isMuted);
-    if (isMuted) {
-      window.speechSynthesis.cancel();
-      window.speechSynthesis.resume();
-    } else {
-      window.speechSynthesis.pause();
-    }
+    return () => {
+      if (audioElementRef.current) {
+        const audio = audioElementRef.current;
+        audio.pause();
+        audio.src = '';
+        audio.load();
+        audioElementRef.current = null;
+      }
+      debouncedPlayAudio.cancel();
+    };
+  }, [textToSpeechResponse, isMuted]);
+
+  useEffect(() => {
+    return () => {
+      if (audioElementRef.current) {
+        const audio = audioElementRef.current;
+        audio.pause();
+        audio.src = '';
+        audio.load();
+      }
+      debouncedPlayAudio.cancel();
+    };
+  }, []);
+
+  const speakText = (text, language) => {
+    // First, cancel any ongoing speech
+    window.speechSynthesis.cancel();
+
+    // Set the current speech text
+    setCurrentSpeechText(text);
+
+    // Create and speak the new utterance
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = language;
+    window.speechSynthesis.speak(utterance);
   };
 
   const startChatSession = () => {
-    setIsChatOpen(true);
+    const chatBox = document.querySelector(".chat-box");
+    if (chatBox) {
+      chatBox.style.transition = "transform 0.5s ease-out";
+      chatBox.style.transform = "translateY(0)";
+      setTimeout(() => {
+        setIsChatOpen(true);
+      }, 500); // Match the duration with the transition time
+    } else {
+      setIsChatOpen(true);
+    }
     const newSessionId = 0;
     setSessionId(newSessionId);
     if (isConnected) {
-      socketRef.current.emit("startTextInput", currentLanguage, newSessionId, "Sorry, there was an error processing your request", true);
+      socketRef.current.emit(
+        "startTextInput",
+        currentLanguage,
+        newSessionId,
+        "",
+        true
+      );
     } else {
-      setChatMessages([{ from: "bot", content: "Sorry, there's a connection issue. Please try again later." }]);
+      console.log("Sorry, there's a connection issue. Please try again later.");
     }
   };
 
   const endChatSession = () => {
-    setIsChatOpen(false);
+    const chatBox = document.querySelector(".chat-box");
+    if (chatBox) {
+      chatBox.style.transition = "transform 0.5s ease-out";
+      chatBox.style.transform = "translateY(100%)";
+      setTimeout(() => {
+        setIsChatOpen(false);
+      }, 500); // Match the duration with the transition time
+    } else {
+      setIsChatOpen(false);
+    }
     if (isConnected) {
       socketRef.current.emit("endStream");
     }
@@ -126,15 +262,27 @@ const TextToTextChat = () => {
     setInputMsg(event.target.value);
   };
 
-  const handleSendMessage = (message = inputMsg) => {
+  const handleSendMessage = (message = inputMsg, from = "user") => {
     if (message.trim() === "") return;
     if (!isConnected) {
-      setChatMessages((prevMessages) => [...prevMessages, { from: "bot", content: "Sorry, there's a connection issue. Please try again later." }]);
+      console.log("Connection issue, cannot send message");
       return;
     }
 
-    setChatMessages((prevMessages) => [...prevMessages, { from: "user", content: message }]);
-    socketRef.current.emit("startTextInput", currentLanguage, sessionId, message, "", false);
+    console.log("Sending message to server:", message);
+    setChatMessages((prevMessages) => {
+      const newMessages = [...prevMessages, { from, content: message }];
+      console.log("Updated chatMessages:", newMessages);
+      return newMessages;
+    });
+    socketRef.current.emit(
+      "startTextInput",
+      currentLanguage,
+      sessionId,
+      message,
+      "",
+      false
+    );
     setInputMsg("");
   };
 
@@ -145,22 +293,29 @@ const TextToTextChat = () => {
     }
 
     if (!isConnected) {
-      alert("Cannot start recording due to connection issues. Please try again later.");
+      alert(
+        "Cannot start recording due to connection issues. Please try again later."
+      );
       return;
     }
 
     try {
       if (!audioContextRef.current) {
-        audioContextRef.current = new (window.AudioContext || window.webkitAudioContext)();
+        audioContextRef.current = new (window.AudioContext ||
+          window.webkitAudioContext)();
       }
 
-      if (audioContextRef.current.state === 'suspended') {
+      if (audioContextRef.current.state === "suspended") {
         await audioContextRef.current.resume();
       }
 
-      streamRef.current = await navigator.mediaDevices.getUserMedia({ audio: true });
+      streamRef.current = await navigator.mediaDevices.getUserMedia({
+        audio: true,
+      });
 
-      const source = audioContextRef.current.createMediaStreamSource(streamRef.current);
+      const source = audioContextRef.current.createMediaStreamSource(
+        streamRef.current
+      );
 
       if (!processorRef.current) {
         await audioContextRef.current.audioWorklet.addModule(
@@ -175,6 +330,9 @@ const TextToTextChat = () => {
         processorRef.current.port.onmessage = (event) => {
           const audioData = event.data;
           socketRef.current.emit("send_audio_data", { audio: audioData });
+
+          // Update the last audio time
+          lastAudioTimeRef.current = Date.now();
         };
       }
 
@@ -182,17 +340,41 @@ const TextToTextChat = () => {
       processorRef.current.connect(audioContextRef.current.destination);
 
       setIsRecording(true);
-      socketRef.current.emit("startStream", currentLanguage, sessionId, "", sessionId === 0);
+      socketRef.current.emit(
+        "startStream",
+        currentLanguage,
+        sessionId,
+        "",
+        sessionId === 0
+      );
 
-      timeoutRef.current = setTimeout(() => {
-        stopRecording();
-      }, 6000);
+      // Set the initial last audio time
+      lastAudioTimeRef.current = Date.now();
+
+      // Check for silence every second
+      const checkSilence = () => {
+        const now = Date.now();
+        if (now - lastAudioTimeRef.current > 5000) {
+          stopRecording();
+        } else {
+          timeoutRef.current = setTimeout(checkSilence, 1000);
+        }
+      };
+
+      timeoutRef.current = setTimeout(checkSilence, 1000);
     } catch (error) {
       console.error("Error accessing microphone:", error);
-      if (error.name === 'NotAllowedError' || error.name === 'PermissionDeniedError') {
-        alert("Microphone access is necessary for the application to function. Please enable microphone access in your browser settings.");
+      if (
+        error.name === "NotAllowedError" ||
+        error.name === "PermissionDeniedError"
+      ) {
+        alert(
+          "Microphone access is necessary for the application to function. Please enable microphone access in your browser settings."
+        );
       } else {
-        alert("An error occurred while accessing the microphone. Please try again later.");
+        alert(
+          "An error occurred while accessing the microphone. Please try again later."
+        );
       }
     }
   };
@@ -208,46 +390,59 @@ const TextToTextChat = () => {
       }
 
       if (streamRef.current) {
-        streamRef.current.getTracks().forEach(track => track.stop());
+        streamRef.current.getTracks().forEach((track) => track.stop());
       }
+      console.log("Recording stopped");
     }
   };
 
   return (
-    <div className="flex flex-col h-screen ">
+    <div className="flex flex-col h-screen">
       {!isChatOpen ? (
-        <button onClick={startChatSession} className="fixed bottom-4 right-4 bg-gray-300 text-black p-4 rounded-full shadow-lg z-50">
+        <button
+          onClick={startChatSession}
+          className=" fixed bottom-4 right-4 bg-gray-300 text-black p-4 rounded-full shadow-lg z-50"
+        >
           <HiSparkles size={24} />
         </button>
       ) : (
-        <div className="fixed bottom-0 left-0 h-[500px] max-h-[80vh] flex flex-col bg-white border border-gray-300 rounded-lg overflow-hidden shadow-lg z-50">
+        <div className="chat-box fixed bottom-0 left-[25%] h-[300px] max-h-[80vh] w-[800px] flex flex-col bg-white border border-gray-300 rounded-lg overflow-hidden shadow-lg z-50 responsive-chat-box">
           <div className="bg-gray-900 text-white p-4 flex justify-between items-center">
             <h2 className="text-lg font-semibold">AI Chat</h2>
             <button onClick={endChatSession} className="text-white">
               Close
             </button>
           </div>
-          {connectionError && (
-            <div className="bg-red-500 text-white p-2 text-sm">
-              {connectionError}
-            </div>
-          )}
           <div className="flex-1 p-4 overflow-y-auto bg-gray-100">
-            {chatMessages.map((message, index) => (
-              <div key={index} className={`mb-4 ${message.from === "user" ? "text-right" : "text-left"}`}>
-                <span className={`inline-block p-2 rounded-lg ${message.from === "user" ? "bg-gray-950 text-white" : "bg-white text-gray-800"}`}>
-                  {message.content}
-                </span>
-              </div>
-            ))}
+            {chatMessages
+              .filter((message) => message.content.trim() !== "") // Filter out empty messages
+              .map((message, index) => (
+                <div
+                  key={index}
+                  className={`mb-4 ${
+                    message.from === "user" ? "text-right" : "text-left"
+                  }`}
+                >
+                  <span
+                    className={`inline-block p-2 rounded-lg ${
+                      message.from === "user"
+                        ? "bg-gray-950 text-white"
+                        : "bg-white text-gray-800"
+                    }`}
+                  >
+                    {message.content}
+                  </span>
+                </div>
+              ))}
           </div>
+
           <div className="bg-white p-4 border-t border-gray-300">
             <div className="flex items-center">
               <input
                 type="text"
                 value={inputMsg}
                 onChange={handleInputChange}
-                onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
                 placeholder="Type a message..."
                 className="flex-1 p-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
@@ -260,10 +455,10 @@ const TextToTextChat = () => {
               </button>
               <button
                 onClick={startRecording}
-                className="ml-2 bg-black text-white p-2 rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
+                className="ml-2 bg-black text-white p-2 rounded-md focus:outline-none focus:ring-2"
                 disabled={!isConnected}
               >
-                {isRecording ? <MicOff size={20} /> : <Mic size={20} />}
+                {isRecording ? <Mic size={20} /> : <MicOff size={20} />}
               </button>
               <button
                 onClick={toggleMute}
@@ -275,9 +470,22 @@ const TextToTextChat = () => {
           </div>
         </div>
       )}
-      <footer className="fixed bottom-4 left-4 z-50 flex space-x-2">
+      <footer className="fixed bottom-4 left-4 z-50 flex space-x-2"></footer>
+      <style jsx>{`
+        .responsive-chat-box {
+          width: 800px;
+          left: 25%;
+        }
 
-      </footer>
+        @media (max-width: 768px) {
+          .responsive-chat-box {
+            width: 100%;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+          }
+        }
+      `}</style>
     </div>
   );
 };

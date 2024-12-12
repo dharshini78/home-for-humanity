@@ -1,6 +1,7 @@
+import React, { useState, useEffect } from "react";
 import { IoMdClose } from "react-icons/io";
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { useLanguage } from "./languageContext.jsx";
 
 const speakText = (text, isMuted, language) => {
   if (isMuted) return;
@@ -8,7 +9,7 @@ const speakText = (text, isMuted, language) => {
   window.speechSynthesis.cancel(); // Cancel any ongoing speech
 
   const utterance = new SpeechSynthesisUtterance(text);
-  
+
   // Define language codes with fallbacks
   const languageCodes = {
     'en': ['en-US', 'en-GB', 'en'],
@@ -98,6 +99,7 @@ const speakText = (text, isMuted, language) => {
 const LanguagePopUp = ({ onClose, onSelectLanguage }) => {
   const { i18n } = useTranslation();
   const [searchTerm, setSearchTerm] = useState("");
+  const { setSelectedLanguage } = useLanguage(); // Use the LanguageContext
 
   const languages = [
     { code: 'en', name: 'English' },
@@ -142,6 +144,7 @@ const LanguagePopUp = ({ onClose, onSelectLanguage }) => {
   const handleLanguageSelection = (lang) => {
     i18n.changeLanguage(lang);
     onSelectLanguage(lang);
+    setSelectedLanguage(lang); // Update the selected language in the context
     speakText(i18n.t(`${lang}_welcome`), lang, false); // Speak a welcome message in the selected language
   };
 

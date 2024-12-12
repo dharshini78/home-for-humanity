@@ -1,0 +1,60 @@
+{
+    "name": "TimberShelter",
+    "id": 0,
+    "page": "page01",
+    "occupancy": 3,
+    "duration": "4-5 Weeks",
+    "designCredits": {
+      "title": "Design Credits",
+      "content": {
+        "shelterName": "Lari Octa Green Shelter",
+        "designer": "Dr. Yasmeen Lari",
+        "organization": "Heritage Foundation of Pakistan",
+        "address": "E-6, 4th Gizri Street, DHA 4, Karachi, 75500 Pakistan",
+        "website": "https://www.heritagefoundationpak.org/"
+      }
+    },
+    "bibliography": {
+      "title": "Bibliography",
+      "content": {
+        "zoteroLibrary": [
+          {
+            "title": "‘LARI OCTA GREEN’: SUSTAINABLE BAMBOO DESIGN FOR FLOOD RELIEF",
+            "source": "Designboom.com",
+            "date": "26/11/2022",
+            "link": "https://www.designboom.com/architecture/lari-octa-green-emergency-bamboo-shelters-flood-relief-heritage-foundation-of-pakistan-10-26-2022/"
+          }
+        ],
+        "otherSources": [
+          {
+            "title": "LOG (Lari OctaGreen)",
+            "source": "Yasmeen Lari's Zero Carbon Channel",
+            "platform": "YouTube",
+            "date": "12/03/2021",
+            "link": "https://www.youtube.com/watch?v=YC5dm2Yl1EE"
+          },
+          {
+            "title": "Documents and plans",
+            "author": "Yasmeen Lari"
+          },
+          {
+            "title": "Working with Bamboo - Basic Principles and Techniques",
+            "author": "Stéphane Schröder",
+            "date": "08/07/2024",
+            "link": "https://www.guaduabamboo.com/blog/joining-bamboo"
+          },
+          {
+            "title": "Manual de construcción con bambú",
+            "author": "Oscar Hidalgo López",
+            "publisher": "Universidad Nacional de Colombia",
+            "year": 1981
+          }
+        ]
+      }
+    },
+    "instructions": "Instructions",
+    "materialList": "Material List",
+    "downloadAsPdf": "Download as PDF",
+    "comments": "Comments",
+    "postComments": "Post Comments"
+  }

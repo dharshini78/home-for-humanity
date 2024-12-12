@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { IoMdClose, IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import axios from "axios";
+import he from "he"; // Import the he library
+import { useLanguage } from "../Features/languageContext.jsx"; // Import the language context
 
-const MAX_IMAGES = 10; 
-const DISPLAY_LIMIT = 3; 
+const MAX_IMAGES = 10;
+const DISPLAY_LIMIT = 3;
 
 const CommentTS = () => {
   const [showModal, setShowModal] = useState(false);
@@ -16,44 +18,218 @@ const CommentTS = () => {
   const [showImagePopup, setShowImagePopup] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [currentImages, setCurrentImages] = useState([]);
+  const [translations, setTranslations] = useState(null);
+  const { selectedLanguage } = useLanguage();
 
   useEffect(() => {
     fetchComments();
+    fetchTranslations("en"); // Fetch default English translations on mount
   }, []);
+
+  useEffect(() => {
+    if (selectedLanguage) {
+      console.log("Current selected language:", selectedLanguage);
+      fetchComments();
+      fetchTranslations(selectedLanguage);
+    }
+  }, [selectedLanguage]);
 
   const fetchComments = async () => {
     try {
       const response = await axios.get(
         "https://api.homeforhumanity.xrvizion.com/shelter/comments?shelterId=0"
       );
+
+      console.log("Raw comments response:", response.data);
+
       const filteredComments = response.data.comments.filter(
         (comment) => comment.posted
       );
-      setComments(filteredComments);
-      console.log(filteredComments);
+
+      console.log("Filtered comments before translation:", filteredComments);
+
+      // Translate each comment's message
+      const translatedComments = await Promise.all(
+        filteredComments.map(async (comment) => {
+          try {
+            // Skip translation for comments without a message
+            if (!comment.comments) {
+              console.warn("Skipping comment without message:", comment);
+              return comment;
+            }
+
+            const translatedMessage = await translateMessage(
+              comment.comments,
+              selectedLanguage
+            );
+
+            return {
+              ...comment,
+              comments: translatedMessage,
+            };
+          } catch (translateError) {
+            console.error(
+              "Translation error for specific comment:",
+              translateError
+            );
+            return comment;
+          }
+        })
+      );
+
+      console.log("Translated comments:", translatedComments);
+      setComments(translatedComments);
     } catch (error) {
       console.error("Error fetching comments:", error);
     }
   };
 
+  // In your fetchTranslations method
+  const fetchTranslations = async (langCode) => {
+    try {
+      const response = await axios.post(
+        "https://api.homeforhumanity.xrvizion.com/shelter/gettranslation",
+        {
+          shelterName: "TimberShelter",
+          langCode: langCode,
+          fileName: "timbershelter_comments.json",
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = response.data;
+
+      if (data.msg === "Success" && data.translatedContent) {
+        // Separate comments translations and UI translations
+        const uiTranslations = data.translatedContent.ui || {};
+        const commentsTranslations = data.translatedContent.comments || [];
+
+        setTranslations({
+          ...uiTranslations,
+          commentMessages: commentsTranslations
+        });
+      } else {
+        console.error("Error in translation response:", data.msg);
+      }
+    } catch (error) {
+      console.error("Error fetching translations:", error);
+    }
+  };
+
+  // In your render method, modify how translations are accessed
+
+  const decodeContent = (content) => {
+    if (typeof content === "string") {
+      return he.decode(content);
+    } else if (Array.isArray(content)) {
+      return content.map(decodeContent);
+    } else if (typeof content === "object" && content !== null) {
+      const decodedObject = {};
+      for (const key in content) {
+        if (content.hasOwnProperty(key)) {
+          decodedObject[key] = decodeContent(content[key]);
+        }
+      }
+      return decodedObject;
+    }
+    return content;
+  };
+  const translateMessage = async (message, langCode) => {
+    // Validate input
+    if (!message || !langCode) {
+      console.warn("No message or language code provided");
+      return message;
+    }
+
+    try {
+      console.log("Original Message:", message);
+      console.log("Target Language:", langCode);
+
+      const response = await axios.post(
+        "https://api.homeforhumanity.xrvizion.com/shelter/gettranslation",
+        {
+          shelterName: "TimberShelter",
+          langCode: langCode,
+          fileName: "timbershelter_comments_en.json",
+          text: message,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log("Full Translation Response:", response.data);
+
+      // Detailed debugging of the response
+      if (response.data.msg === "Success") {
+        // Attempt to extract translated message with multiple strategies
+        let translatedMessage = message;
+
+        // Check if translatedContent exists and is a string or has translatedMessage
+        if (response.data.translatedContent) {
+          if (typeof response.data.translatedContent === "string") {
+            translatedMessage = response.data.translatedContent;
+          } else if (response.data.translatedContent.translatedMessage) {
+            translatedMessage =
+              response.data.translatedContent.translatedMessage;
+          } else if (response.data.translatedContent.text) {
+            translatedMessage = response.data.translatedContent.text;
+          }
+        }
+
+        console.log("Extracted Translated Message:", translatedMessage);
+
+        // Ensure we return a string, fallback to original message
+        return String(translatedMessage).trim() || message;
+      } else {
+        console.error("Translation failed:", response.data.msg);
+        return message;
+      }
+    } catch (error) {
+      console.error("Comprehensive translation error:", error);
+      return message;
+    }
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validate input fields
+    if (!name || !email || !message) {
+      setError(
+        translations
+          ? translations.requiredFieldsError
+          : "Please fill in all required fields."
+      );
+      return;
+    }
 
     const formData = new FormData();
     formData.append("name", name);
     formData.append("email", email);
-    formData.append("comments", message);
-    formData.append("shelterId", "0"); // Timber Shelter ID
-
-    if (file.length) {
-      for (let i = 0; i < file.length; i++) {
-        formData.append("files", file[i]);
-      }
-    }
-
-    console.log(name, email, message, file, formData);
 
     try {
+      // Translate the message to the selected language before posting
+      const translatedMessage = await translateMessage(
+        message,
+        selectedLanguage
+      );
+
+      formData.append("comments", translatedMessage);
+      formData.append("shelterId", "0"); // Timber Shelter ID
+
+      // Handle file uploads
+      if (file.length) {
+        for (let i = 0; i < file.length; i++) {
+          formData.append("files", file[i]);
+        }
+      }
+
+      // Post the comment with the translated message
       await axios.post(
         "https://api.homeforhumanity.xrvizion.com/shelter/updatecomments",
         formData,
@@ -64,7 +240,9 @@ const CommentTS = () => {
           },
         }
       );
-      fetchComments(); // Refresh comments after posting
+
+      // Reset form and fetch updated comments
+      fetchComments();
       setShowModal(false);
       setName("");
       setEmail("");
@@ -73,22 +251,32 @@ const CommentTS = () => {
       setError("");
     } catch (error) {
       console.error("Error posting comment:", error);
+      setError(
+        translations
+          ? translations.submissionError
+          : "Failed to post comment. Please try again."
+      );
     }
   };
-
   const handleFileChange = (e) => {
     const selectedFiles = Array.from(e.target.files);
     if (selectedFiles.length > MAX_IMAGES) {
-      setError(`You can only upload up to ${MAX_IMAGES} images.`);
+      setError(
+        translations
+          ? translations.fileUploadError
+          : `You can only upload up to ${MAX_IMAGES} images.`
+      );
       return;
     }
     setFiles(selectedFiles);
     setError("");
   };
+
   const renderFilePreview = (file, index, totalFiles) => {
     const isBeyondLimit = index >= DISPLAY_LIMIT;
-    const shouldShowOverlay = index === DISPLAY_LIMIT && totalFiles.length > DISPLAY_LIMIT;
-  
+    const shouldShowOverlay =
+      index === DISPLAY_LIMIT && totalFiles.length > DISPLAY_LIMIT;
+
     if (file instanceof File) {
       return (
         <div className="relative">
@@ -129,7 +317,6 @@ const CommentTS = () => {
     }
     return null;
   };
-  
 
   const openImagePopup = (index, files) => {
     setCurrentImageIndex(index);
@@ -154,18 +341,26 @@ const CommentTS = () => {
   return (
     <div>
       <div className="mt-[3rem] flex justify-between w-full items-center">
-        <h2 className="mini underline underline-offset-2">Comments</h2>
+        <h2 className="mini underline underline-offset-2">
+          {translations && translations.comments
+            ? translations.comments
+            : "Comments"}
+        </h2>{" "}
         <button
           className="border flex items-center p-2 rounded-[6rem] w-[9rem] justify-center bg-gray-100 mini border-gray-400 h-9 mr-4 text-smm"
           onClick={() => setShowModal(true)}
         >
-          Post Comment
+          {translations && translations.postAComment
+            ? translations.postAComment
+            : "Post comments"}
         </button>
       </div>
       {comments.map((comment, index) => (
         <div key={index} className="mt-4 border-b pb-4">
           <h3 className="text-smm font-semibold">{comment.name}</h3>
-          <p className="mt-2 text-smm comment-message">{comment.comments}</p>
+          <p className="mt-2 text-smm comment-message">
+            {translations?.commentMessages?.[index] || comment.comments}
+          </p>
           <div className="flex flex-wrap mt-2">
             {comment.fileUrl && Array.isArray(comment.fileUrl)
               ? comment.fileUrl.map((file, idx) => (
@@ -188,14 +383,16 @@ const CommentTS = () => {
             >
               <IoMdClose size={24} />
             </button>
-            <h2 className="text-lg font-semibold mb-4">Post a Comment</h2>
+            <h2 className="text-lg font-semibold mb-4">
+              {translations ? translations.postAComment : "Post a Comment"}
+            </h2>
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label
                   htmlFor="name"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Name
+                  {translations ? translations.name : "Name"}
                 </label>
                 <input
                   type="text"
@@ -211,7 +408,7 @@ const CommentTS = () => {
                   htmlFor="email"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Email
+                  {translations ? translations.email : "Email"}
                 </label>
                 <input
                   type="email"
@@ -227,7 +424,7 @@ const CommentTS = () => {
                   htmlFor="message"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Message
+                  {translations ? translations.message : "Message"}
                 </label>
                 <textarea
                   id="message"
@@ -243,7 +440,7 @@ const CommentTS = () => {
                   htmlFor="files"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Upload Files
+                  {translations ? translations.uploadFiles : "Upload Files"}
                 </label>
                 <input
                   type="file"
@@ -259,7 +456,7 @@ const CommentTS = () => {
                   type="submit"
                   className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
-                  Submit
+                  {translations ? translations.submit : "Submit"}
                 </button>
               </div>
             </form>
