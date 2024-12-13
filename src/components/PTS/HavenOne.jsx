@@ -61,7 +61,7 @@ const DurationIndicator = ({ duration, selectedHeadcount, itemWithId, tooltipTex
   const calculatedDuration = calculateDuration(duration, itemWithId.headcounts, selectedHeadcount);
 
   return (
-    <Tooltip text={tooltipText} isVisible={showTooltip}>
+    <Tooltip text={translatedContent ? translatedContent.tooltip.estimated : tooltipText} isVisible={showTooltip}>
       <div
         className="flex items-center rounded-[6rem] w-[8rem] justify-center border border-gray-600 h-8 text-sm md:text-base md:w-[8rem] hover:bg-gray-200 transition-colors cursor-pointer ml-2"
         onMouseEnter={() => setShowTooltip(true)}
@@ -76,11 +76,11 @@ const DurationIndicator = ({ duration, selectedHeadcount, itemWithId, tooltipTex
   );
 };
 
-const OccupancyIndicator = ({ occupancy, tooltipText }) => {
+const OccupancyIndicator = ({ occupancy, tooltipText, translatedContent }) => {
   const [showTooltip, setShowTooltip] = useState(false);
 
   return (
-    <Tooltip text={tooltipText} isVisible={showTooltip}>
+    <Tooltip text={translatedContent ? translatedContent.tooltip.occupancy : tooltipText} isVisible={showTooltip}>
       <div
         className="flex items-center rounded-[6rem] w-[3.4rem] justify-center border border-gray-600 h-8 text-sm md:text-base md:w-[5rem] hover:bg-gray-200 transition-colors cursor-pointer"
         onMouseEnter={() => setShowTooltip(true)}
@@ -282,18 +282,20 @@ const HavenOne = () => {
         <div className="lg:w-1/2 flex flex-col">
           <div className="flex flex-col">
             <div key={itemWithId.id} className="flex">
-              <OccupancyIndicator
-                occupancy={translatedContent ? translatedContent.occupancy : itemWithId.headcounts}
-                tooltipText="Occupancy"
-              />
+            <OccupancyIndicator
+  occupancy={translatedContent ? translatedContent.occupancy : itemWithId.headcounts}
+  tooltipText="Occupancy"
+  translatedContent={translatedContent}
+/>
 
-              <DurationIndicator
-                duration={itemWithId.duration} // Use the original duration from itemWithId
-                selectedHeadcount={selectedHeadcount}
-                itemWithId={itemWithId}
-                tooltipText="Estimated construction duration"
-                translatedContent={translatedContent} // Pass the translated content
-              />
+<DurationIndicator
+  duration={itemWithId.duration}
+  selectedHeadcount={selectedHeadcount}
+  itemWithId={itemWithId}
+  tooltipText="Estimated construction duration"
+  translatedContent={translatedContent}
+/>
+
             </div>
           </div>
           <div className="mt-6 flex flex-col justify-normal items-start mb-9">

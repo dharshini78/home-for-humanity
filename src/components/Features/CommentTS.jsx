@@ -23,14 +23,14 @@ const CommentTS = () => {
 
   useEffect(() => {
     fetchComments();
-    fetchTranslations("en"); // Fetch default English translations on mount
+    fetchTranslations();
   }, []);
 
   useEffect(() => {
     if (selectedLanguage) {
       console.log("Current selected language:", selectedLanguage);
       fetchComments();
-      fetchTranslations(selectedLanguage);
+      fetchTranslations();
     }
   }, [selectedLanguage]);
 
@@ -84,14 +84,13 @@ const CommentTS = () => {
     }
   };
 
-  // In your fetchTranslations method
-  const fetchTranslations = async (langCode) => {
+  const fetchTranslations = async () => {
     try {
       const response = await axios.post(
         "https://api.homeforhumanity.xrvizion.com/shelter/gettranslation",
         {
           shelterName: "TimberShelter",
-          langCode: langCode,
+          langCode: selectedLanguage,
           fileName: "timbershelter_comments.json",
         },
         {
@@ -100,26 +99,14 @@ const CommentTS = () => {
           },
         }
       );
-      const data = response.data;
 
-      if (data.msg === "Success" && data.translatedContent) {
-        // Separate comments translations and UI translations
-        const uiTranslations = data.translatedContent.ui || {};
-        const commentsTranslations = data.translatedContent.comments || [];
-
-        setTranslations({
-          ...uiTranslations,
-          commentMessages: commentsTranslations
-        });
-      } else {
-        console.error("Error in translation response:", data.msg);
+      if (response.data.msg === "Success") {
+        setTranslations(response.data.translatedContent);
       }
     } catch (error) {
       console.error("Error fetching translations:", error);
     }
   };
-
-  // In your render method, modify how translations are accessed
 
   const decodeContent = (content) => {
     if (typeof content === "string") {
@@ -137,6 +124,7 @@ const CommentTS = () => {
     }
     return content;
   };
+
   const translateMessage = async (message, langCode) => {
     // Validate input
     if (!message || !langCode) {
@@ -153,7 +141,7 @@ const CommentTS = () => {
         {
           shelterName: "TimberShelter",
           langCode: langCode,
-          fileName: "timbershelter_comments_en.json",
+          fileName: "timbershelter_comments.json",
           text: message,
         },
         {
@@ -195,6 +183,7 @@ const CommentTS = () => {
       return message;
     }
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -258,6 +247,7 @@ const CommentTS = () => {
       );
     }
   };
+
   const handleFileChange = (e) => {
     const selectedFiles = Array.from(e.target.files);
     if (selectedFiles.length > MAX_IMAGES) {
@@ -342,17 +332,13 @@ const CommentTS = () => {
     <div>
       <div className="mt-[3rem] flex justify-between w-full items-center">
         <h2 className="mini underline underline-offset-2">
-          {translations && translations.comments
-            ? translations.comments
-            : "Comments"}
-        </h2>{" "}
+          {translations ? translations.comments : "Comments"}
+        </h2>
         <button
           className="border flex items-center p-2 rounded-[6rem] w-[9rem] justify-center bg-gray-100 mini border-gray-400 h-9 mr-4 text-smm"
           onClick={() => setShowModal(true)}
         >
-          {translations && translations.postAComment
-            ? translations.postAComment
-            : "Post comments"}
+          {translations ? translations.postAComment : "Post comments"}
         </button>
       </div>
       {comments.map((comment, index) => (
