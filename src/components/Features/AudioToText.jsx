@@ -4,8 +4,7 @@ import { Send, Mic, MicOff, VolumeX, Volume2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import io from "socket.io-client";
 import { speakText } from "./LanguagePopUp";
-import { debounce } from 'lodash'; // Make sure to import debounce
-
+import { debounce } from "lodash"; // Make sure to import debounce
 
 const TextToTextChat = () => {
   const { i18n } = useTranslation();
@@ -47,15 +46,15 @@ const TextToTextChat = () => {
 
       audioElement.onended = () => {
         isPlayingRef.current = false;
-        audioElement.src = '';
+        audioElement.src = "";
         audioElement.load();
         audioElementRef.current = null;
       };
 
       audioElementRef.current = audioElement;
       isPlayingRef.current = true;
-      audioElement.play().catch(error => {
-        console.error('Audio playback failed:', error);
+      audioElement.play().catch((error) => {
+        console.error("Audio playback failed:", error);
         isPlayingRef.current = false;
       });
     }, 100)
@@ -69,7 +68,7 @@ const TextToTextChat = () => {
         if (newIsMuted || audioElementRef.current.paused) {
           // If muting or audio was paused, stop completely
           audioElementRef.current.pause();
-          audioElementRef.current.src = '';
+          audioElementRef.current.src = "";
           audioElementRef.current.load();
           audioElementRef.current = null;
           isPlayingRef.current = false;
@@ -121,7 +120,8 @@ const TextToTextChat = () => {
 
       // Check if the message is already in the chatMessages array
       const isDuplicate = chatMessages.some(
-        (message) => message.from === "bot" && message.content === data.completedText
+        (message) =>
+          message.from === "bot" && message.content === data.completedText
       );
 
       if (!isDuplicate) {
@@ -182,7 +182,7 @@ const TextToTextChat = () => {
       if (audioElementRef.current) {
         const audio = audioElementRef.current;
         audio.pause();
-        audio.src = '';
+        audio.src = "";
         audio.load();
         audioElementRef.current = null;
       }
@@ -195,7 +195,7 @@ const TextToTextChat = () => {
       if (audioElementRef.current) {
         const audio = audioElementRef.current;
         audio.pause();
-        audio.src = '';
+        audio.src = "";
         audio.load();
       }
       debouncedPlayAudio.cancel();

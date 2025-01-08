@@ -1,3 +1,66 @@
-shelter:1{
-    
-}
+ 
+ temporary shelter
+ 
+ Staves 1-9
+ Framework 14-19
+ Join parts 20-26
+ Roof Structure 27-32
+ Water Proofing 33-40
+
+Bracing 41-47
+Roof 48-53
+Floor 54 - 61
+
+
+superadobe:
+
+preparation one to two
+foundation three to eighteen
+Foor nineteen to twenty seven
+dome twenty eight to 37
+dome thirty seven to fourty nine
+storage floor fifty to fifty eight
+roof fifty nine
+plaster sixty one to seventy five
+
+bamboo
+
+foundation  one to four 
+primary columns five to ten 
+beams eleven to sixteen 
+secondary columns seventeen to twentyone
+bracings1 twenty two to twenty seven
+bracings2 twenty eight to thirty three
+bracings3 thirty four to fourty
+rod beams fourtyone to fourty three
+roof main frame fourty four to fiftyone
+roof secondary frame fiftytwo to fifty nine
+Rafters sixty to sixty four
+roof panels sixty five to seventy three
+Facade seventy four to eighty two
+
+octagreen shelter:
+
+foundation 1 to 11
+brick foundation 12 to 24
+wall panels 25 to 47
+door panels 48 to 59
+assembly panels 60 to 67
+roof 68 to 81
+grass roof 94 to 109
+walls 110 to 116
+flooring 117 to 126
+
+
+timber shelter:
+
+foundation 1 to 9
+ridge beam 10-14
+masonary 15-16
+roof Structure 17-21
+water Proofing 22-29
+insulation 30-32
+metal roof 33-37
+guy ropes 38-41
+
+

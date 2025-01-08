@@ -49,3 +49,23 @@
     transform: none !important;
   }
 }
+/* App.css */
+.bg-beige-100 {
+  background-color: #f5f5dc;
+}
+
+.bg-gray-900 {
+  background-color: #1a202c;
+}
+
+.text-gray-800 {
+  color: #2d3748;
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+.hover\:bg-gray-700:hover {
+  background-color: #4a5568;
+}

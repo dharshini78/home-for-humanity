@@ -6,20 +6,22 @@ const LanguageContext = createContext();
 
 export const LanguageProvider = ({ children }) => {
   const [selectedLanguage, setSelectedLanguage] = useState(() => {
-    const storedLanguage = localStorage.getItem('selectedLanguage');
-    return storedLanguage || 'en';
+    const storedLanguage = localStorage.getItem("selectedLanguage");
+    return storedLanguage || "en";
   });
   const [translatedContent, setTranslatedContent] = useState({});
   const { id } = useParams();
   const titleWithId = data.find((item) => item.id === id);
 
   useEffect(() => {
-    localStorage.setItem('selectedLanguage', selectedLanguage);
+    localStorage.setItem("selectedLanguage", selectedLanguage);
   }, [selectedLanguage]);
 
   useEffect(() => {
     const fetchTranslatedContent = async (language) => {
-      const storedContent = localStorage.getItem(`translatedContent_${language}_${titleWithId.title}`);
+      const storedContent = localStorage.getItem(
+        `translatedContent_${language}_${titleWithId.title}`
+      );
       if (storedContent) {
         setTranslatedContent((prevContent) => ({
           ...prevContent,
@@ -36,29 +38,37 @@ export const LanguageProvider = ({ children }) => {
             // Add other shelters as needed
           };
 
-          const fileName = fileNameMapping[titleWithId.title] || 'default_instructions_en.json';
+          const fileName =
+            fileNameMapping[titleWithId.title] ||
+            "default_instructions_en.json";
 
-          const response = await fetch('https://api.homeforhumanity.xrvizion.com/shelter/gettranslation', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              shelterName: titleWithId.title.replace(/\s+/g, ''), // Remove spaces
-              langCode: language,
-              fileName: fileName,
-            }),
-          });
+          const response = await fetch(
+            "https://api.homeforhumanity.xrvizion.com/shelter/gettranslation",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                shelterName: titleWithId.title.replace(/\s+/g, ""), // Remove spaces
+                langCode: language,
+                fileName: fileName,
+              }),
+            }
+          );
           const data = await response.json();
           if (data.msg === "Success") {
             setTranslatedContent((prevContent) => ({
               ...prevContent,
               [language]: data.translatedContent,
             }));
-            localStorage.setItem(`translatedContent_${language}_${titleWithId.title}`, JSON.stringify(data.translatedContent));
+            localStorage.setItem(
+              `translatedContent_${language}_${titleWithId.title}`,
+              JSON.stringify(data.translatedContent)
+            );
           }
         } catch (error) {
-          console.error('Error fetching translated content:', error);
+          console.error("Error fetching translated content:", error);
         }
       }
     };
@@ -69,7 +79,9 @@ export const LanguageProvider = ({ children }) => {
   }, [selectedLanguage, translatedContent, id]);
 
   return (
-    <LanguageContext.Provider value={{ selectedLanguage, setSelectedLanguage, translatedContent }}>
+    <LanguageContext.Provider
+      value={{ selectedLanguage, setSelectedLanguage, translatedContent }}
+    >
       {children}
     </LanguageContext.Provider>
   );

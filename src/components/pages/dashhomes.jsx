@@ -8,14 +8,14 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { CiTimer } from "react-icons/ci";
 import "../Home.css";
 import data from "../Data/PTSData.jsx";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import SkeletonLoader from "../Skeletons/SkeletonHome.jsx";
 import Chatbot from "../Features/AudioToText.jsx";
 import LanguagePopUp from "../Features/LanguagePopUp.jsx";
 import { FaLanguage } from "react-icons/fa";
 import { useLanguage } from "../Features/languageContext.jsx";
-import he from 'he'; // Import the he library
-import { FaCirclePlus } from "react-icons/fa6";
+import he from "he"; // Import the he library
+import { BsFillPlusCircleFill } from "react-icons/bs";
 
 export default function Home() {
   const [sortedData, setSortedData] = useState(data);
@@ -34,6 +34,7 @@ export default function Home() {
   const [selectedShelter, setSelectedShelter] = useState(null);
   const { selectedLanguage, setSelectedLanguage } = useLanguage();
   const [translations, setTranslations] = useState(null);
+  const navigate = useNavigate();
 
   const Tooltip = ({ children, text, isVisible }) => {
     return (
@@ -70,18 +71,26 @@ export default function Home() {
     setSelectedShelter(shelterTitle);
   };
 
-  const DurationIndicator = ({ duration, selectedHeadcount, tooltipText, isChanged }) => {
+  const DurationIndicator = ({
+    duration,
+    selectedHeadcount,
+    tooltipText,
+    isChanged,
+  }) => {
     const [showTooltip, setShowTooltip] = useState(false);
 
     const generateTooltipText = () => {
-      return `${translations?.tooltip.averageConstructionDuration.replace("{dynamicNumber}", selectedHeadcount)}`;
+      return `${translations?.tooltip.averageConstructionDuration.replace(
+        "{dynamicNumber}",
+        selectedHeadcount
+      )}`;
     };
 
     return (
       <Tooltip text={generateTooltipText()} isVisible={showTooltip}>
         <div
           className={`flex items-center rounded-[6rem] w-[8rem] justify-center border border-gray-600 h-8 text-sm md:text-base md:w-[8rem] hover:bg-gray-200 transition-colors cursor-pointer
-          ${isChanged ? 'animate-pulse bg-gray-800 text-white' : ''}`}
+          ${isChanged ? "animate-pulse bg-gray-800 text-white" : ""}`}
           onMouseEnter={() => setShowTooltip(true)}
           onMouseLeave={() => setShowTooltip(false)}
         >
@@ -133,7 +142,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    const storedLanguage = localStorage.getItem('selectedLanguage');
+    const storedLanguage = localStorage.getItem("selectedLanguage");
     if (storedLanguage) {
       setSelectedLanguage(storedLanguage);
     }
@@ -144,26 +153,29 @@ export default function Home() {
   useEffect(() => {
     const fetchTranslations = async () => {
       try {
-        const response = await fetch(`https://api.homeforhumanity.xrvizion.com/shelter/gettranslation`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            shelterName: "OtherPages",
-            langCode: selectedLanguage,
-            fileName: 'homepage_en.json',
-          }),
-        });
+        const response = await fetch(
+          `https://api.homeforhumanity.xrvizion.com/shelter/gettranslation`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              shelterName: "OtherPages",
+              langCode: selectedLanguage,
+              fileName: "homepage_en.json",
+            }),
+          }
+        );
         const data = await response.json();
         if (data.msg === "Success") {
           const decodedContent = decodeContent(data.translatedContent);
           setTranslations(decodedContent);
         } else {
-          console.error('Error in translation response:', data.msg);
+          console.error("Error in translation response:", data.msg);
         }
       } catch (error) {
-        console.error('Error fetching home translations:', error);
+        console.error("Error fetching home translations:", error);
       } finally {
         setIsLoadingTranslations(false);
       }
@@ -218,27 +230,27 @@ export default function Home() {
 
   const handleSort = (type, value) => {
     switch (type) {
-      case 'climate':
-        setClimateSort(prev =>
+      case "climate":
+        setClimateSort((prev) =>
           prev.includes(value)
-            ? prev.filter(item => item !== value)
+            ? prev.filter((item) => item !== value)
             : [...prev, value]
         );
         break;
-      case 'headcount':
-        setHeadCountSort(prev => prev === value ? '' : value);
+      case "headcount":
+        setHeadCountSort((prev) => (prev === value ? "" : value));
         setIsDurationChanged(true);
         const timeout = setTimeout(() => {
           setIsDurationChanged(false);
         }, 2000);
 
         return () => clearTimeout(timeout);
-      case 'cost':
-        setCostSort(prev => prev === value ? '' : value);
+      case "cost":
+        setCostSort((prev) => (prev === value ? "" : value));
         setOccupancySort(null); // Disable occupancy sort
         break;
-      case 'occupancy':
-        setOccupancySort(prev => prev === value ? '' : value);
+      case "occupancy":
+        setOccupancySort((prev) => (prev === value ? "" : value));
         setCostSort(null); // Disable cost sort
         break;
     }
@@ -251,23 +263,32 @@ export default function Home() {
     setOccupancySort(null);
   };
 
-  const calculateDuration = (originalDuration, defaultHeadCount, selectedHeadCount) => {
+  const calculateDuration = (
+    originalDuration,
+    defaultHeadCount,
+    selectedHeadCount
+  ) => {
     if (!selectedHeadCount) return originalDuration;
 
-    const [minWeeks, maxWeeks] = originalDuration.split('-').map(Number);
+    const [minWeeks, maxWeeks] = originalDuration.split("-").map(Number);
     const defaultCount = parseInt(defaultHeadCount);
-    const selectedCount = selectedHeadCount === '5+' ? 5 : parseInt(selectedHeadCount);
+    const selectedCount =
+      selectedHeadCount === "5+" ? 5 : parseInt(selectedHeadCount);
 
     if (selectedCount <= defaultCount) {
       const multiplier = defaultCount / selectedCount;
       const newMinWeeks = Math.ceil(minWeeks * multiplier);
       const newMaxWeeks = Math.ceil(maxWeeks * multiplier);
-      return newMinWeeks === newMaxWeeks ? `${newMinWeeks}` : `${newMinWeeks}-${newMaxWeeks}`;
+      return newMinWeeks === newMaxWeeks
+        ? `${newMinWeeks}`
+        : `${newMinWeeks}-${newMaxWeeks}`;
     } else {
       const multiplier = selectedCount / defaultCount;
       const newMinWeeks = Math.floor(minWeeks / multiplier);
       const newMaxWeeks = Math.floor(maxWeeks / multiplier);
-      return newMinWeeks === newMaxWeeks ? `${newMinWeeks}` : `${newMinWeeks}-${newMaxWeeks}`;
+      return newMinWeeks === newMaxWeeks
+        ? `${newMinWeeks}`
+        : `${newMinWeeks}-${newMaxWeeks}`;
     }
   };
 
@@ -282,11 +303,11 @@ export default function Home() {
   };
 
   const decodeContent = (content) => {
-    if (typeof content === 'string') {
+    if (typeof content === "string") {
       return he.decode(content);
     } else if (Array.isArray(content)) {
       return content.map(decodeContent);
-    } else if (typeof content === 'object' && content !== null) {
+    } else if (typeof content === "object" && content !== null) {
       const decodedObject = {};
       for (const key in content) {
         if (content.hasOwnProperty(key)) {
@@ -304,36 +325,42 @@ export default function Home() {
       "Octagreen Shelter": "shelterTwo",
       "Temporary Shelter": "shelterThree",
       "Bamboo Shelter": "shelterFour",
-      "Superadobe Shelter": "shelterFive"
+      "Superadobe Shelter": "shelterFive",
     };
 
-    let filteredData = data.map(item => {
+    let filteredData = data.map((item) => {
       const key = translationKeys[item.title];
       const translatedTitle = translations?.main?.[key] || item.title;
-      console.log(`Original Title: ${item.title}, Translated Title: ${translatedTitle}`);
+      console.log(
+        `Original Title: ${item.title}, Translated Title: ${translatedTitle}`
+      );
       return {
         ...item,
-        title: translatedTitle
+        title: translatedTitle,
       };
     });
 
     // Apply climate filter
     if (climateSort.length > 0) {
       filteredData = filteredData.filter((item) =>
-        climateSort.every(climate => item.weather[climate])
+        climateSort.every((climate) => item.weather[climate])
       );
     }
 
     // Apply headcount and duration calculation
     if (headCountSort) {
-      filteredData = filteredData.map(item => ({
+      filteredData = filteredData.map((item) => ({
         ...item,
-        calculatedDuration: calculateDuration(item.duration, item.headcounts, headCountSort)
+        calculatedDuration: calculateDuration(
+          item.duration,
+          item.headcounts,
+          headCountSort
+        ),
       }));
     } else {
-      filteredData = filteredData.map(item => ({
+      filteredData = filteredData.map((item) => ({
         ...item,
-        calculatedDuration: item.duration
+        calculatedDuration: item.duration,
       }));
     }
 
@@ -361,21 +388,36 @@ export default function Home() {
     }
 
     setSortedData(filteredData);
-  }, [costSort, headCountSort, climateSort, searchQuery, occupancySort, translations]);
+  }, [
+    costSort,
+    headCountSort,
+    climateSort,
+    searchQuery,
+    occupancySort,
+    translations,
+  ]);
 
   if (loading || isLoadingTranslations) {
     return <SkeletonLoader />;
   }
 
-  const isFilterApplied = climateSort.length > 0 || headCountSort || costSort || occupancySort;
+  const isFilterApplied =
+    climateSort.length > 0 || headCountSort || costSort || occupancySort;
   return (
     <>
       <div className="flex justify-between items-center p-5 ff-xl z-10 border-b border-black">
         <div className="flex items-center">
           <button onClick={toggleMenu} className="md:hidden">
-            {isMenuOpen ? <IoMdClose size={25} /> : <RxHamburgerMenu size={24} />}
+            {isMenuOpen ? (
+              <IoMdClose size={25} />
+            ) : (
+              <RxHamburgerMenu size={24} />
+            )}
           </button>
-          <Link to="/" className="ml-3 mr-10 text-[1.2rem] md:text-[1.5rem] lg:text-[1.75rem] mt-1">
+          <Link
+            to="/"
+            className="ml-3 mr-10 text-[1.2rem] md:text-[1.5rem] lg:text-[1.75rem] mt-1"
+          >
             <h1 className="text-black mini">Home for Humanity</h1>
           </Link>
         </div>
@@ -399,7 +441,10 @@ export default function Home() {
           <button onClick={toggleSearch} className="flex items-center">
             <IoMdSearch size={24} />
           </button>
-          <button onClick={toggleLanguage} className="flex items-center space-x-2">
+          <button
+            onClick={toggleLanguage}
+            className="flex items-center space-x-2"
+          >
             <FaLanguage size={35} />
           </button>
         </div>
@@ -410,16 +455,28 @@ export default function Home() {
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <Link to="/" className="underline-animation p-7 w-full flex items-center justify-start border-b border-gray-300 mini">
+        <Link
+          to="/"
+          className="underline-animation p-7 w-full flex items-center justify-start border-b border-gray-300 mini"
+        >
           {translations?.navbar.shelter}
         </Link>
-        <Link to="/about" className="underline-animation p-7 w-full flex items-center justify-start border-b border-gray-300 mini">
+        <Link
+          to="/about"
+          className="underline-animation p-7 w-full flex items-center justify-start border-b border-gray-300 mini"
+        >
           {translations?.navbar.about}
         </Link>
-        <Link to="/faqs" className="underline-animation p-7 w-full flex items-center justify-start border-b border-gray-300 mini">
+        <Link
+          to="/faqs"
+          className="underline-animation p-7 w-full flex items-center justify-start border-b border-gray-300 mini"
+        >
           {translations?.navbar.faqs}
         </Link>
-        <Link to="/credits" className="underline-animation p-7 w-full flex items-center justify-start border-b border-gray-300 mini">
+        <Link
+          to="/credits"
+          className="underline-animation p-7 w-full flex items-center justify-start border-b border-gray-300 mini"
+        >
           {translations?.navbar.credits}
         </Link>
       </div>
@@ -451,7 +508,10 @@ export default function Home() {
       )}
 
       {isLanguageOpen && (
-        <LanguagePopUp onClose={toggleLanguage} onSelectLanguage={handleLanguageSelect} />
+        <LanguagePopUp
+          onClose={toggleLanguage}
+          onSelectLanguage={handleLanguageSelect}
+        />
       )}
 
       <div className="mx-auto p-5 border-b border-gray-700">
@@ -459,26 +519,34 @@ export default function Home() {
           {/* Climate Filter */}
           <div className="flex-shrink-0">
             <div className="mb-1">
-              <h2 className="text-xss md:text-xss font-semibold mb-1">{translations?.filterContents.climate.title}</h2>
-              <p className="text-xss md:text-xss text-gray-600">{translations?.filterContents.climate.description}</p>
+              <h2 className="text-xss md:text-xss font-semibold mb-1">
+                {translations?.filterContents.climate.title}
+              </h2>
+              <p className="text-xss md:text-xss text-gray-600">
+                {translations?.filterContents.climate.description}
+              </p>
             </div>
             <div className="flex flex-wrap gap-1 text-xss">
               {[
-                { name: 'sunny', icon: <IoIosSunny size={16} /> },
-                { name: 'snowy', icon: <BsSnow size={16} /> },
-                { name: 'rainy', icon: <BsCloudRainHeavyFill size={16} /> },
-                { name: 'windy', icon: <BsWind size={16} /> }
+                { name: "sunny", icon: <IoIosSunny size={16} /> },
+                { name: "snowy", icon: <BsSnow size={16} /> },
+                { name: "rainy", icon: <BsCloudRainHeavyFill size={16} /> },
+                { name: "windy", icon: <BsWind size={16} /> },
               ].map(({ name, icon }) => (
                 <button
                   key={name}
                   className={`p-1.5 rounded-full border border-gray-400 flex items-center gap-1 transition-all text-xs
-                    ${climateSort.includes(name)
-                      ? 'bg-gray-900 text-white border-gray-900'
-                      : 'bg-white text-gray-700 hover:bg-gray-100'}`}
-                  onClick={() => handleSort('climate', name)}
+                    ${
+                      climateSort.includes(name)
+                        ? "bg-gray-900 text-white border-gray-900"
+                        : "bg-white text-gray-700 hover:bg-gray-100"
+                    }`}
+                  onClick={() => handleSort("climate", name)}
                 >
                   {icon}
-                  <span className="capitalize">{translations?.filterContents.climate.options[name]}</span>
+                  <span className="capitalize">
+                    {translations?.filterContents.climate.options[name]}
+                  </span>
                 </button>
               ))}
             </div>
@@ -487,18 +555,24 @@ export default function Home() {
           {/* Headcount Filter */}
           <div className="flex-shrink-0">
             <div className="mb-1">
-              <h2 className="text-xss md:text-xss font-semibold mb-1">{translations?.filterContents.counts.title}</h2>
-              <p className="text-xss md:text-xss text-gray-600">{translations?.filterContents.counts.description}</p>
+              <h2 className="text-xss md:text-xss font-semibold mb-1">
+                {translations?.filterContents.counts.title}
+              </h2>
+              <p className="text-xss md:text-xss text-gray-600">
+                {translations?.filterContents.counts.description}
+              </p>
             </div>
             <div className="flex flex-wrap gap-1 text-xss">
-              {['2', '3', '4', '5+'].map((count) => (
+              {["2", "3", "4", "5+"].map((count) => (
                 <button
                   key={count}
                   className={`px-2.5 py-1 text-xs rounded-full border border-gray-400 transition-all
-                    ${headCountSort === count
-                      ? 'bg-gray-900 text-white border-gray-900'
-                      : 'bg-white text-gray-700 hover:bg-gray-100'}`}
-                  onClick={() => handleSort('headcount', count)}
+                    ${
+                      headCountSort === count
+                        ? "bg-gray-900 text-white border-gray-900"
+                        : "bg-white text-gray-700 hover:bg-gray-100"
+                    }`}
+                  onClick={() => handleSort("headcount", count)}
                 >
                   {count}
                 </button>
@@ -509,25 +583,41 @@ export default function Home() {
           {/* Sort Section */}
           <div className="flex-grow">
             <div className="mb-1">
-              <h2 className="text-xss md:text-xss font-semibold mb-1">{translations?.filterContents.sorting.title1}</h2>
-              <p className="text-xss md:text-xss text-gray-600">{translations?.filterContents.sorting.description}</p>
+              <h2 className="text-xss md:text-xss font-semibold mb-1">
+                {translations?.filterContents.sorting.title1}
+              </h2>
+              <p className="text-xss md:text-xss text-gray-600">
+                {translations?.filterContents.sorting.description}
+              </p>
             </div>
             <div className="flex flex-wrap gap-3">
               {/* Price Sort */}
               <div className="flex items-center gap-1">
-                <span className="text-xss md:text-xss text-gray-600">{translations?.filterContents.sorting.title1}:</span>
+                <span className="text-xss md:text-xss text-gray-600">
+                  {translations?.filterContents.sorting.title1}:
+                </span>
                 <div className="flex gap-1">
                   {[
-                    { label: '↑', value: 'desc', icon: <AiFillDollarCircle size={12} /> },
-                    { label: '↓', value: 'asc', icon: <AiFillDollarCircle size={12} /> }
+                    {
+                      label: "↑",
+                      value: "desc",
+                      icon: <AiFillDollarCircle size={12} />,
+                    },
+                    {
+                      label: "↓",
+                      value: "asc",
+                      icon: <AiFillDollarCircle size={12} />,
+                    },
                   ].map(({ label, value, icon }) => (
                     <button
                       key={value}
                       className={`px-2 py-1 text-xss rounded border border-gray-400 transition-all flex items-center
-                        ${costSort === value
-                          ? 'bg-gray-900 text-white border-gray-900'
-                          : 'bg-white text-gray-700 hover:bg-gray-100'}`}
-                      onClick={() => handleSort('cost', value)}
+                        ${
+                          costSort === value
+                            ? "bg-gray-900 text-white border-gray-900"
+                            : "bg-white text-gray-700 hover:bg-gray-100"
+                        }`}
+                      onClick={() => handleSort("cost", value)}
                     >
                       {icon} {label}
                     </button>
@@ -537,19 +627,23 @@ export default function Home() {
 
               {/* Occupancy Sort */}
               <div className="flex items-center gap-1">
-                <span className="text-xss md:text-xss text-gray-600">{translations?.filterContents.sorting.title2}:</span>
+                <span className="text-xss md:text-xss text-gray-600">
+                  {translations?.filterContents.sorting.title2}:
+                </span>
                 <div className="flex gap-1">
                   {[
-                    { label: '↑', value: 'desc', icon: <FaUser size={12} /> },
-                    { label: '↓', value: 'asc', icon: <FaUser size={12} /> }
+                    { label: "↑", value: "desc", icon: <FaUser size={12} /> },
+                    { label: "↓", value: "asc", icon: <FaUser size={12} /> },
                   ].map(({ label, value, icon }) => (
                     <button
                       key={value}
                       className={`px-2 py-1 text-xss rounded border border-gray-400 transition-all flex items-center
-                        ${occupancySort === value
-                          ? 'bg-gray-900 text-white border-gray-900'
-                          : 'bg-white text-gray-700 hover:bg-gray-100'}`}
-                      onClick={() => handleSort('occupancy', value)}
+                        ${
+                          occupancySort === value
+                            ? "bg-gray-900 text-white border-gray-900"
+                            : "bg-white text-gray-700 hover:bg-gray-100"
+                        }`}
+                      onClick={() => handleSort("occupancy", value)}
                     >
                       {icon} {label}
                     </button>
@@ -571,37 +665,39 @@ export default function Home() {
               </button>
             )}
           </div>
-
         </div>
 
         <footer className="fixed bottom-4 z-50">
-          <button
-            onClick={() => setIsChatbotOpen(true)}
-            className="shadow-lg"
-          >
-            <Chatbot isOpen={isChatbotOpen} onClose={() => setIsChatbotOpen(false)} />
+          <button onClick={() => setIsChatbotOpen(true)} className="shadow-lg">
+            <Chatbot
+              isOpen={isChatbotOpen}
+              onClose={() => setIsChatbotOpen(false)}
+            />
           </button>
         </footer>
       </div>
 
       <div className="flex justify-end items-end mr-[5rem] gap-[5rem]">
-      <button className=" p-2 border-none rounded flex justify-center items-center">
-            Create <FaCirclePlus  className="ml-2 mt-1 w-[0.8rem]"/>
-          </button>     
-          
-          <button className=" p-2 border-none rounded flex justify-center items-center">
-            Advanced Filters
-          </button>
+        <button
+          className="p-2 border-none rounded flex justify-center items-center"
+          onClick={() => navigate("/user/username/createproject")}
+        >
+          Create <BsFillPlusCircleFill className="ml-2 mt-1 w-[1rem]" />
+        </button>
 
+        <button className="p-2 border-none rounded flex justify-center items-center">
+          Advanced Filters
+        </button>
+      </div>
 
-
-           </div>
-
-           <div className="flex flex-col justify-center items-center pt-[18rem]">
-            <p className="text-gray-[#3A3A3A]">Looks like there are no existing projects here.</p>
-            <p className="text-gray-[#3A3A3A]">Please click on the create button to add a new project.</p>
-          </div>         
+      <div className="flex flex-col justify-center items-center pt-[14rem]">
+        <p className="text-gray-[#3A3A3A]">
+          Looks like there are no existing projects here.
+        </p>
+        <p className="text-gray-[#3A3A3A]">
+          Please click on the create button to add a new project.
+        </p>
+      </div>
     </>
   );
 }
-

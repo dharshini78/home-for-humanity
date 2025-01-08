@@ -6,7 +6,7 @@ import { CiTimer } from "react-icons/ci";
 import { useLanguage } from "../Features/languageContext.jsx";
 import LanguagePopUp from "../Features/LanguagePopUp.jsx";
 import { Link, useLocation } from "react-router-dom";
-import he from 'he'; // Import the he library
+import he from "he"; // Import the he library
 
 const Navbar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -65,26 +65,29 @@ const Navbar = () => {
   useEffect(() => {
     const fetchTranslations = async () => {
       try {
-        const response = await fetch(`https://api.homeforhumanity.xrvizion.com/shelter/gettranslation`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            shelterName: "OtherPages",
-            langCode: selectedLanguage,
-            fileName: 'navbar_en.json',
-          }),
-        });
+        const response = await fetch(
+          `https://api.homeforhumanity.xrvizion.com/shelter/gettranslation`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              shelterName: "OtherPages",
+              langCode: selectedLanguage,
+              fileName: "navbar_en.json",
+            }),
+          }
+        );
         const data = await response.json();
         if (data.msg === "Success") {
           const decodedContent = decodeContent(data.translatedContent);
           setTranslations(decodedContent);
         } else {
-          console.error('Error in translation response:', data.msg);
+          console.error("Error in translation response:", data.msg);
         }
       } catch (error) {
-        console.error('Error fetching about translations:', error);
+        console.error("Error fetching about translations:", error);
       }
     };
 
@@ -92,11 +95,11 @@ const Navbar = () => {
   }, [selectedLanguage]);
 
   const decodeContent = (content) => {
-    if (typeof content === 'string') {
+    if (typeof content === "string") {
       return he.decode(content);
     } else if (Array.isArray(content)) {
       return content.map(decodeContent);
-    } else if (typeof content === 'object' && content !== null) {
+    } else if (typeof content === "object" && content !== null) {
       const decodedObject = {};
       for (const key in content) {
         if (content.hasOwnProperty(key)) {
@@ -113,7 +116,11 @@ const Navbar = () => {
       <div className="flex justify-between items-center p-5 ff-xl z-10 border-b border-black">
         <div className="flex items-center md:hidden">
           <button onClick={toggleMenu}>
-            {isMenuOpen ? <IoMdClose size={25} /> : <RxHamburgerMenu size={24} />}
+            {isMenuOpen ? (
+              <IoMdClose size={25} />
+            ) : (
+              <RxHamburgerMenu size={24} />
+            )}
           </button>
         </div>
 
@@ -123,14 +130,25 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="hidden md:flex items-center space-x-6 mr-[7rem] justify-center">
-          <Link to="/" className="underline-animation p-1 text-smm">{translations ? translations["Shelters"] : "Shelters"}</Link>
-          <Link to="/about" className="underline-animation p-1 text-smm">{translations ? translations["About"] : "About"}</Link>
-          <Link to="/faqs" className="underline-animation p-1 text-smm">{translations ? translations["FAQs"] : "FAQs"}</Link>
-          <Link to="/credits" className="underline-animation p-1 text-smm">{translations ? translations["Credits"] : "Credits"}</Link>
+          <Link to="/" className="underline-animation p-1 text-smm">
+            {translations ? translations["Shelters"] : "Shelters"}
+          </Link>
+          <Link to="/about" className="underline-animation p-1 text-smm">
+            {translations ? translations["About"] : "About"}
+          </Link>
+          <Link to="/faqs" className="underline-animation p-1 text-smm">
+            {translations ? translations["FAQs"] : "FAQs"}
+          </Link>
+          <Link to="/credits" className="underline-animation p-1 text-smm">
+            {translations ? translations["Credits"] : "Credits"}
+          </Link>
         </div>
 
         <div className="flex items-center space-x-4">
-          <button onClick={toggleLanguage} className="flex items-center space-x-2">
+          <button
+            onClick={toggleLanguage}
+            className="flex items-center space-x-2"
+          >
             <FaLanguage size={35} />
           </button>
         </div>
@@ -141,24 +159,34 @@ const Navbar = () => {
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <Link to="/" className="underline-animation p-7 w-full flex items-center justify-start border-b border-gray-300 mini">
+        <Link
+          to="/"
+          className="underline-animation p-7 w-full flex items-center justify-start border-b border-gray-300 mini"
+        >
           {translations ? translations["Shelters"] : "Shelters"}
         </Link>
-        <Link to="/about" className="underline-animation p-7 w-full flex items-center justify-start border-b border-gray-300 mini">
+        <Link
+          to="/about"
+          className="underline-animation p-7 w-full flex items-center justify-start border-b border-gray-300 mini"
+        >
           {translations ? translations["About"] : "About"}
         </Link>
-        <Link to="/faqs" className="underline-animation p-7 w-full flex items-center justify-start border-b border-gray-300 mini">
+        <Link
+          to="/faqs"
+          className="underline-animation p-7 w-full flex items-center justify-start border-b border-gray-300 mini"
+        >
           {translations ? translations["FAQs"] : "FAQs"}
         </Link>
-        <Link to="/credits" className="underline-animation p-7 w-full flex items-center justify-start border-b border-gray-300 mini">
+        <Link
+          to="/credits"
+          className="underline-animation p-7 w-full flex items-center justify-start border-b border-gray-300 mini"
+        >
           {translations ? translations["Credits"] : "Credits"}
         </Link>
       </div>
 
       {isSearchOpen && (
-        <div
-          className="bg-gray-100 w-full flex flex-col justify-start items-center transition-transform duration-300 ease-in-out fixed top-[60px] left-0 z-50 rounded-b-lg shadow-md"
-        >
+        <div className="bg-gray-100 w-full flex flex-col justify-start items-center transition-transform duration-300 ease-in-out fixed top-[60px] left-0 z-50 rounded-b-lg shadow-md">
           <div className="w-full p-4 border-b border-gray-300">
             <input
               type="text"
@@ -170,7 +198,10 @@ const Navbar = () => {
           </div>
           <ul className="w-full overflow-y-auto flex mini">
             {suggestions.map((suggestion, index) => (
-              <li key={index} className="p-4 border-b border-gray-300 flex items-center">
+              <li
+                key={index}
+                className="p-4 border-b border-gray-300 flex items-center"
+              >
                 <CiTimer className="mr-2" size={30} />
                 {suggestion}
               </li>
@@ -180,7 +211,10 @@ const Navbar = () => {
       )}
 
       {isLanguageOpen && (
-        <LanguagePopUp onClose={toggleLanguage} onSelectLanguage={handleLanguageSelect} />
+        <LanguagePopUp
+          onClose={toggleLanguage}
+          onSelectLanguage={handleLanguageSelect}
+        />
       )}
     </>
   );

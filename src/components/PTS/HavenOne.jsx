@@ -1,20 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams, Link, useLocation } from "react-router-dom";
-import { IoMdArrowBack, IoMdArrowDropleft, IoMdArrowDropright, IoMdClose } from "react-icons/io";
+import {
+  IoMdArrowBack,
+  IoMdArrowDropleft,
+  IoMdArrowDropright,
+  IoMdClose,
+} from "react-icons/io";
 import { GoClockFill } from "react-icons/go";
 import { FaUser, FaClipboardList, FaBookReader } from "react-icons/fa";
 import { IoDownload } from "react-icons/io5";
-import './HavenOne.css';
+import "./HavenOne.css";
 import SkeletonLoader from "../Skeletons/SkeletonHavenOne.jsx";
 import CommentTS from "../Features/CommentTS.jsx";
 import CommentLOG from "../Features/CommentLOG.jsx";
 import CommentTem from "../Features/CommentTem.jsx";
 import CommentBS from "../Features/CommentBS.jsx";
 import CommentSS from "../Features/CommentSS.jsx";
-import Navbar from '../Features/navbar.jsx';
+import Navbar from "../Features/navbar.jsx";
 import { useLanguage } from "../Features/languageContext.jsx";
 import data from "../Data/PTSData.jsx";
-import he from 'he'; // Import the he library
+import he from "he"; // Import the he library
 import axios from "axios";
 
 const Tooltip = ({ children, text, isVisible }) => {
@@ -31,17 +36,33 @@ const Tooltip = ({ children, text, isVisible }) => {
   );
 };
 
-const DurationIndicator = ({ duration, selectedHeadcount, itemWithId, tooltipText, translatedContent }) => {
+const DurationIndicator = ({
+  duration,
+  selectedHeadcount,
+  itemWithId,
+  tooltipText,
+  translatedContent,
+}) => {
   const [showTooltip, setShowTooltip] = useState(false);
 
-  const calculateDuration = (originalDuration, defaultHeadCount, selectedHeadCount) => {
+  const calculateDuration = (
+    originalDuration,
+    defaultHeadCount,
+    selectedHeadCount
+  ) => {
     if (!selectedHeadCount) return originalDuration;
 
-    const [minWeeks, maxWeeks] = originalDuration.split('-').map(Number);
+    const [minWeeks, maxWeeks] = originalDuration.split("-").map(Number);
     const defaultCount = parseInt(defaultHeadCount, 10);
-    const selectedCount = selectedHeadcount === '5+' ? 5 : parseInt(selectedHeadcount, 10);
+    const selectedCount =
+      selectedHeadcount === "5+" ? 5 : parseInt(selectedHeadcount, 10);
 
-    if (isNaN(selectedCount) || isNaN(defaultCount) || isNaN(minWeeks) || isNaN(maxWeeks)) {
+    if (
+      isNaN(selectedCount) ||
+      isNaN(defaultCount) ||
+      isNaN(minWeeks) ||
+      isNaN(maxWeeks)
+    ) {
       return originalDuration;
     }
 
@@ -49,19 +70,32 @@ const DurationIndicator = ({ duration, selectedHeadcount, itemWithId, tooltipTex
       const multiplier = defaultCount / selectedCount;
       const newMinWeeks = Math.ceil(minWeeks * multiplier);
       const newMaxWeeks = Math.ceil(maxWeeks * multiplier);
-      return newMinWeeks === newMaxWeeks ? `${newMinWeeks}` : `${newMinWeeks}-${newMaxWeeks}`;
+      return newMinWeeks === newMaxWeeks
+        ? `${newMinWeeks}`
+        : `${newMinWeeks}-${newMaxWeeks}`;
     } else {
       const multiplier = selectedCount / defaultCount;
       const newMinWeeks = Math.floor(minWeeks / multiplier);
       const newMaxWeeks = Math.floor(maxWeeks / multiplier);
-      return newMinWeeks === newMaxWeeks ? `${newMinWeeks}` : `${newMinWeeks}-${newMaxWeeks}`;
+      return newMinWeeks === newMaxWeeks
+        ? `${newMinWeeks}`
+        : `${newMinWeeks}-${newMaxWeeks}`;
     }
   };
 
-  const calculatedDuration = calculateDuration(duration, itemWithId.headcounts, selectedHeadcount);
+  const calculatedDuration = calculateDuration(
+    duration,
+    itemWithId.headcounts,
+    selectedHeadcount
+  );
 
   return (
-    <Tooltip text={translatedContent ? translatedContent.tooltip.estimated : tooltipText} isVisible={showTooltip}>
+    <Tooltip
+      text={
+        translatedContent ? translatedContent.tooltip.estimated : tooltipText
+      }
+      isVisible={showTooltip}
+    >
       <div
         className="flex items-center rounded-[6rem] w-[8rem] justify-center border border-gray-600 h-8 text-sm md:text-base md:w-[8rem] hover:bg-gray-200 transition-colors cursor-pointer ml-2"
         onMouseEnter={() => setShowTooltip(true)}
@@ -69,7 +103,8 @@ const DurationIndicator = ({ duration, selectedHeadcount, itemWithId, tooltipTex
       >
         <GoClockFill />
         <span className="ml-2 mt-1 materials-font">
-          {calculatedDuration} {translatedContent ? translatedContent.duration : "weeks"}
+          {calculatedDuration}{" "}
+          {translatedContent ? translatedContent.duration : "weeks"}
         </span>
       </div>
     </Tooltip>
@@ -80,7 +115,12 @@ const OccupancyIndicator = ({ occupancy, tooltipText, translatedContent }) => {
   const [showTooltip, setShowTooltip] = useState(false);
 
   return (
-    <Tooltip text={translatedContent ? translatedContent.tooltip.occupancy : tooltipText} isVisible={showTooltip}>
+    <Tooltip
+      text={
+        translatedContent ? translatedContent.tooltip.occupancy : tooltipText
+      }
+      isVisible={showTooltip}
+    >
       <div
         className="flex items-center rounded-[6rem] w-[3.4rem] justify-center border border-gray-600 h-8 text-sm md:text-base md:w-[5rem] hover:bg-gray-200 transition-colors cursor-pointer"
         onMouseEnter={() => setShowTooltip(true)}
@@ -105,11 +145,13 @@ const HavenOne = () => {
   const [imageIndex, setImageIndex] = useState(0);
   const [translatedContent, setTranslatedContent] = useState(null);
   const { selectedLanguage } = useLanguage(); // Use the LanguageContext
-  const [selectedHeadcount, setSelectedHeadcount] = useState(location.state?.headcount || itemWithId.headcounts);
+  const [selectedHeadcount, setSelectedHeadcount] = useState(
+    location.state?.headcount || itemWithId.headcounts
+  );
   const [lastFetchedLanguage, setLastFetchedLanguage] = useState(null);
 
   const goBack = () => {
-    navigate('/');
+    navigate("/");
   };
 
   useEffect(() => {
@@ -127,11 +169,11 @@ const HavenOne = () => {
   }, []);
 
   const decodeContent = (content) => {
-    if (typeof content === 'string') {
+    if (typeof content === "string") {
       return he.decode(content);
     } else if (Array.isArray(content)) {
       return content.map(decodeContent);
-    } else if (typeof content === 'object' && content !== null) {
+    } else if (typeof content === "object" && content !== null) {
       const decodedObject = {};
       for (const key in content) {
         if (content.hasOwnProperty(key)) {
@@ -146,10 +188,14 @@ const HavenOne = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [commentsResponse, translatedContentResponse] = await Promise.all([
-          axios.get(`https://api.homeforhumanity.xrvizion.com/shelter/comments?shelterId=${id}`),
-          fetchTranslatedContent(selectedLanguage)
-        ]);
+        const [commentsResponse, translatedContentResponse] = await Promise.all(
+          [
+            axios.get(
+              `https://api.homeforhumanity.xrvizion.com/shelter/comments?shelterId=${id}`
+            ),
+            fetchTranslatedContent(selectedLanguage),
+          ]
+        );
 
         const filteredComments = commentsResponse.data.comments.filter(
           (comment) => comment.posted
@@ -163,7 +209,7 @@ const HavenOne = () => {
           setLastFetchedLanguage(selectedLanguage);
         }
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
 
@@ -173,33 +219,34 @@ const HavenOne = () => {
   const fetchTranslatedContent = async (language) => {
     try {
       const fileNameMapping = {
-        "Timber Shelter": "timbershelter_homepage_en.json",
+        "Timber-Frame Shelter": "timbershelter_homepage_en.json",
         "Temporary Shelter": "temporaryshelter_homepage_en.json",
         "Bamboo Shelter": "bambooshelter_homepage_en.json",
         "Superadobe Shelter": "superadobeshelter_homepage_en.json",
-        "Octagreen Shelter": "octagreenshelter_homepage_en.json"
+        "Octagreen Shelter": "octagreenshelter_homepage_en.json",
       };
 
-      const fileName = fileNameMapping[itemWithId.title] || 'default_homepage_en.json';
+      const fileName =
+        fileNameMapping[itemWithId.title] || "default_homepage_en.json";
 
       const response = await axios.post(
         `https://api.homeforhumanity.xrvizion.com/shelter/gettranslation`,
         {
-          shelterName: itemWithId.title.replace(/\s+/g, ''), // Remove spaces
+          shelterName: itemWithId.title.replace(/\s+/g, ""), // Remove spaces
           langCode: language,
           fileName: fileName,
         },
         {
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         }
       );
 
       return response.data;
     } catch (error) {
-      console.error('Error fetching translated content:', error);
-      throw error;
+      console.error("Error fetching translated content:", error);
+      throw new Error("Failed to fetch translated content");
     }
   };
 
@@ -225,14 +272,21 @@ const HavenOne = () => {
   const handlePrevImage = () => {
     if (imageIndex > 0) {
       setImageIndex(imageIndex - 1);
-      setSelectedImage(comments.flatMap(comment => comment.filePaths)[imageIndex - 1]);
+      setSelectedImage(
+        comments.flatMap((comment) => comment.filePaths)[imageIndex - 1]
+      );
     }
   };
 
   const handleNextImage = () => {
-    if (imageIndex < comments.flatMap(comment => comment.filePaths).length - 1) {
+    if (
+      imageIndex <
+      comments.flatMap((comment) => comment.filePaths).length - 1
+    ) {
       setImageIndex(imageIndex + 1);
-      setSelectedImage(comments.flatMap(comment => comment.filePaths)[imageIndex + 1]);
+      setSelectedImage(
+        comments.flatMap((comment) => comment.filePaths)[imageIndex + 1]
+      );
     }
   };
 
@@ -243,11 +297,21 @@ const HavenOne = () => {
   const renderCommentComponent = () => {
     switch (id) {
       case "0":
-        return <CommentTS comments={comments} onSubmit={handleCommentSubmit} className='underline' />;
+        return (
+          <CommentTS
+            comments={comments}
+            onSubmit={handleCommentSubmit}
+            className="underline"
+          />
+        );
       case "1":
-        return <CommentLOG comments={comments} onSubmit={handleCommentSubmit} />;
+        return (
+          <CommentLOG comments={comments} onSubmit={handleCommentSubmit} />
+        );
       case "2":
-        return <CommentTem comments={comments} onSubmit={handleCommentSubmit} />;
+        return (
+          <CommentTem comments={comments} onSubmit={handleCommentSubmit} />
+        );
       case "3":
         return <CommentBS comments={comments} onSubmit={handleCommentSubmit} />;
       case "4":
@@ -258,11 +322,11 @@ const HavenOne = () => {
   };
 
   const pdfMapping = {
-    "0": "/Timber_Pakistan_Instructions.pdf",
-    "1": "/LOG_Shelter_Instructions.pdf",
-    "2": "/Temporary_Shelter_Instructions.pdf",
-    "3": "/Bamboo_Shelter_Instructions.pdf",
-    "4": "/Superadobe_Shelter_Instructions.pdf",
+    0: "/Timber_Pakistan_Instructions.pdf",
+    1: "/LOG_Shelter_Instructions.pdf",
+    2: "/Temporary_Shelter_Instructions.pdf",
+    3: "/Bamboo_Shelter_Instructions.pdf",
+    4: "/Superadobe_Shelter_Instructions.pdf",
   };
 
   const pdfPath = pdfMapping[id];
@@ -275,27 +339,32 @@ const HavenOne = () => {
           <button className="flex items-center" onClick={goBack}>
             <IoMdArrowBack size={20} />
           </button>
-          <h1 className="ml-2">{translatedContent ? translatedContent.name : itemWithId.title}</h1>
+          <h1 className="ml-2">
+            {translatedContent ? translatedContent.name : itemWithId.title}
+          </h1>
         </div>
       </div>
       <div className="flex flex-col lg:flex-row px-6">
         <div className="lg:w-1/2 flex flex-col">
           <div className="flex flex-col">
             <div key={itemWithId.id} className="flex">
-            <OccupancyIndicator
-  occupancy={translatedContent ? translatedContent.occupancy : itemWithId.headcounts}
-  tooltipText="Occupancy"
-  translatedContent={translatedContent}
-/>
+              <OccupancyIndicator
+                occupancy={
+                  translatedContent
+                    ? translatedContent.occupancy
+                    : itemWithId.headcounts
+                }
+                tooltipText="Occupancy"
+                translatedContent={translatedContent}
+              />
 
-<DurationIndicator
-  duration={itemWithId.duration}
-  selectedHeadcount={selectedHeadcount}
-  itemWithId={itemWithId}
-  tooltipText="Estimated construction duration"
-  translatedContent={translatedContent}
-/>
-
+              <DurationIndicator
+                duration={itemWithId.duration}
+                selectedHeadcount={selectedHeadcount}
+                itemWithId={itemWithId}
+                tooltipText="Estimated construction duration"
+                translatedContent={translatedContent}
+              />
             </div>
           </div>
           <div className="mt-6 flex flex-col justify-normal items-start mb-9">
@@ -304,13 +373,17 @@ const HavenOne = () => {
               <Link to={`/haven/${itemWithId.id}/materials`}>
                 <button className="border-b-[0.6px] w-full flex pb-5 border-gray-400 text-smm items-center mt-5">
                   <FaBookReader size={16} className="mr-4" />
-                  {translatedContent ? translatedContent.instructions : "Instructions"}
+                  {translatedContent
+                    ? translatedContent.instructions
+                    : "Instructions"}
                 </button>
               </Link>
               <Link to={`/haven/${itemWithId.id}/list`}>
                 <button className="border-b-[0.6px] w-full flex pb-5 border-gray-400 text-smm items-center mt-5">
                   <FaClipboardList size={18} className="mr-3" />
-                  {translatedContent ? translatedContent.materialList : "material list"}
+                  {translatedContent
+                    ? translatedContent.materialList
+                    : "material list"}
                 </button>
               </Link>
 
@@ -319,74 +392,199 @@ const HavenOne = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 download={`${itemWithId.title}_Instructions.pdf`}
-                className="border-b-[0.6px] w-full flex pb-5 border-gray-400 text-smm items-center mt-5"
+                className="border-b-[0.6px] w-full flex pb-5 border-gray-400 text-smm items-center mt-5 text-blue-500  hover:text-blue-700"
               >
                 <IoDownload size={24} className="mr-2 text-gray-800 mb-1" />
-                {translatedContent ? translatedContent.downloadAsPdf : "Download as PDF"}
+                {translatedContent
+                  ? translatedContent.downloadAsPdf
+                  : "Download as PDF"}
               </a>
             </div>
           </div>
         </div>
         <div className="lg:w-1/2 flex flex-col lg:mt-0 lg:pl-6">
           <div className="w-full text-smm">
-            <h2 className="text-lg font-bold">{translatedContent ? translatedContent.designCredits.title : "Design Credits"}</h2>
+            <h2 className="text-lg font-bold">
+              {translatedContent
+                ? translatedContent.designCredits.title
+                : "Design Credits"}
+            </h2>
             <pre className="whitespace-pre-wrap text-smm">
               {translatedContent ? (
                 <>
-                  {translatedContent.designCredits.content.shelterName}<br />
-                  {translatedContent.designCredits.content.designer}<br />
-                  {translatedContent.designCredits.content.organization}<br />
-                  {translatedContent.designCredits.content.address}<br />
-                  <a href={translatedContent.designCredits.content.website} target="_blank" rel="noopener noreferrer">
+                  {translatedContent.designCredits.content.shelterName}
+                  <br />
+                  {translatedContent.designCredits.content.designer}
+                  <br />
+                  {translatedContent.designCredits.content.organization}
+                  <br />
+                  {translatedContent.designCredits.content.address}
+                  <br />
+                  {translatedContent.designCredits.content.source && (
+                    <>
+                      {translatedContent.designCredits.content.source}
+                      <br />
+                    </>
+                  )}
+                  {translatedContent.designCredits.content.publisher && (
+                    <>
+                      {translatedContent.designCredits.content.publisher}
+                      <br />
+                    </>
+                  )}
+                  {translatedContent.designCredits.content.location && (
+                    <>
+                      {translatedContent.designCredits.content.location}
+                      <br />
+                    </>
+                  )}
+                  {translatedContent.designCredits.content.year && (
+                    <>
+                      {translatedContent.designCredits.content.year}
+                      <br />
+                    </>
+                  )}
+                  {translatedContent.designCredits.content.designer2 && (
+                    <>
+                      {translatedContent.designCredits.content.designer2}
+                      <br />
+                    </>
+                  )}
+                  {translatedContent.designCredits.content.organization2 && (
+                    <>
+                      {translatedContent.designCredits.content.organization2}
+                      <br />
+                    </>
+                  )}
+                  {translatedContent.designCredits.content.address2 && (
+                    <>
+                      {translatedContent.designCredits.content.address2}
+                      <br />
+                    </>
+                  )}
+                  <a
+                    href={translatedContent.designCredits.content.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 underline hover:text-blue-700"
+                  >
                     {translatedContent.designCredits.content.website}
                   </a>
+                  {translatedContent.designCredits.content.website2 && (
+                    <>
+                      <br />
+                      <a
+              href={translatedContent.designCredits.content.website2}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 underline hover:text-blue-700"
+            >
+                      {translatedContent.designCredits.content.website2}
+                      </a>
+                    </>
+                  )}
                 </>
               ) : (
                 "Loading..."
               )}
             </pre>
           </div>
-          <div className="w-full mt-4">
-            <h2 className="text-lg font-bold">{translatedContent ? translatedContent.bibliography.title : "Bibliography"}</h2>
+
+          {/* <div className="w-full mt-4">
+            <h2 className="text-lg font-bold">
+              {translatedContent
+                ? translatedContent.bibliography.title
+                : "Bibliography"}
+            </h2>
             <pre className="whitespace-pre-wrap text-smm">
               {translatedContent ? (
                 <>
-                  {translatedContent.bibliography.content.zoteroLibrary.map((item, index) => (
-                    <React.Fragment key={index}>
-                      {item.title}<br />
-                      {item.source}<br />
-                      {item.date}<br />
-                      <a href={item.link} target="_blank" rel="noopener noreferrer">
-                        {item.link}
-                      </a>
-                      <br /><br />
-                    </React.Fragment>
-                  ))}
-                  {translatedContent.bibliography.content.otherSources.map((item, index) => (
-                    <React.Fragment key={index}>
-                      {item.title}<br />
-                      {item.source && <>{item.source}<br /></>}
-                      {item.platform && <>{item.platform}<br /></>}
-                      {item.date && <>{item.date}<br /></>}
-                      {item.link && (
-                        <>
-                          <a href={item.link} target="_blank" rel="noopener noreferrer">
-                            {item.link}
-                          </a>
-                          <br />
-                        </>
-                      )}
-                      {item.author && <>{item.author}<br /></>}
-                      {item.publisher && <>{item.publisher}<br /></>}
-                      {item.year && <>{item.year}<br /><br /></>}
-                    </React.Fragment>
-                  ))}
+                  {translatedContent.bibliography.content.zoteroLibrary.map(
+                    (item, index) => (
+                      <React.Fragment key={index}>
+                        {item.title}
+                        <br />
+                        {item.source}
+                        <br />
+                        {item.date}
+                        <br />
+                        <a
+                          href={item.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-500 underline hover:text-blue-700"
+                        >
+                          {item.link}
+                        </a>
+                        <br />
+                        <br />
+                      </React.Fragment>
+                    )
+                  )}
+                  {translatedContent.bibliography.content.otherSources.map(
+                    (item, index) => (
+                      <React.Fragment key={index}>
+                        {item.title}
+                        <br />
+                        {item.source && (
+                          <>
+                            {item.source}
+                            <br />
+                          </>
+                        )}
+                        {item.platform && (
+                          <>
+                            {item.platform}
+                            <br />
+                          </>
+                        )}
+                        {item.date && (
+                          <>
+                            {item.date}
+                            <br />
+                          </>
+                        )}
+                        {item.link && (
+                          <>
+                            <a
+                              href={item.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-blue-500 underline hover:text-blue-700"
+                            >
+                              {item.link}
+                            </a>
+                            <br />
+                          </>
+                        )}
+                        {item.author && (
+                          <>
+                            {item.author}
+                            <br />
+                          </>
+                        )}
+                        {item.publisher && (
+                          <>
+                            {item.publisher}
+                            <br />
+                          </>
+                        )}
+                        {item.year && (
+                          <>
+                            {item.year}
+                            <br />
+                            <br />
+                          </>
+                        )}
+                      </React.Fragment>
+                    )
+                  )}
                 </>
               ) : (
                 "Loading..."
               )}
             </pre>
-          </div>
+          </div> */}
           <div className="w-full mt-4">
             {comments.length === 0 && <p className="mt-4 text-smm"></p>}
 
@@ -397,22 +595,38 @@ const HavenOne = () => {
 
       {selectedImage && (
         <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50">
-          <button className="absolute top-4 right-4 text-white" onClick={closeImagePopup}>
+          <button
+            className="absolute top-4 right-4 text-white"
+            onClick={closeImagePopup}
+          >
             <IoMdClose size={24} />
           </button>
-          <button className="absolute left-4 text-white" onClick={handlePrevImage} disabled={imageIndex === 0}>
+          <button
+            className="absolute left-4 text-white"
+            onClick={handlePrevImage}
+            disabled={imageIndex === 0}
+          >
             <IoMdArrowDropleft size={24} />
           </button>
-          <img src={selectedImage} alt="Selected" className="max-w-[80%] max-h-[80%]" />
-          <button className="absolute right-4 text-white" onClick={handleNextImage} disabled={imageIndex === comments.flatMap(comment => comment.filePaths).length - 1}>
+          <img
+            src={selectedImage}
+            alt="Selected"
+            className="max-w-[80%] max-h-[80%]"
+          />
+          <button
+            className="absolute right-4 text-white"
+            onClick={handleNextImage}
+            disabled={
+              imageIndex ===
+              comments.flatMap((comment) => comment.filePaths).length - 1
+            }
+          >
             <IoMdArrowDropright size={24} />
           </button>
         </div>
       )}
 
-      <footer className="fixed bottom-4 right-4 z-50">
-
-      </footer>
+      <footer className="fixed bottom-4 right-4 z-50"></footer>
     </>
   );
 };

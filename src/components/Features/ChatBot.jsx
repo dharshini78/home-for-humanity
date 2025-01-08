@@ -114,7 +114,7 @@
 //   if (!isOpen) return null;
 
 //   return (
-//     <div 
+//     <div
 //       className={`fixed left-1/2 transform -translate-x-1/2 bg-gray-800 border border-gray-700 shadow-lg p-4 z-50 flex flex-col transition-all duration-500 ease-in-out
 //         ${isOpen ? 'top-4' : 'top-full'}
 //         ${isFullscreen ? 'w-full h-full inset-0' : 'w-1/2 h-96'}
@@ -123,19 +123,19 @@
 //       <div className="flex justify-between items-center mb-4">
 //         <h2 className="text-lg font-bold text-white">Chatbot</h2>
 //         <div className="flex items-center space-x-2">
-//           <button 
+//           <button
 //             className="text-gray-500 hover:text-gray-300 transition-colors"
 //             onClick={() => setShowLanguagePopUp(true)}
 //           >
 //             {language}
 //           </button>
-//           <button 
+//           <button
 //             className="text-gray-500 hover:text-gray-300 transition-colors"
 //             onClick={toggleFullscreen}
 //           >
 //             {isFullscreen ? <HiCompress size={24} /> : <HiExpand size={24} />}
 //           </button>
-//           <button 
+//           <button
 //             className="text-gray-500 hover:text-gray-300 transition-colors"
 //             onClick={onClose}
 //           >
@@ -145,21 +145,21 @@
 //       </div>
 
 //       {showLanguagePopUp && (
-//         <LanguagePopUp 
-//           onClose={() => setShowLanguagePopUp(false)} 
-//           onSelectLanguage={setLanguage} 
+//         <LanguagePopUp
+//           onClose={() => setShowLanguagePopUp(false)}
+//           onSelectLanguage={setLanguage}
 //         />
 //       )}
 
 //       <div className="flex-grow overflow-y-auto mb-4 bg-gray-900 bg-opacity-50 backdrop-blur-lg rounded-lg p-4 w-full">
 //         {messages.map((msg, index) => (
-//           <div 
-//             key={index} 
+//           <div
+//             key={index}
 //             className={`mb-2 ${msg.role === 'user' ? 'text-right' : 'text-left'}`}
 //           >
 //             <strong className={`${msg.role === 'user' ? 'text-blue-500' : 'text-green-500'}`}>
 //               {msg.role}:
-//             </strong> 
+//             </strong>
 //             {msg.content}
 //           </div>
 //         ))}
