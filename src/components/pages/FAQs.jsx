@@ -34,7 +34,7 @@ const FAQs = () => {
       try {
         console.log("Fetching translations for FAQs");
         const response = await fetch(
-          "https://api.homeforhumanity.xrvizion.com/shelter/gettranslation",
+          "https://api.diyhomes.ai/shelter/gettranslation",
           {
             method: "POST",
             headers: {

@@ -13,7 +13,7 @@ const About = () => {
     const fetchTranslations = async (langCode) => {
       try {
         const response = await fetch(
-          `https://api.homeforhumanity.xrvizion.com/shelter/gettranslation`,
+          `https://api.diyhomes.ai/shelter/gettranslation`,
           {
             method: "POST",
             headers: {

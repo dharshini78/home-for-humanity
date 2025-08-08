@@ -19,7 +19,7 @@
 //     });
 
 //     try {
-//       await axios.post('https://api.homeforhumanity.xrvizion.com/shelter/updatecomments', formData, {
+//       await axios.post('https://api.diyhomes.ai/shelter/updatecomments', formData, {
 //         headers: {
 //           'Content-Type': 'multipart/form-data',
 //         },
@@ -81,7 +81,7 @@
 //   useEffect(() => {
 //     const fetchComments = async () => {
 //       try {
-//         const response = await axios.get(`https://api.homeforhumanity.xrvizion.com/shelter/comments?shelterId=${shelterId}`);
+//         const response = await axios.get(`https://api.diyhomes.ai/shelter/comments?shelterId=${shelterId}`);
 //         setComments(response.data);
 //       } catch (error) {
 //         console.error('Error fetching comments:', error);

@@ -18,7 +18,7 @@
 //   const audioRef = useRef(new Audio());
 
 //   useEffect(() => {
-//     const socket = io.connect('https://api.homeforhumanity.xrvizion.com/');
+//     const socket = io.connect('https://api.diyhomes.ai/');
 //     setConnection(socket);
 
 //     socket.on('connect', () => {

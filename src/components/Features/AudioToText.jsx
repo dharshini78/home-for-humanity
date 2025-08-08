@@ -1,13 +1,13 @@
-import React, { useEffect, useState, useRef } from "react";
 import { HiSparkles } from "react-icons/hi2";
 import { Send, Mic, MicOff, VolumeX, Volume2 } from "lucide-react";
-import { useTranslation } from "react-i18next";
+// import { useTranslation } from "react-i18next";
 import io from "socket.io-client";
-import { speakText } from "./LanguagePopUp";
+import { useState, useRef, useEffect } from "react";
+// import { speakText } from "./LanguagePopUp";
 import { debounce } from "lodash"; // Make sure to import debounce
 
 const TextToTextChat = () => {
-  const { i18n } = useTranslation();
+  // const { i18n } = useTranslation();
   const [sessionId, setSessionId] = useState(0);
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [inputMsg, setInputMsg] = useState("");
@@ -87,7 +87,7 @@ const TextToTextChat = () => {
   };
 
   useEffect(() => {
-    const socket = io("https://api.homeforhumanity.xrvizion.com", {
+    const socket = io("https://api.diyhomes.ai", {
       reconnection: true,
       reconnectionDelay: 1000,
       reconnectionDelayMax: 5000,
@@ -319,7 +319,7 @@ const TextToTextChat = () => {
 
       if (!processorRef.current) {
         await audioContextRef.current.audioWorklet.addModule(
-          "https://xrv-xrc.s3.ap-south-1.amazonaws.com/Butati/Resources/recorderWorkletProcessor.js"
+          "https://d1au9pp4edftkp.cloudfront.net/Butati/Resources/recorderWorkletProcessor.js"
         );
 
         processorRef.current = new AudioWorkletNode(

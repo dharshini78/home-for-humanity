@@ -191,7 +191,7 @@ const HavenOne = () => {
         const [commentsResponse, translatedContentResponse] = await Promise.all(
           [
             axios.get(
-              `https://api.homeforhumanity.xrvizion.com/shelter/comments?shelterId=${id}`
+              `https://api.diyhomes.ai/shelter/comments?shelterId=${id}`
             ),
             fetchTranslatedContent(selectedLanguage),
           ]
@@ -203,10 +203,11 @@ const HavenOne = () => {
         setComments(filteredComments);
 
         const data = await translatedContentResponse;
-        if (data && data.msg === "Success") {
+              if (data && data.msg === "Success") {
           const decodedContent = decodeContent(data.translatedContent);
           setTranslatedContent(decodedContent);
           setLastFetchedLanguage(selectedLanguage);
+          console.log("Translated content set:", decodedContent);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -230,7 +231,7 @@ const HavenOne = () => {
         fileNameMapping[itemWithId.title] || "default_homepage_en.json";
 
       const response = await axios.post(
-        `https://api.homeforhumanity.xrvizion.com/shelter/gettranslation`,
+        `https://api.diyhomes.ai/shelter/gettranslation`,
         {
           shelterName: itemWithId.title.replace(/\s+/g, ""), // Remove spaces
           langCode: language,
@@ -250,11 +251,11 @@ const HavenOne = () => {
     }
   };
 
-  useEffect(() => {
-    if (selectedLanguage !== lastFetchedLanguage) {
-      fetchTranslatedContent(selectedLanguage);
-    }
-  }, [selectedLanguage, lastFetchedLanguage]);
+  // useEffect(() => {
+  //   if (selectedLanguage !== lastFetchedLanguage) {
+  //     fetchTranslatedContent(selectedLanguage);
+  //   }
+  // }, [selectedLanguage, lastFetchedLanguage]);
 
   if (!itemWithId) {
     return <div>Home not found</div>;
@@ -373,9 +374,7 @@ const HavenOne = () => {
               <Link to={`/haven/${itemWithId.id}/materials`}>
                 <button className="border-b-[0.6px] w-full flex pb-5 border-gray-400 text-smm items-center mt-5">
                   <FaBookReader size={16} className="mr-4" />
-                  {translatedContent
-                    ? translatedContent.instructions
-                    : "Instructions"}
+               {translatedContent ? translatedContent.instructions : "Instructions"}
                 </button>
               </Link>
               <Link to={`/haven/${itemWithId.id}/list`}>
@@ -404,11 +403,11 @@ const HavenOne = () => {
         </div>
         <div className="lg:w-1/2 flex flex-col lg:mt-0 lg:pl-6">
           <div className="w-full text-smm">
-            <h2 className="text-lg font-bold">
-              {translatedContent
-                ? translatedContent.designCredits.title
-                : "Design Credits"}
-            </h2>
+                  <h2 className="text-lg font-bold">
+          {translatedContent
+            ? translatedContent.designCredits.title
+            : "Design Credits"}
+        </h2>
             <pre className="whitespace-pre-wrap text-smm">
               {translatedContent ? (
                 <>
@@ -474,12 +473,12 @@ const HavenOne = () => {
                     <>
                       <br />
                       <a
-              href={translatedContent.designCredits.content.website2}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-500 underline hover:text-blue-700"
-            >
-                      {translatedContent.designCredits.content.website2}
+                        href={translatedContent.designCredits.content.website2}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500 underline hover:text-blue-700"
+                      >
+                        {translatedContent.designCredits.content.website2}
                       </a>
                     </>
                   )}

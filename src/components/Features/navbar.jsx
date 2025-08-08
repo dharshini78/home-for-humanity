@@ -66,7 +66,7 @@ const Navbar = () => {
     const fetchTranslations = async () => {
       try {
         const response = await fetch(
-          `https://api.homeforhumanity.xrvizion.com/shelter/gettranslation`,
+          `https://api.diyhomes.ai/shelter/gettranslation`,
           {
             method: "POST",
             headers: {

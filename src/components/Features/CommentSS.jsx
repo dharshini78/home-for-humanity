@@ -37,7 +37,7 @@ const CommentTS = () => {
   const fetchComments = async () => {
     try {
       const response = await axios.get(
-        "https://api.homeforhumanity.xrvizion.com/shelter/comments?shelterId=4"
+        "https://api.diyhomes.ai/shelter/comments?shelterId=4"
       );
 
       console.log("Raw comments response:", response.data);
@@ -87,7 +87,7 @@ const CommentTS = () => {
   const fetchTranslations = async () => {
     try {
       const response = await axios.post(
-        "https://api.homeforhumanity.xrvizion.com/shelter/gettranslation",
+        "https://api.diyhomes.ai/shelter/gettranslation",
         {
           shelterName: "SuperadobeShelter",
           langCode: selectedLanguage,
@@ -137,7 +137,7 @@ const CommentTS = () => {
       console.log("Target Language:", langCode);
 
       const response = await axios.post(
-        "https://api.homeforhumanity.xrvizion.com/shelter/gettranslation",
+        "https://api.diyhomes.ai/shelter/gettranslation",
         {
           shelterName: "SuperadobeShelter",
           langCode: langCode,
@@ -220,7 +220,7 @@ const CommentTS = () => {
 
       // Post the comment with the translated message
       await axios.post(
-        "https://api.homeforhumanity.xrvizion.com/shelter/updatecomments",
+        "https://api.diyhomes.ai/shelter/updatecomments",
         formData,
         {
           headers: {

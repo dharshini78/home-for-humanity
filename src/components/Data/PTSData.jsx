@@ -1,783 +1,1091 @@
 // ===============================================PTS=======================================
 
 const img003 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-1.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/1.png";
 const img004 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-2.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/2.png";
 const img005 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-3.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/3.png";
 const img006 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-4.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/4.png";
 const img007 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-5.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/5.png";
 const img008 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-6.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/6.png";
 const img009 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-7.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/7.png";
 const img010 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-8.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/8.png";
 const img011 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-9.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/9.png";
 const img012 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-10.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/10.png";
 const img013 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-11.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/11.png";
 const img014 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-12.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/12.png";
 const img015 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-13.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/13.png";
 const img016 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-14.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/14.png";
 const img017 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-15.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/15.png";
 const img018 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-16.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/16.png";
 const img019 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-17.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/17.png";
 const img020 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-18.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/18.png";
 const img021 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-19.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/19.png";
 const img022 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-20.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/20.png";
 const img023 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-21.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/21.png";
 const img024 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-22.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/22.png";
 const img025 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-23.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/23.png";
 const img026 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-24.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/24.png";
 const img027 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-25.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/25.png";
 const img028 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-26.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/26.png";
 const img029 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-27.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/27.png";
 const img030 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-28.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/28.png";
 const img031 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-29.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/29.png";
 const img032 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-30.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/30.png";
 const img033 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-31.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/31.png";
 const img034 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-32.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/32.png";
 const img035 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-33.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/33.png";
 const img036 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-34.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/34.png";
 const img037 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-35.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/35.png";
 const img038 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-36.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/36.png";
 const img039 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-37.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/37.png";
 const img040 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-38.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/38.png";
 const img041 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-39.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/39.png";
 const img042 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-40.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/40.png";
 const img043 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/newContent/4+Timber+Pakistan_Instructions-41.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/41.png";
+const img044 =
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Timber_Shelter/Steps/42.png";
 
 // ==========================================================LOG=================================
 
 const loggies01 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-1.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-1.png";
 const loggies02 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-2.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-2.png";
 const loggies03 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-3.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-3.png";
 const loggies04 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-4.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-4.png";
 const loggies05 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-5.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-5.png";
 const loggies06 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-6.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-6.png";
 const loggies07 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-7.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-7.png";
 const loggies08 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-8.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-8.png";
 const loggies09 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-9.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-9.png";
 const loggies10 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-10.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-10.png";
 const loggies11 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-11.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-11.png";
 const loggies12 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-12.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-12.png";
 const loggies13 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-13.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-13.png";
 const loggies14 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-14.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-14.png";
 const loggies15 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-15.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-15.png";
 const loggies16 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-16.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-16.png";
 const loggies17 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-17.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-17.png";
 const loggies18 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-18.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-18.png";
 const loggies19 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-19.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-19.png";
 const loggies20 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-20.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-20.png";
 const loggies21 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-21.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-21.png";
 const loggies22 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-22.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-22.png";
 const loggies23 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-23.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-23.png";
 const loggies24 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-24.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-24.png";
 const loggies25 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-25.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-25.png";
 const loggies26 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-26.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-26.png";
 const loggies27 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-27.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-27.png";
 const loggies28 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-28.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-28.png";
 const loggies29 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-29.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-29.png";
 const loggies30 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-30.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-30.png";
 const loggies31 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-31.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-31.png";
 const loggies32 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-32.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-32.png";
 const loggies33 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-33.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-33.png";
 const loggies34 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-34.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-34.png";
 const loggies35 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-35.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-35.png";
 const loggies36 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-36.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-36.png";
 const loggies37 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-37.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-37.png";
 const loggies38 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-38.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-38.png";
 const loggies39 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-39.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-39.png";
 const loggies40 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-40.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-40.png";
 const loggies41 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-41.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-41.png";
 const loggies42 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-42.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-42.png";
 const loggies43 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-43.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-43.png";
 const loggies44 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-44.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-44.png";
 const loggies45 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-45.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-45.png";
 const loggies46 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-46.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-46.png";
 const loggies47 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-47.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-47.png";
 const loggies48 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-48.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-48.png";
 const loggies49 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-49.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-49.png";
 const loggies50 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-50.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-50.png";
 const loggies51 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-51.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-51.png";
 const loggies52 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-52.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-52.png";
 const loggies53 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-53.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-53.png";
 const loggies54 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-54.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-54.png";
 const loggies55 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-55.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-55.png";
 const loggies56 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-56.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-56.png";
 const loggies57 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-57.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-57.png";
 const loggies58 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-58.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-58.png";
 const loggies59 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-59.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-59.png";
 const loggies60 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-60.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-60.png";
 const loggies61 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-61.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-61.png";
 const loggies62 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-62.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-62.png";
 const loggies63 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-63.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-63.png";
 const loggies64 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-64.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-64.png";
 const loggies65 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-65.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-65.png";
 const loggies66 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-66.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-66.png";
 const loggies67 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-67.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-67.png";
 const loggies68 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-68.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-68.png";
 const loggies69 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-69.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-69.png";
 const loggies70 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-70.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-70.png";
 const loggies71 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-71.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-71.png";
 const loggies72 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-72.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-72.png";
 const loggies73 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-73.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-73.png";
 const loggies74 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-74.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-74.png";
 const loggies75 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-75.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-75.png";
 const loggies76 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-76.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-76.png";
 const loggies77 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-77.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-77.png";
 const loggies78 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-78.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-78.png";
 const loggies79 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-79.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-79.png";
 const loggies80 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-80.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-80.png";
 const loggies81 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-81.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-81.png";
 const loggies82 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-82.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-82.png";
 const loggies83 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-83.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-83.png";
 const loggies84 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-84.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-84.png";
 const loggies85 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-85.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-85.png";
 const loggies86 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-86.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-86.png";
 const loggies87 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-87.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-87.png";
 const loggies88 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-88.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-88.png";
 const loggies89 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-89.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-89.png";
 const loggies90 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-90.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-90.png";
 const loggies91 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-91.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-91.png";
 const loggies92 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-92.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-92.png";
 const loggies93 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-93.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-93.png";
 const loggies94 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-94.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-94.png";
 const loggies95 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-95.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-95.png";
 const loggies96 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-96.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-96.png";
 const loggies97 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-97.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-97.png";
 const loggies98 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-98.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-98.png";
 const loggies99 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-99.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-99.png";
 const loggies100 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-100.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-100.png";
 const loggies101 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-101.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-101.png";
 const loggies102 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-102.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-102.png";
 const loggies103 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-103.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-103.png";
 const loggies104 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-104.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-104.png";
 const loggies105 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-105.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-105.png";
 const loggies106 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-106.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-106.png";
 const loggies107 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-107.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-107.png";
 const loggies108 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-108.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-108.png";
 const loggies109 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-109.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-109.png";
 const loggies110 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-110.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-110.png";
 const loggies111 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-111.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-111.png";
 const loggies112 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-112.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-112.png";
 const loggies113 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-113.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-113.png";
 const loggies114 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-114.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-114.png";
 const loggies115 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-115.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-115.png";
 const loggies116 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-116.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-116.png";
 const loggies117 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-117.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-117.png";
 const loggies118 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-118.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-118.png";
 const loggies119 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-119.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-119.png";
 const loggies120 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-120.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-120.png";
 const loggies121 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-121.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-121.png";
 const loggies122 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-122.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-122.png";
 const loggies123 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-123.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-123.png";
 const loggies124 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-124.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-124.png";
 const loggies125 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-125.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-125.png";
+
 const loggies126 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Lari_Octagreen_Shelter/newContent/4+LOG+Pakistan_Instructions-126.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-126.png";
+
+const loggies127 =
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-127.png";
+
+const loggies128 =
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-128.png";
+
+// const loggies01 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-1.png";
+// const loggies02 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-2.png";
+// const loggies03 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-3.png";
+// const loggies04 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-4.png";
+// const loggies05 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-5.png";
+// const loggies06 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-6.png";
+// const loggies07 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-7.png";
+// const loggies08 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-8.png";
+// const loggies09 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-9.png";
+// const loggies10 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-10.png";
+// const loggies11 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-11.png";
+// const loggies12 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-12.png";
+// const loggies13 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-13.png";
+// const loggies14 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-14.png";
+// const loggies15 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-15.png";
+// const loggies16 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-16.png";
+// const loggies17 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-17.png";
+// const loggies18 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-18.png";
+// const loggies19 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-19.png";
+// const loggies20 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-20.png";
+// const loggies21 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-21.png";
+// const loggies22 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-22.png";
+// const loggies23 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-23.png";
+// const loggies24 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-24.png";
+// const loggies25 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-25.png";
+// const loggies26 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-26.png";
+// const loggies27 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-27.png";
+// const loggies28 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-28.png";
+// const loggies29 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-29.png";
+// const loggies30 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-30.png";
+// const loggies31 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-31.png";
+// const loggies32 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-32.png";
+// const loggies33 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-33.png";
+// const loggies34 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-34.png";
+// const loggies35 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-35.png";
+// const loggies36 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-36.png";
+// const loggies37 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-37.png";
+// const loggies38 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-38.png";
+// const loggies39 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-39.png";
+// const loggies40 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-40.png";
+// const loggies41 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-41.png";
+// const loggies42 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-42.png";
+// const loggies43 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-43.png";
+// const loggies44 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-44.png";
+// const loggies45 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-45.png";
+// const loggies46 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-46.png";
+// const loggies47 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-47.png";
+// const loggies48 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-48.png";
+// const loggies49 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-49.png";
+// const loggies50 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-50.png";
+// const loggies51 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-51.png";
+// const loggies52 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-52.png";
+// const loggies53 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-53.png";
+// const loggies54 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-54.png";
+// const loggies55 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-55.png";
+// const loggies56 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-56.png";
+// const loggies57 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-57.png";
+// const loggies58 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-58.png";
+// const loggies59 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-59.png";
+// const loggies60 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-60.png";
+// const loggies61 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-61.png";
+// const loggies62 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-62.png";
+// const loggies63 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-63.png";
+// const loggies64 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-64.png";
+// const loggies65 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-65.png";
+// const loggies66 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-66.png";
+// const loggies67 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-67.png";
+// const loggies68 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-68.png";
+// const loggies69 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-69.png";
+// const loggies70 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-70.png";
+// const loggies71 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-71.png";
+// const loggies72 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-72.png";
+// const loggies73 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-73.png";
+// const loggies74 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-74.png";
+// const loggies75 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-75.png";
+// const loggies76 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-76.png";
+// const loggies77 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-77.png";
+// const loggies78 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-78.png";
+// const loggies79 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-79.png";
+// const loggies80 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-80.png";
+// const loggies81 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-81.png";
+// const loggies82 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-82.png";
+// const loggies83 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-83.png";
+// const loggies84 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-84.png";
+// const loggies85 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-85.png";
+// const loggies86 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-86.png";
+// const loggies87 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-87.png";
+// const loggies88 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-88.png";
+// const loggies89 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-89.png";
+// const loggies90 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-90.png";
+// const loggies91 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-91.png";
+// const loggies92 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-92.png";
+// const loggies93 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-93.png";
+// const loggies94 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-94.png";
+// const loggies95 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-95.png";
+// const loggies96 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-96.png";
+// const loggies97 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-97.png";
+// const loggies98 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-98.png";
+// const loggies99 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-99.png";
+// const loggies100 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-100.png";
+// const loggies101 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-101.png";
+// const loggies102 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-102.png";
+// const loggies103 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-103.png";
+// const loggies104 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-104.png";
+// const loggies105 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-105.png";
+// const loggies106 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-106.png";
+// const loggies107 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-107.png";
+// const loggies108 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-108.png";
+// const loggies109 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-109.png";
+// const loggies110 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-110.png";
+// const loggies111 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-111.png";
+// const loggies112 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-112.png";
+// const loggies113 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-113.png";
+// const loggies114 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-114.png";
+// const loggies115 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-115.png";
+// const loggies116 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-116.png";
+// const loggies117 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-117.png";
+// const loggies118 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-118.png";
+// const loggies119 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-119.png";
+// const loggies120 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-120.png";
+// const loggies121 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-121.png";
+// const loggies122 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-122.png";
+// const loggies123 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-123.png";
+// const loggies124 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-124.png";
+// const loggies125 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-125.png";
+// const loggies126 =
+//   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Lari_Octagreen_Shelter/temp/1_Octagreen+Shelter+Instructions_removed-126.png";
 
 const tem1 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/1TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-1.png";
 const tem2 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/2TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-2.png";
 const tem3 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/3TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-3.png";
 const tem4 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/4TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-4.png";
 const tem5 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/5TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-5.png";
 const tem6 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/6TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-6.png";
 const tem7 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/7TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-7.png";
 const tem8 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/8TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-8.png";
 const tem9 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/9TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-9.png";
 const tem10 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/10TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-10.png";
 const tem11 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/11TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-11.png";
 const tem12 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/12TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-12.png";
 const tem13 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/13TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-13.png";
 const tem14 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/14TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-14.png";
 const tem15 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/15TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-15.png";
 const tem16 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/16TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-16.png";
 const tem17 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/17TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-17.png";
 const tem18 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/18TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-18.png";
 const tem19 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/19TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-19.png";
 const tem20 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/20TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-20.png";
 const tem21 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/21TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-21.png";
 const tem22 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/22TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-22.png";
 const tem23 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/23TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-23.png";
 const tem24 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/24TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-24.png";
 const tem25 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/25TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-25.png";
 const tem26 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/26TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-26.png";
 const tem27 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/27TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-27.png";
 const tem28 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/28TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-28.png";
 const tem29 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/29TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-29.png";
 const tem30 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/30TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-30.png";
 const tem31 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/31TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-31.png";
 const tem32 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/32TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-32.png";
 const tem33 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/33TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-33.png";
 const tem34 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/34TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-34.png";
 const tem35 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/35TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-35.png";
 const tem36 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/36TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-36.png";
 const tem37 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/37TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-37.png";
 const tem38 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/38TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-38.png";
 const tem39 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/39TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-39.png";
 const tem40 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/40TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-40.png";
 const tem41 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/41TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-41.png";
 const tem42 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/42TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-42.png";
 const tem43 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/43TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-43.png";
 const tem44 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/44TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-44.png";
 const tem45 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/45TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-45.png";
 const tem46 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/46TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-46.png";
 const tem47 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/47TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-47.png";
 const tem48 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/48TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-48.png";
 const tem49 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/49TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-49.png";
 const tem50 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/50TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-50.png";
 const tem51 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/51TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-51.png";
 const tem52 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/52TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-52.png";
 const tem53 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/53TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-53.png";
 const tem54 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/54TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-54.png";
 const tem55 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/55TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-55.png";
 const tem56 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/56TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-56.png";
 const tem57 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/57TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-57.png";
 const tem58 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/58TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-58.png";
 const tem59 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/59TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-59.png";
 const tem60 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/60TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-60.png";
 const tem61 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Temporary_Shelter/Steps/61TS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-61.png";
+const tem62 =
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-62.png";
+const tem63 =
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-63.png";
+const tem64 =
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-64.png";
+const tem65 =
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-65.png";
+const tem66 =
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-66.png";
+const tem67 =
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Temporary_Shelter/temp/1_Temporary+Shelter+Instructions_removed-67.png";
 
 const indo1 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-1.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-1.png";
 const indo2 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-2.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-2.png";
 const indo3 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-3.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-3.png";
 const indo4 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-4.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-4.png";
 const indo5 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-5.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-5.png";
 const indo6 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-6.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-6.png";
 const indo7 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-7.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-7.png";
 const indo8 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-8.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-8.png";
 const indo9 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-9.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-9.png";
 const indo10 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-10.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-10.png";
 const indo11 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-11.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-11.png";
 const indo12 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-12.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-12.png";
 const indo13 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-13.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-13.png";
 const indo14 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-14.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-14.png";
 const indo15 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-15.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-15.png";
 const indo16 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-16.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-16.png";
 const indo17 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-17.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-17.png";
 const indo18 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-18.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-18.png";
 const indo19 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-19.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-19.png";
 const indo20 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-20.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-20.png";
 const indo21 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-21.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-21.png";
 const indo22 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-22.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-22.png";
 const indo23 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-23.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-23.png";
 const indo24 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-24.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-24.png";
 const indo25 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-25.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-25.png";
 const indo26 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-26.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-26.png";
 const indo27 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-27.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-27.png";
 const indo28 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-28.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-28.png";
 const indo29 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-29.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-29.png";
 const indo30 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-30.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-30.png";
 const indo31 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-31.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-31.png";
 const indo32 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-32.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-32.png";
 const indo33 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-33.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-33.png";
 const indo34 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-34.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-34.png";
 const indo35 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-35.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-35.png";
 const indo36 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-36.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-36.png";
 const indo37 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-37.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-37.png";
 const indo38 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-38.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-38.png";
 const indo39 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-39.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-39.png";
 const indo40 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-40.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-40.png";
 const indo41 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-41.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-41.png";
 const indo42 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-42.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-42.png";
 const indo43 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-43.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-43.png";
 const indo44 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-44.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-44.png";
 const indo45 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-45.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-45.png";
 const indo46 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-46.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-46.png";
 const indo47 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-47.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-47.png";
 const indo48 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-48.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-48.png";
 const indo49 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-49.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-49.png";
 const indo50 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-50.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-50.png";
 const indo51 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-51.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-51.png";
 const indo52 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-52.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-52.png";
 const indo53 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-53.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-53.png";
 const indo54 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-54.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-54.png";
 const indo55 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-55.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-55.png";
 const indo56 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-56.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-56.png";
 const indo57 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-57.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-57.png";
 const indo58 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-58.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-58.png";
 const indo59 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-59.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-59.png";
 const indo60 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-60.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-60.png";
 const indo61 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-61.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-61.png";
 const indo62 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-62.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-62.png";
 const indo63 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-63.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-63.png";
 const indo64 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-64.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-64.png";
 const indo65 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-65.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-65.png";
 const indo66 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-66.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-66.png";
 const indo67 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-67.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-67.png";
 const indo68 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-68.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-68.png";
 const indo69 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-69.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-69.png";
 const indo70 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-70.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-70.png";
 const indo71 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-71.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-71.png";
 const indo72 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-72.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-72.png";
 const indo73 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-73.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-73.png";
 const indo74 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-74.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-74.png";
 const indo75 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-75.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-75.png";
 const indo76 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-76.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-76.png";
 const indo77 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-77.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-77.png";
 const indo78 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-78.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-78.png";
 const indo79 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-79.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-79.png";
 const indo80 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-80.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-80.png";
 const indo81 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-81.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-81.png";
 const indo82 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-82.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-82.png";
 const indo83 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Bamboo_Shelter/newContent/4+Bamboo+Indonesia_Instructions-83.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-83.png";
+const indo84 =
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-84.png";
+
+const indo85 =
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-85.png";
+
+const indo86 =
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-86.png";
+
+const indo87 =
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-87.png";
+
+const indo88 =
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-88.png";
+
+const indo89 =
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-89.png";
+
+const indo90 =
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-90.png";
+
+const indo91 =
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-91.png";
+
+const indo92 =
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-92.png";
 
 const sup1 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-1.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-1.jpg";
 const sup2 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-2.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-2.jpg";
 const sup3 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-3.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-3.jpg";
 const sup4 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-4.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-4.jpg";
 const sup5 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-5.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-5.jpg";
 const sup6 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-6.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-6.jpg";
 const sup7 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-7.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-7.jpg";
 const sup8 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-8.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-8.jpg";
 const sup9 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-9.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-9.jpg";
 const sup10 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-10.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-10.jpg";
 const sup11 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-11.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-11.jpg";
 const sup12 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-12.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-12.jpg";
 const sup13 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-13.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-13.jpg";
 const sup14 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-14.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-14.jpg";
 const sup15 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-15.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-15.jpg";
 const sup16 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-16.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-16.jpg";
 const sup17 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-17.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-17.jpg";
 const sup18 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-18.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-18.jpg";
 const sup19 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-19.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-19.jpg";
 const sup20 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-20.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-20.jpg";
 const sup21 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-21.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-21.jpg";
 const sup22 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-22.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-22.jpg";
 const sup23 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-23.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-23.jpg";
 const sup24 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-24.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-24.jpg";
 const sup25 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-25.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-25.jpg";
 const sup26 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-26.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-26.jpg";
 const sup27 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-27.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-27.jpg";
 const sup28 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-28.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-28.jpg";
 const sup29 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-29.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-29.jpg";
 const sup30 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-30.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-30.jpg";
 const sup31 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-31.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-31.jpg";
 const sup32 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-32.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-32.jpg";
 const sup33 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-33.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-33.jpg";
 const sup34 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-34.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-34.jpg";
 const sup35 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-35.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-35.jpg";
 const sup36 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-36.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-36.jpg";
 const sup37 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-37.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-37.jpg";
 const sup38 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-38.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-38.jpg";
 const sup39 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-39.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-39.jpg";
 const sup40 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-40.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-40.jpg";
 const sup41 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-41.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-41.jpg";
 const sup42 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-42.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-42.jpg";
 const sup43 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-43.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-43.jpg";
 const sup44 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-44.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-44.jpg";
 const sup45 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-45.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-45.jpg";
 const sup46 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-46.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-46.jpg";
 const sup47 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-47.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-47.jpg";
 const sup48 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-48.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-48.jpg";
 const sup49 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-49.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-49.jpg";
 const sup50 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-50.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-50.jpg";
 const sup51 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-51.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-51.jpg";
 const sup52 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-52.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-52.jpg";
 const sup53 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-53.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-53.jpg";
 const sup54 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-54.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-54.jpg";
 const sup55 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-55.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-55.jpg";
 const sup56 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-56.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-56.jpg";
 const sup57 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-57.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-57.jpg";
 const sup58 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-58.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-58.jpg";
 const sup59 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-59.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-59.jpg";
 const sup60 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-60.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-60.jpg";
 const sup61 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-61.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-61.jpg";
 const sup62 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-62.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-62.jpg";
 const sup63 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-63.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-63.jpg";
 const sup64 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-64.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-64.jpg";
 const sup65 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-65.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-65.jpg";
 const sup66 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-66.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-66.jpg";
 const sup67 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-67.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-67.jpg";
 const sup68 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-68.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-68.jpg";
 const sup69 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-69.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-69.jpg";
 const sup70 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-70.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-70.jpg";
 const sup71 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-71.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-71.jpg";
 const sup72 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-72.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-72.jpg";
 const sup73 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-73.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-73.jpg";
 const sup74 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-74.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-74.jpg";
 const sup75 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/newContent/4+Superadobe+Jordan_Instructions-75.jpg";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-75.jpg";
+const sup76 =
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-76.jpg";
+const sup77 =
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-77.jpg";
+const sup78 =
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-78.jpg";
+const sup79 =
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-79.jpg";
 
 import loggie01 from "../../assets/LOG/Materialsimg/001.png";
 import loggie02 from "../../assets/LOG/Materialsimg/002.png";
@@ -806,15 +1114,15 @@ import bsindoreal from "../../assets/BS_indo/BSIndoReal.jpg";
 import ssreal from "../../assets/SS/SSReal.jpg";
 
 const shelter1 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/shelter.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/shelter.png";
 const shelter2 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/LogBnW.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/LogBnW.png";
 const shelter3 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/BS.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/BS.png";
 const shelter4 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/BS_indo.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/BS_indo.png";
 const shelter5 =
-  "https://xrv-xrc.s3.ap-south-1.amazonaws.com/HomeForHumanity/Resources/superDoble.png";
+  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/superDoble.png";
 
 import list001 from "../../assets/PTS/MaterialsList/1.png";
 import list002 from "../../assets/PTS/MaterialsList/2.png";
@@ -874,7 +1182,7 @@ import indoMat20 from "../../assets/BS_indo/indomat/20indomat.png";
 import indoMat21 from "../../assets/BS_indo/indomat/21indomat.png";
 import indoMat22 from "../../assets/BS_indo/indomat/22indomat.png";
 import indoMat23 from "../../assets/BS_indo/indomat/23indomat.png";
-import indoMat24 from "../../assets/BS_indo/indomat/24indomat.png";
+// import indoMat24 from "../../assets/BS_indo/indomat/24indomat.png";
 
 import supMat1 from "../../assets/SS/supmat/1supmat.png";
 import supMat2 from "../../assets/SS/supmat/2supmat.png";
@@ -1188,6 +1496,12 @@ const data = [
         materials: [],
         labor: "1-2 men",
       },
+      {
+        description: "The shelter is finished.",
+        img: img044,
+        materials: [],
+        labor: "1-2 men",
+      },
     ],
 
     list: [
@@ -1248,6 +1562,11 @@ const data = [
       {
         listImg: list014,
         listImgName: "2x Vertical columns  dia. 75 mm, L=3.05 m",
+      },
+      {
+        listImg: list015,
+        listImgName:
+          "21x Beam  Ridge beam (1), Rafters (14), Purlin (6) dia. 75 mm, L=4.27 m",
       },
       {
         listImg: list015,
@@ -2222,6 +2541,20 @@ const data = [
         materials: [],
         labor: "1-2 men",
       },
+
+      {
+        description: "The shelter is finished.",
+        img: loggies127,
+        materials: [],
+        labor: "1-2 men",
+      },
+
+      {
+        description: "The shelter is finished.",
+        img: loggies128,
+        materials: [],
+        labor: "1-2 men",
+      },
     ],
     list: [
       {
@@ -2230,7 +2563,7 @@ const data = [
       },
       {
         listImg: loggie02,
-        listImgName: "Rammer",
+        listImgName: "Hammer",
       },
       {
         listImg: loggie03,
@@ -2322,8 +2655,6 @@ const data = [
       },
     ],
   },
-
-
 
 
 
@@ -2765,7 +3096,52 @@ const data = [
         materials: [],
         labor: "1-2 men",
       },
+
+        {
+        description:
+          "Add aluminium cladding to the front and the back side of the shelter. The shelter is finished.",
+        img: tem62,
+        materials: ["Aluminium cladding"],
+        labor: "1-2 men",
+      },
+      {
+        description: "The shelter is finished.",
+        img: tem63,
+        materials: [],
+        labor: "1-2 men",
+      },
+
+        {
+        description:
+          "Add aluminium cladding to the front and the back side of the shelter. The shelter is finished.",
+        img: tem64,
+        materials: ["Aluminium cladding"],
+        labor: "1-2 men",
+      },
+      {
+        description: "The shelter is finished.",
+        img: tem65,
+        materials: [],
+        labor: "1-2 men",
+      },
+        {
+        description:
+          "Add aluminium cladding to the front and the back side of the shelter. The shelter is finished.",
+        img: tem66,
+        materials: ["Aluminium cladding"],
+        labor: "1-2 men",
+      },
+      {
+        description: "The shelter is finished.",
+        img: tem67,
+        materials: [],
+        labor: "1-2 men",
+      },
     ],
+
+
+
+
     list: [
       {
         listImg: temMat1,
@@ -2843,6 +3219,24 @@ const data = [
       },
     ],
   },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   {
     id: "3",
@@ -3419,6 +3813,60 @@ const data = [
         materials: [],
         labor: "1-2 men",
       },
+      {
+        description: "The finished shelter is now ready for use.",
+        img: indo84,
+        materials: [],
+        labor: "1-2 men",
+      },
+      {
+        description: "The finished shelter is now ready for use.",
+        img: indo85,
+        materials: [],
+        labor: "1-2 men",
+      },
+      {
+        description: "The finished shelter is now ready for use.",
+        img: indo86,
+        materials: [],
+        labor: "1-2 men",
+      },
+      {
+        description: "The finished shelter is now ready for use.",
+        img: indo87,
+        materials: [],
+        labor: "1-2 men",
+      },
+      {
+        description: "The finished shelter is now ready for use.",
+        img: indo88,
+        materials: [],
+        labor: "1-2 men",
+      },
+      {
+        description: "The finished shelter is now ready for use.",
+        img: indo89,
+        materials: [],
+        labor: "1-2 men",
+      },
+      {
+        description: "The finished shelter is now ready for use.",
+        img: indo90,
+        materials: [],
+        labor: "1-2 men",
+      },
+      {
+        description: "The finished shelter is now ready for use.",
+        img: indo91,
+        materials: [],
+        labor: "1-2 men",
+      },
+      {
+        description: "The finished shelter is now ready for use.",
+        img: indo92,
+        materials: [],
+        labor: "1-2 men",
+      },
     ],
     list: [
       {
@@ -3515,6 +3963,7 @@ const data = [
       },
     ],
   },
+
   {
     id: "4",
     img: shelter5,
@@ -4031,6 +4480,33 @@ const data = [
       {
         description: "Final Result.",
         img: sup75,
+        materials: [],
+        labor: "1-2 men",
+      },
+      {
+        description: "Final Result.",
+        img: sup76,
+        materials: [],
+        labor: "1-2 men",
+      },
+
+      {
+        description: "Final Result.",
+        img: sup77,
+        materials: [],
+        labor: "1-2 men",
+      },
+
+      {
+        description: "Final Result.",
+        img: sup78,
+        materials: [],
+        labor: "1-2 men",
+      },
+
+      {
+        description: "Final Result.",
+        img: sup79,
         materials: [],
         labor: "1-2 men",
       },

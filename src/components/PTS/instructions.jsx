@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { RiArrowRightDoubleFill, RiArrowLeftDoubleFill } from "react-icons/ri";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
@@ -12,7 +12,7 @@ import Navbar from "../Features/navbar.jsx";
 import data from "../Data/PTSData.jsx";
 import he from "he"; // Import the he library
 import { useLanguage } from "../Features/languageContext.jsx";
-import { IoConstruct } from "react-icons/io5";
+
 
 const Materials = () => {
   const navigate = useNavigate();
@@ -35,7 +35,24 @@ const Materials = () => {
 
   const stepsRef = useRef(null);
   const currentStepRef = useRef(null);
-  const titleWithId = data.find((item) => item.id === id);
+  // const titleWithId = data.find((item) => item.id === id);
+const titleWithId = data.find((item) => item.id === id);
+console.log("Found titleWithId:", titleWithId);
+
+// Add this to see all properties:
+console.log("titleWithId properties:", Object.keys(titleWithId));
+console.log("titleWithId.steps:", titleWithId.steps);
+console.log("titleWithId.steps type:", typeof titleWithId.steps);
+console.log("titleWithId.steps length:", titleWithId.steps?.length);
+
+if (!titleWithId) {
+  console.error("No shelter found with the given id:", id);
+  return <div>No shelter found with the given id.</div>;
+}
+
+const steps = titleWithId.steps || [];
+console.log("Steps:", steps);
+
 
   const units = ["mm", "cm", "m", "km", "in", "ft", "yd", "mi"];
   const languageCodeMapping = {
@@ -102,21 +119,18 @@ const Materials = () => {
     try {
       const ttsLanguageCode = languageCodeMapping[targetLanguage] || "en-US"; // Default to 'en-US' if mapping is not found
 
-      const response = await fetch(
-        "https://api.homeforhumanity.xrvizion.com/shelter/gettts",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            content,
-            targetLanguage: ttsLanguageCode, // Use the TTS language code
-            shelterName: shelterName.replace(/\s+/g, ""), // Remove spaces
-            pageNumber,
-          }),
-        }
-      );
+      const response = await fetch("https://api.diyhomes.ai/shelter/gettts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          content,
+          targetLanguage: ttsLanguageCode, // Use the TTS language code
+          shelterName: shelterName.replace(/\s+/g, ""), // Remove spaces
+          pageNumber,
+        }),
+      });
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -180,7 +194,7 @@ const Materials = () => {
       });
 
       const response = await fetch(
-        "https://api.homeforhumanity.xrvizion.com/shelter/gettranslation",
+        "https://api.diyhomes.ai/shelter/gettranslation",
         {
           method: "POST",
           headers: {
@@ -251,12 +265,12 @@ const Materials = () => {
     };
   }, [isStepsOpen]);
 
-
   const [autoPlayEnabled, setAutoPlayEnabled] = useState(true);
   useEffect(() => {
     if (!loading && translatedContent && autoPlayEnabled) {
       speakStepDescription();
     }
+    // eslint-disable-next-line
   }, [currentIndex, loading, translatedContent, autoPlayEnabled]);
 
   const scrollToTop = () => {
@@ -269,11 +283,11 @@ const Materials = () => {
   const goBack = () => {
     // First stop any playing audio
     if (currentAudio) {
-        currentAudio.pause();
-        currentAudio.currentTime = 0;
+      currentAudio.pause();
+      currentAudio.currentTime = 0;
     }
     if (audioUrl) {
-        URL.revokeObjectURL(audioUrl);
+      URL.revokeObjectURL(audioUrl);
     }
     setIsSpeaking(false);
     setCurrentAudio(null);
@@ -281,120 +295,119 @@ const Materials = () => {
 
     // Then navigate
     navigate(`/haven/${id}`);
-};
-
-  // const handleStepClick = (index) => {
-  //   clearTimeout(audioTimeout);
-  //   stopCurrentAudio();
-  //   setAudioUrl(null); // Clear the audio URL
-
-  //   const timeoutId = setTimeout(() => {
-  //     setCurrentIndex(index);
-  //     if (windowWidth <= 1024) {
-  //       toggleSteps();
-  //     }
-  //   }, 500); // 1-second delay
-
-  //   setAudioTimeout(timeoutId);
-  // };
+  };
 
   useEffect(() => {
     // Clear audio state when language changes
     stopCurrentAudio();
     setAudioUrl(null);
+    // eslint-disable-next-line
   }, [selectedLanguage]);
   const [currentAudio, setCurrentAudio] = useState(null);
-// Add/update these state variables at the top of your component
-const [isAudioPending, setIsAudioPending] = useState(false);
-const audioTimeoutRef = useRef(null);
-const pendingAudioFetchRef = useRef(null);
+  // Add/update these state variables at the top of your component
+  const [isAudioPending, setIsAudioPending] = useState(false);
+  const audioTimeoutRef = useRef(null);
+  const pendingAudioFetchRef = useRef(null);
 
-// Replace the existing speakStepDescription function
-// Update this state at component level
+  // Replace the existing speakStepDescription function
+  // Update this state at component level
 
-const speakStepDescription = async () => {
-  // If audio is currently playing, just stop it
-  if (isSpeaking) {
-    stopCurrentAudio();
-    return;
-  }
-
-  // If we already have the audio URL, play it immediately
-  if (audioUrl) {
-    const audio = new Audio(audioUrl);
-    setCurrentAudio(audio);
-    audio.play();
-    setIsSpeaking(true);
-
-    audio.onended = () => {
-      setIsSpeaking(false);
-      setCurrentAudio(null);
-    };
-
-    audio.onerror = (error) => {
-      console.error("Error playing audio:", error);
-      setIsSpeaking(false);
-      setCurrentAudio(null);
-    };
-    return;
-  }
-
-  // If we need to fetch new audio
-  if (!isAudioPending) {
-    const step = translatedContent.instructions[`step${currentIndex + 1}`];
-    const textToSpeak = step.description;
-    const materialsText = step.usedMaterials.join(", ");
-    const fullTextToSpeak = `${textToSpeak}. ${translatedContent.others.materialsList} ............ ${materialsText}.`;
-
-    setIsAudioPending(true);
-
-    try {
-      const url = await fetchTTSAudio(
-        fullTextToSpeak,
-        selectedLanguage,
-        titleWithId.title,
-        currentIndex + 1
-      );
-
-      if (url) {
-        setAudioUrl(url);
-        const audio = new Audio(url);
-        setCurrentAudio(audio);
-        audio.play();
-        setIsSpeaking(true);
-
-        audio.onended = () => {
-          setIsSpeaking(false);
-          setCurrentAudio(null);
-        };
-
-        audio.onerror = (error) => {
-          console.error("Error playing audio:", error);
-          setIsSpeaking(false);
-          setCurrentAudio(null);
-        };
-      }
-    } catch (error) {
-      console.error("Error fetching audio:", error);
-    } finally {
-      setIsAudioPending(false);
+  const speakStepDescription = async () => {
+    // If audio is currently playing, just stop it
+    if (isSpeaking) {
+      stopCurrentAudio();
+      return;
     }
-  }
-};
 
-const stopCurrentAudio = () => {
-  if (currentAudio) {
-    currentAudio.pause();
-    currentAudio.currentTime = 0;
-  }
-  setIsSpeaking(false);
-  setCurrentAudio(null);
-  // setAutoPlayEnabled(false);
-};
+    // If we already have the audio URL, play it immediately
+    if (audioUrl) {
+      const audio = new Audio(audioUrl);
+      setCurrentAudio(audio);
+      audio.play();
+      setIsSpeaking(true);
 
-// Add cleanup in useEffect
-useEffect(() => {
-  return () => {
+      audio.onended = () => {
+        setIsSpeaking(false);
+        setCurrentAudio(null);
+      };
+
+      audio.onerror = (error) => {
+        console.error("Error playing audio:", error);
+        setIsSpeaking(false);
+        setCurrentAudio(null);
+      };
+      return;
+    }
+
+    // If we need to fetch new audio
+    if (!isAudioPending && translatedContent && translatedContent.instructions && translatedContent.instructions[`step${currentIndex + 1}`]) {
+      const step = translatedContent.instructions[`step${currentIndex + 1}`];
+      const textToSpeak = step.description;
+      const materialsText = Array.isArray(step.usedMaterials) ? step.usedMaterials.join(", ") : "";
+      const fullTextToSpeak = `${textToSpeak}. ${translatedContent?.others?.materialsList} ............ ${materialsText}.`;
+
+      setIsAudioPending(true);
+
+      try {
+        const url = await fetchTTSAudio(
+          fullTextToSpeak,
+          selectedLanguage,
+          titleWithId.title,
+          currentIndex + 1
+        );
+
+        if (url) {
+          setAudioUrl(url);
+          const audio = new Audio(url);
+          setCurrentAudio(audio);
+          audio.play();
+          setIsSpeaking(true);
+
+          audio.onended = () => {
+            setIsSpeaking(false);
+            setCurrentAudio(null);
+          };
+
+          audio.onerror = (error) => {
+            console.error("Error playing audio:", error);
+            setIsSpeaking(false);
+            setCurrentAudio(null);
+          };
+        }
+      } catch (error) {
+        console.error("Error fetching audio:", error);
+      } finally {
+        setIsAudioPending(false);
+      }
+    }
+  };
+
+  const stopCurrentAudio = () => {
+    if (currentAudio) {
+      currentAudio.pause();
+      currentAudio.currentTime = 0;
+    }
+    setIsSpeaking(false);
+    setCurrentAudio(null);
+    // setAutoPlayEnabled(false);
+  };
+
+  // Add cleanup in useEffect
+  useEffect(() => {
+    return () => {
+      if (audioTimeoutRef.current) {
+        clearTimeout(audioTimeoutRef.current);
+      }
+      if (pendingAudioFetchRef.current) {
+        pendingAudioFetchRef.current.abort();
+      }
+      stopCurrentAudio();
+    };
+    // eslint-disable-next-line
+  }, []);
+
+  // Update handleStepClick
+  const handleStepClick = (index) => {
     if (audioTimeoutRef.current) {
       clearTimeout(audioTimeoutRef.current);
     }
@@ -402,57 +415,46 @@ useEffect(() => {
       pendingAudioFetchRef.current.abort();
     }
     stopCurrentAudio();
+    setAudioUrl(null);
+
+    setCurrentIndex(index);
+    if (windowWidth <= 1024) {
+      toggleSteps();
+    }
   };
-}, []);
 
-// Update handleStepClick
-const handleStepClick = (index) => {
-  if (audioTimeoutRef.current) {
-    clearTimeout(audioTimeoutRef.current);
-  }
-  if (pendingAudioFetchRef.current) {
-    pendingAudioFetchRef.current.abort();
-  }
-  stopCurrentAudio();
-  setAudioUrl(null);
+  const handlePrevious = () => {
+    // Clear any existing timeouts
+    if (audioTimeoutRef.current) {
+      clearTimeout(audioTimeoutRef.current);
+    }
+    // Cancel any pending fetch requests
+    if (pendingAudioFetchRef.current) {
+      pendingAudioFetchRef.current.abort();
+    }
+    stopCurrentAudio();
+    setAudioUrl(null);
+    setCurrentIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : 0));
+  };
 
-  setCurrentIndex(index);
-  if (windowWidth <= 1024) {
-    toggleSteps();
-  }
-};
-
-const handlePrevious = () => {
-  // Clear any existing timeouts
-  if (audioTimeoutRef.current) {
-    clearTimeout(audioTimeoutRef.current);
-  }
-  // Cancel any pending fetch requests
-  if (pendingAudioFetchRef.current) {
-    pendingAudioFetchRef.current.abort();
-  }
-  stopCurrentAudio();
-  setAudioUrl(null);
-  setCurrentIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : 0));
-};
-
-const handleNext = () => {
-  // Clear any existing timeouts
-  if (audioTimeoutRef.current) {
-    clearTimeout(audioTimeoutRef.current);
-  }
-  // Cancel any pending fetch requests
-  if (pendingAudioFetchRef.current) {
-    pendingAudioFetchRef.current.abort();
-  }
-  stopCurrentAudio();
-  setAudioUrl(null);
-  setCurrentIndex((prevIndex) =>
-    prevIndex < Object.keys(translatedContent.instructions).length - 1
-      ? prevIndex + 1
-      : prevIndex
-  );
-};
+  const handleNext = () => {
+    // Clear any existing timeouts
+    if (audioTimeoutRef.current) {
+      clearTimeout(audioTimeoutRef.current);
+    }
+    // Cancel any pending fetch requests
+    if (pendingAudioFetchRef.current) {
+      pendingAudioFetchRef.current.abort();
+    }
+    stopCurrentAudio();
+    setAudioUrl(null);
+    setCurrentIndex((prevIndex) =>
+      translatedContent && translatedContent.instructions &&
+      prevIndex < Object.keys(translatedContent.instructions).length - 1
+        ? prevIndex + 1
+        : prevIndex
+    );
+  };
 
   useEffect(() => {
     const handleClickOrTouchOutside = (event) => {
@@ -545,124 +547,142 @@ const handleNext = () => {
     );
   };
 
-  const getConstructionPhase = (shelterType, currentIndex) => {
-    switch (shelterType) {
-      case "Temporary Shelter":
-        if (currentIndex >= 0 && currentIndex < 9) {
-          return translatedContent.construction.staves;
-        } else if (currentIndex >= 9 && currentIndex < 14) {
-          return translatedContent.construction.framework;
-        } else if (currentIndex >= 14 && currentIndex < 19) {
-          return translatedContent.construction.joinParts;
-        } else if (currentIndex >= 19 && currentIndex < 26) {
-          return translatedContent.construction.roofStructure;
-        } else if (currentIndex >= 26 && currentIndex < 32) {
-          return translatedContent.construction.waterProofing;
-        } else if (currentIndex >= 32 && currentIndex < 40) {
-          return translatedContent.construction.bracing;
-        } else if (currentIndex >= 40 && currentIndex < 47) {
-          return translatedContent.construction.roof;
-        } else if (currentIndex >= 47 && currentIndex < 53) {
-          return translatedContent.construction.floor;
-        } else {
-          return "";
-        }
-      case "Superadobe Shelter":
-        if (currentIndex >= 0 && currentIndex < 2) {
-          return translatedContent.construction.preparation;
-        } else if (currentIndex >= 2 && currentIndex < 18) {
-          return translatedContent.construction.foundation;
-        } else if (currentIndex >= 18 && currentIndex < 27) {
-          return translatedContent.construction.floor;
-        } else if (currentIndex >= 27 && currentIndex < 37) {
-          return translatedContent.construction.dome;
-        } else if (currentIndex >= 37 && currentIndex < 49) {
-          return translatedContent.construction.dome;
-        } else if (currentIndex >= 49 && currentIndex < 58) {
-          return translatedContent.construction.storageFloor;
-        } else if (currentIndex >= 58 && currentIndex < 59) {
-          return translatedContent.construction.roof;
-        } else if (currentIndex >= 59 && currentIndex < 75) {
-          return translatedContent.construction.plaster;
-        } else {
-          return "";
-        }
-      case "Bamboo Shelter":
-        if (currentIndex >= 0 && currentIndex < 4) {
-          return translatedContent.construction.foundation;
-        } else if (currentIndex >= 4 && currentIndex < 10) {
-          return translatedContent.construction.primaryColumns;
-        } else if (currentIndex >= 10 && currentIndex < 16) {
-          return translatedContent.construction.beams;
-        } else if (currentIndex >= 16 && currentIndex < 21) {
-          return translatedContent.construction.secondaryColumns;
-        } else if (currentIndex >= 21 && currentIndex < 27) {
-          return translatedContent.construction.bracings1;
-        } else if (currentIndex >= 27 && currentIndex < 33) {
-          return translatedContent.construction.bracings2;
-        } else if (currentIndex >= 33 && currentIndex < 40) {
-          return translatedContent.construction.bracings3;
-        } else if (currentIndex >= 40 && currentIndex < 43) {
-          return translatedContent.construction.rodBeams;
-        } else if (currentIndex >= 43 && currentIndex < 51) {
-          return translatedContent.construction.roofMainFrame;
-        } else if (currentIndex >= 51 && currentIndex < 59) {
-          return translatedContent.construction.roofSecondaryFrame;
-        } else if (currentIndex >= 59 && currentIndex < 64) {
-          return translatedContent.construction.rafters;
-        } else if (currentIndex >= 64 && currentIndex < 73) {
-          return translatedContent.construction.roofPanels;
-        } else if (currentIndex >= 73 && currentIndex < 82) {
-          return translatedContent.construction.facade;
-        } else {
-          return "";
-        }
-      case "Octagreen Shelter":
-        if (currentIndex >= 0 && currentIndex < 11) {
-          return translatedContent.construction.foundation;
-        } else if (currentIndex >= 11 && currentIndex < 24) {
-          return translatedContent.construction.brickFoundation;
-        } else if (currentIndex >= 24 && currentIndex < 47) {
-          return translatedContent.construction.wallPanels;
-        } else if (currentIndex >= 47 && currentIndex < 59) {
-          return translatedContent.construction.doorPanels;
-        } else if (currentIndex >= 59 && currentIndex < 67) {
-          return translatedContent.construction.assemblyPanels;
-        } else if (currentIndex >= 67 && currentIndex < 81) {
-          return translatedContent.construction.roof;
-        } else if (currentIndex >= 81 && currentIndex < 109) {
-          return translatedContent.construction.grassRoof;
-        } else if (currentIndex >= 109 && currentIndex < 116) {
-          return translatedContent.construction.walls;
-        } else if (currentIndex >= 116 && currentIndex < 126) {
-          return translatedContent.construction.flooring;
-        } else {
-          return "";
-        }
-      case "Timber-Frame Shelter":
-        if (currentIndex >= 0 && currentIndex < 9) {
-          return translatedContent.construction.foundation;
-        } else if (currentIndex >= 9 && currentIndex < 14) {
-          return translatedContent.construction.ridgeBeam;
-        } else if (currentIndex >= 14 && currentIndex < 16) {
-          return translatedContent.construction.masonry;
-        } else if (currentIndex >= 16 && currentIndex < 21) {
-          return translatedContent.construction.roofStructure;
-        } else if (currentIndex >= 21 && currentIndex < 29) {
-          return translatedContent.construction.waterProofing;
-        } else if (currentIndex >= 29 && currentIndex < 32) {
-          return translatedContent.construction.insulation;
-        } else if (currentIndex >= 32 && currentIndex < 37) {
-          return translatedContent.construction.metalRoof;
-        } else if (currentIndex >= 37 && currentIndex < 41) {
-          return translatedContent.construction.guyRopes;
-        } else {
-          return "";
-        }
-      default:
+const getConstructionPhase = (shelterType, currentIndex) => {
+  switch (shelterType) {
+    case "Temporary Shelter":
+      if (currentIndex >= 0 && currentIndex < 14) {
+        return translatedContent?.construction?.staves ?? "Staves";
+      } else if (currentIndex >= 14 && currentIndex < 27) {
+        return translatedContent?.construction?.framework ?? "Framework";
+      } else if (currentIndex >= 27 && currentIndex < 40) {
+        return translatedContent?.construction?.joinParts ?? "Join Parts";
+      } else if (currentIndex >= 40 && currentIndex < 47) {
+        return translatedContent?.construction?.roofStructure ?? "Roof Structure";
+      } else if (currentIndex >= 47 && currentIndex < 53) {
+        return translatedContent?.construction?.waterProofing ?? "Water Proofing";
+      } else if (currentIndex >= 53 && currentIndex < 67) {
+        return translatedContent?.construction?.bracing ?? "Bracing";
+      } else if (currentIndex >= 67 && currentIndex < 73) {
+        return translatedContent?.construction?.roof ?? "Roof";
+      } else if (currentIndex >= 73 && currentIndex < 82) {
+        return translatedContent?.construction?.floor ?? "Floor";
+      } else {
         return "";
-    }
-  };
+      }
+
+    case "Superadobe Shelter":
+      if (currentIndex >= 0 && currentIndex < 2) {
+        return translatedContent?.construction?.preparation ?? "Preparation";
+      } else if (currentIndex >= 2 && currentIndex < 30) {
+        return translatedContent?.construction?.foundation ?? "Foundation";
+      } else if (currentIndex >= 30 && currentIndex < 37) {
+        return translatedContent?.construction?.floor ?? "Floor";
+      } else if (currentIndex >= 37 && currentIndex < 58) {
+        return translatedContent?.construction?.dome ?? "Dome";
+      } else if (currentIndex >= 58 && currentIndex < 59) {
+        return translatedContent?.construction?.roof ?? "Roof";
+      } else if (currentIndex >= 59 && currentIndex < 79) {
+        return translatedContent?.construction?.plaster ?? "Plaster";
+      } else {
+        return "";
+      }
+
+    case "Bamboo Shelter":
+      if (currentIndex >= 0 && currentIndex < 4) {
+        return translatedContent?.construction?.foundation ?? "Foundation";
+      } else if (currentIndex >= 4 && currentIndex < 10) {
+        return translatedContent?.construction?.primaryColumns ?? "Primary Columns";
+      } else if (currentIndex >= 10 && currentIndex < 16) {
+        return translatedContent?.construction?.beams ?? "Beams";
+      } else if (currentIndex >= 16 && currentIndex < 21) {
+        return translatedContent?.construction?.secondaryColumns ?? "Secondary Columns";
+      } else if (currentIndex >= 21 && currentIndex < 27) {
+        return translatedContent?.construction?.bracings1 ?? "Bracings 1";
+      } else if (currentIndex >= 27 && currentIndex < 33) {
+        return translatedContent?.construction?.bracings2 ?? "Bracings 2";
+      } else if (currentIndex >= 33 && currentIndex < 40) {
+        return translatedContent?.construction?.bracings3 ?? "Bracings 3";
+      } else if (currentIndex >= 40 && currentIndex < 43) {
+        return translatedContent?.construction?.rodBeams ?? "Rod Beams";
+      } else if (currentIndex >= 43 && currentIndex < 51) {
+        return translatedContent?.construction?.roofMainFrame ?? "Roof Main Frame";
+      } else if (currentIndex >= 51 && currentIndex < 59) {
+        return translatedContent?.construction?.roofSecondaryFrame ?? "Roof Secondary Frame";
+      } else if (currentIndex >= 59 && currentIndex < 64) {
+        return translatedContent?.construction?.rafters ?? "Rafters";
+      } else if (currentIndex >= 64 && currentIndex < 73) {
+        return translatedContent?.construction?.roofPanels ?? "Roof Panels";
+      } else if (currentIndex >= 73 && currentIndex < 92) {
+        return translatedContent?.construction?.facade ?? "Facade";
+      } else {
+        return "";
+      }
+
+    case "Octagreen Shelter":
+      if (currentIndex >= 0 && currentIndex < 11) {
+        return translatedContent?.construction?.foundation ?? "Foundation";
+      } else if (currentIndex >= 11 && currentIndex < 24) {
+        return translatedContent?.construction?.brickFoundation ?? "Brick Foundation";
+      } else if (currentIndex >= 24 && currentIndex < 47) {
+        return translatedContent?.construction?.wallPanels ?? "Wall Panels";
+      } else if (currentIndex >= 47 && currentIndex < 59) {
+        return translatedContent?.construction?.doorPanels ?? "Door Panels";
+      } else if (currentIndex >= 59 && currentIndex < 67) {
+        return translatedContent?.construction?.assemblyPanels ?? "Assembly Panels";
+      } else if (currentIndex >= 67 && currentIndex < 81) {
+        return translatedContent?.construction?.roof ?? "Roof";
+      } else if (currentIndex >= 81 && currentIndex < 109) {
+        return translatedContent?.construction?.grassRoof ?? "Grass Roof";
+      } else if (currentIndex >= 109 && currentIndex < 116) {
+        return translatedContent?.construction?.walls ?? "Walls";
+      } else if (currentIndex >= 116 && currentIndex < 128) {
+        return translatedContent?.construction?.flooring ?? "Flooring";
+      } else {
+        return "";
+      }
+
+    case "Timber-Frame Shelter":
+      if (currentIndex >= 0 && currentIndex < 9) {
+        return translatedContent?.construction?.foundation ?? "Foundation";
+      } else if (currentIndex >= 9 && currentIndex < 14) {
+        return translatedContent?.construction?.ridgeBeam ?? "Ridge Beam";
+      } else if (currentIndex >= 14 && currentIndex < 16) {
+        return translatedContent?.construction?.masonry ?? "Masonry";
+      } else if (currentIndex >= 16 && currentIndex < 21) {
+        return translatedContent?.construction?.roofStructure ?? "Roof Structure";
+      } else if (currentIndex >= 21 && currentIndex < 29) {
+        return translatedContent?.construction?.waterProofing ?? "Water Proofing";
+      } else if (currentIndex >= 29 && currentIndex < 32) {
+        return translatedContent?.construction?.insulation ?? "Insulation";
+      } else if (currentIndex >= 32 && currentIndex < 37) {
+        return translatedContent?.construction?.metalRoof ?? "Metal Roof";
+      } else if (currentIndex >= 37 && currentIndex < 42) {
+        return translatedContent?.construction?.guyRopes ?? "Guy Ropes";
+      } else {
+        return "";
+      }
+
+    default:
+      return "";
+  }
+};
+
+
+  // Defensive checks for steps and instructions
+  const hasStepImage =
+    titleWithId.steps &&
+    Array.isArray(titleWithId.steps) &&
+    titleWithId.steps[currentIndex] &&
+    titleWithId.steps[currentIndex].img;
+
+  const currentStepInstruction =
+    translatedContent.instructions &&
+    translatedContent.instructions[`step${currentIndex + 1}`];
+
+  const currentStepMaterials =
+    currentStepInstruction && Array.isArray(currentStepInstruction.usedMaterials)
+      ? currentStepInstruction.usedMaterials
+      : [];
 
   return (
     <>
@@ -683,7 +703,7 @@ const handleNext = () => {
               >
                 <RiArrowLeftDoubleFill size={24} />
                 <h1 className="mt-[0.2rem] text-smm">
-                  {translatedContent.others.steps}
+                  {translatedContent?.others?.steps || "Steps"}
                 </h1>
               </button>
             )}
@@ -696,13 +716,15 @@ const handleNext = () => {
             >
               {imageLoading ? (
                 <SkeletonLoader />
-              ) : (
+              ) : hasStepImage ? (
                 <img
                   src={titleWithId.steps[currentIndex].img}
                   alt={`Step ${currentIndex + 1}`}
                   className="standard-image"
                   onLoad={() => setImageLoading(false)}
                 />
+              ) : (
+                <div className="text-red-500">Step image not found</div>
               )}
             </div>
 
@@ -710,7 +732,7 @@ const handleNext = () => {
               <button className="flex items-center" onClick={handlePrevious}>
                 <IoIosArrowBack />
                 <h1 className="text-smm">
-                  {translatedContent.others.previous}
+                  {translatedContent?.others?.previous || "Previous"}
                 </h1>
               </button>
               <p className="text-smm">
@@ -718,7 +740,7 @@ const handleNext = () => {
                 {Object.keys(translatedContent.instructions).length}
               </p>
               <button className="flex items-center mini" onClick={handleNext}>
-                <h1 className="text-smm">{translatedContent.others.next}</h1>
+                <h1 className="text-smm">{translatedContent?.others?.next || "Next"}</h1>
                 <IoIosArrowForward />
               </button>
             </div>
@@ -727,51 +749,54 @@ const handleNext = () => {
               <div className="flex justify-between items-center">
                 <div className="flex items-center">
                   <h1 className="underline underline-offset-2 text-smm mr-4 steps-heading">
-                    {translatedContent.others.instructions}
+                    {translatedContent?.others?.instructions || "Instructions"}
                   </h1>
                   <button
-  onClick={() => {
-    if (isSpeaking) {
-      stopCurrentAudio();
-      setAutoPlayEnabled(false);
-    } else {
-      setAutoPlayEnabled(true);
-      speakStepDescription();
-    }
-  }}
-  className="p-[0.6rem] bg-gray-200 rounded-full border-black hover:bg-gray-900 hover:text-white hover:border-white active:bg-black border-[0.02rem]"
->
-  {isSpeaking ? <FaStop size={12} /> : <FaPlay size={12} />}
-</button>
+                    onClick={() => {
+                      if (isSpeaking) {
+                        stopCurrentAudio();
+                        setAutoPlayEnabled(false);
+                      } else {
+                        setAutoPlayEnabled(true);
+                        speakStepDescription();
+                      }
+                    }}
+                    className="p-[0.6rem] bg-gray-200 rounded-full border-black hover:bg-gray-900 hover:text-white hover:border-white active:bg-black border-[0.02rem]"
+                  >
+                    {isSpeaking ? <FaStop size={12} /> : <FaPlay size={12} />}
+                  </button>
                 </div>
               </div>
               <div className="relative">
-  <h2 className="text-smm mt-4 inline-block mr-2">
-    {getConstructionPhase(titleWithId.title, currentIndex)} :
-  </h2>
-  <p className="text-smm mt-4 inline">
-    {translatedContent.instructions[`step${currentIndex + 1}`].description}
-  </p>
-</div>
+                <h2 className="text-smm mt-4 inline-block mr-2">
+                  {getConstructionPhase(titleWithId.title, currentIndex)} :
+                </h2>
+                <p className="text-smm mt-4 inline">
+                  {currentStepInstruction
+                    ? currentStepInstruction.description
+                    : "Step description not found"}
+                </p>
+              </div>
 
               <h1 className="underline underline-offset-2 mt-4 text-smm">
-                {translatedContent.others.materialsList}
-              </h1>
+                  {translatedContent?.others?.materialsList || "Materials List"}
+                </h1>
+
 
               <div className="flex w-full justify-between mt-4 materials-font">
                 <div className="leading-7">
-                  {translatedContent.instructions[
-                    `step${currentIndex + 1}`
-                  ].usedMaterials.map((material, index) => (
-                    <p key={index}>{material}</p>
-                  ))}
+                  {currentStepMaterials.length > 0
+                    ? currentStepMaterials.map((material, index) => (
+                        <p key={index}>{material}</p>
+                      ))
+                    : <p>No materials listed</p>}
                 </div>
               </div>
 
               <div className="flex flex-col text-smm mt-4">
                 <div className="flex justify-between items-center">
                   <h2 className="text-smm underline-offset-2 underline text-black">
-                    {translatedContent.others.conversion}
+                    {translatedContent?.others?.conversion || "Conversion"}
                   </h2>
                 </div>
                 <div className="space-y-2 mt-2">
@@ -817,7 +842,7 @@ const handleNext = () => {
               </div>
 
               <h1 className="underline underline-offset-2 mt-4 text-smm">
-                {translatedContent.others.references}
+                {translatedContent?.others?.references || "References"}
               </h1>
 
               <div className="w-full max-w-[560px] mx-auto mt-4 ml-0">
@@ -842,24 +867,25 @@ const handleNext = () => {
         <div className="lg:col-span-1 lg:border-gray-600 lg:pl-4 hidden lg:block overflow-y-auto max-h-screen custom-scrollbar">
           <div className="flex justify-start mb-4 mt-3">
             <h1 className="mini underline underline-offset-2 mb-4">
-              {translatedContent.others.steps}
+              {translatedContent?.others?.steps}
             </h1>
           </div>
 
-          {Object.keys(translatedContent.instructions).map((stepKey, index) => (
-            <p
-              key={index}
-              className={`leading-7 mb-8 text-smm mr-10 text-left cursor-pointer ${
-                index === currentIndex
-                  ? "border-l-2 border-black pl-3 font-bold"
-                  : ""
-              }`}
-              onClick={() => handleStepClick(index)}
-              ref={index === currentIndex ? currentStepRef : null}
-            >
-              {index + 1}. {translatedContent.instructions[stepKey].description}
-            </p>
-          ))}
+          {translatedContent.instructions &&
+            Object.keys(translatedContent.instructions).map((stepKey, index) => (
+              <p
+                key={index}
+                className={`leading-7 mb-8 text-smm mr-10 text-left cursor-pointer ${
+                  index === currentIndex
+                    ? "border-l-2 border-black pl-3 font-bold"
+                    : ""
+                }`}
+                onClick={() => handleStepClick(index)}
+                ref={index === currentIndex ? currentStepRef : null}
+              >
+                {index + 1}. {translatedContent.instructions[stepKey].description}
+              </p>
+            ))}
         </div>
       </div>
 
@@ -877,29 +903,32 @@ const handleNext = () => {
               className="flex items-center p-2 rounded-[6rem] justify-center bg-gray-100 border border-black h-9 mr-4 mb-4"
               onClick={toggleSteps}
             >
-              <h1 className="text-smm">{translatedContent.others.close}</h1>
+              <h1 className="text-smm">
+                {translatedContent?.others?.close || "close"}
+              </h1>
               <RiArrowRightDoubleFill size={24} />
             </button>
           </div>
 
           <h1 className="mini underline underline-offset-2 mb-4">
-            {translatedContent.others.steps}
+            {translatedContent?.others?.steps}
           </h1>
 
-          {Object.keys(translatedContent.instructions).map((stepKey, index) => (
-            <p
-              key={index}
-              className={`leading-7 mb-8 text-smm mr-10 text-left cursor-pointer ${
-                index === currentIndex
-                  ? "border-l-2 border-black pl-3 font-bold"
-                  : ""
-              }`}
-              onClick={() => handleStepClick(index)}
-              ref={index === currentIndex ? currentStepRef : null}
-            >
-              {index + 1}. {translatedContent.instructions[stepKey].description}
-            </p>
-          ))}
+          {translatedContent.instructions &&
+            Object.keys(translatedContent.instructions).map((stepKey, index) => (
+              <p
+                key={index}
+                className={`leading-7 mb-8 text-smm mr-10 text-left cursor-pointer ${
+                  index === currentIndex
+                    ? "border-l-2 border-black pl-3 font-bold"
+                    : ""
+                }`}
+                onClick={() => handleStepClick(index)}
+                ref={index === currentIndex ? currentStepRef : null}
+              >
+                {index + 1}. {translatedContent.instructions[stepKey].description}
+              </p>
+            ))}
         </div>
       </div>
 
@@ -918,38 +947,36 @@ const handleNext = () => {
         />
       )}
 
-<style jsx>{`
-  .custom-scrollbar {
-    scrollbar-width: thin;
-    scrollbar-color: #888888 #f1f1f1;
-  }
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 6px;
-  }
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: #f1f1f1;
-  }
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #888888;
-    border-radius: 4px;
-  }
-  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #555555;
-  }
-  .aspect-video {
-    aspect-ratio: 16 / 9;
-  }
-  .steps-heading {
-    text-align: left;
-  }
-  .standard-image {
-    width: 900px; /* Standard width */
-    height: 500px; /* Standard height */
-    object-fit: contain; /* Maintain aspect ratio */
-    
-  }
-`}</style>
-
+      <style jsx>{`
+        .custom-scrollbar {
+          scrollbar-width: thin;
+          scrollbar-color: #888888 #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: #888888;
+          border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: #555555;
+        }
+        .aspect-video {
+          aspect-ratio: 16 / 9;
+        }
+        .steps-heading {
+          text-align: left;
+        }
+        .standard-image {
+          width: 900px; /* Standard width */
+          height: 500px; /* Standard height */
+          object-fit: contain; /* Maintain aspect ratio */
+        }
+      `}</style>
     </>
   );
 };

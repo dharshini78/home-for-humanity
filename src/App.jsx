@@ -17,9 +17,11 @@ import UserLogin from './components/pages/userlogin.jsx'
 import CreateProject from "./components/pages/createproject.jsx";
 import PreviewShelter from "./components/pages/previewshelter.jsx";
 import Preview from "./components/Features/preview.jsx";
+import ErrorBoundary from "./components/Features/ErrorBoundary.jsx";
 export default function App() {
   return (
     <>
+    <ErrorBoundary>
       <MuteProvider>
         <Routes>
           <Route index element={<Home />} />
@@ -46,6 +48,7 @@ export default function App() {
           <Route path="/haven/:id/list" element={<MaterialsList />} />
         </Routes>
       </MuteProvider>
+      </ErrorBoundary>
     </>
   );
 }

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Navbar from "../Features/navbar.jsx";
 import { useLanguage } from "../Features/languageContext.jsx";
-import he from "he"; // Import the he library
+import he from "he";
 
 const Credits = () => {
   const [loading, setLoading] = useState(true);
@@ -11,286 +11,232 @@ const Credits = () => {
   useEffect(() => {
     const fetchTranslations = async () => {
       try {
-        const response = await fetch(
-          `https://api.homeforhumanity.xrvizion.com/shelter/gettranslation`,
+        const resp = await fetch(
+          `https://api.diyhomes.ai/shelter/gettranslation`,
           {
             method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               shelterName: "OtherPages",
               langCode: selectedLanguage,
-              fileName: "creditspage_en.json",
-            }),
+              fileName: "creditspage_en.json"
+            })
           }
         );
-        const data = await response.json();
+        const data = await resp.json();
         if (data.msg === "Success") {
-          const decodedContent = decodeContent(data.translatedContent);
-          setTranslations(decodedContent);
+          setTranslations(decodeContent(data.translatedContent));
         } else {
-          console.error("Error in translation response:", data.msg);
+          console.error("Translation error:", data.msg);
         }
-      } catch (error) {
-        console.error("Error fetching credits translations:", error);
+      } catch (err) {
+        console.error("Fetch error:", err);
       }
     };
-
     fetchTranslations();
   }, [selectedLanguage]);
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
+    const timer = setTimeout(() => setLoading(false), 500);
+    return () => clearTimeout(timer);
   }, []);
 
   const decodeContent = (content) => {
-    if (typeof content === "string") {
-      return he.decode(content);
-    } else if (Array.isArray(content)) {
-      return content.map(decodeContent);
-    } else if (typeof content === "object" && content !== null) {
-      const decodedObject = {};
-      for (const key in content) {
-        if (content.hasOwnProperty(key)) {
-          decodedObject[key] = decodeContent(content[key]);
-        }
+    if (typeof content === "string") return he.decode(content);
+    if (Array.isArray(content)) return content.map(decodeContent);
+    if (typeof content === "object" && content) {
+      const obj = {};
+      for (const k in content) {
+        if (content.hasOwnProperty(k)) obj[k] = decodeContent(content[k]);
       }
-      return decodedObject;
+      return obj;
     }
     return content;
   };
 
+  if (loading) return <Navbar />;
+
   return (
     <>
       <Navbar />
-
-      <div className="container mx-auto px-4 py-8 flex flex-col items-start justify-start min-h-screen">
-        <h1 className="ff-xl font-bold mb-6 text-left">
-          {translations ? translations.Credits : "Credits"}
+      <div className="container mx-auto px-4 py-8 flex flex-col items-start min-h-screen">
+        <h1 className="ff-xl font-bold mb-6">
+          {translations?.Credits || "Credits"}
         </h1>
 
         <section className="mb-8 w-full max-w-3xl">
-          <h2 className="ff-xl font-bold mb-4 text-left">
-            {translations ? translations.TEAM : "TEAM"}
+          <h2 className="ff-xl font-bold mb-4">
+            {translations?.TEAM || "TEAM"}
           </h2>
-          <div className="space-y-4">
+          <div className="space-y-6">
+            {/* Founders */}
             <div>
               <h3 className="text-smm font-semibold">
-                {translations ? translations.Founders : "Founders"}
+                {translations?.Founders || "Founders"}
               </h3>
               <p className="text-smm">
-                {translations
-                  ? translations.foundersDescription
-                  : "Miki Higasa, Julie Gilhart, Tomoko Ogura and Kikka Hanazawa, Fashion Girls for Humanity, "}
+                {translations?.foundersDescription ||
+                  "Fashion Girls for Humanity, Miki Higasa, Julie Gilhart, Tomoko Ogura and Kikka Hanazawa"}
                 <a
-                  href={
-                    translations
-                      ? translations.foundersLinks[0]
-                      : "https://www.fashiongirlsforhumanity.org/"
-                  }
+                  href={translations?.foundersLinks?.[0] ||
+                    "https://www.fashiongirlsforhumanity.org/"}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-500 underline hover:text-blue-700 ml-1"
                 >
-                  {translations
-                    ? translations.foundersLinks[0]
-                    : "https://www.fashiongirlsforhumanity.org/"}
+                  {translations?.foundersLinks?.[0] ||
+                    "https://www.fashiongirlsforhumanity.org/"}
                 </a>
               </p>
             </div>
-            <div>
-              <h3 className="text-smm font-semibold">
-                {translations ? translations.ProjectLeader : "Project Leader"}
-              </h3>
-              <p className="text-smm">
-                {translations
-                  ? translations.projectLeaderDescription
-                  : "Kai Dal Bello, Home for Humanity Project, Fashion Girls for Humanity"}
-              </p>
-            </div>
-            <div>
-              <h3 className="text-smm font-semibold">
-                {translations ? translations.Curators : "Curators"}
-              </h3>
-              <p className="text-smm">
-                {translations
-                  ? translations.curator1
-                  : "Prof. Momoyo Kaijima, Chair of Architectural Behaviorology, Institute for Architectural Design (iea), ETH Zurich, "}
-                <a
-                  href={
-                    translations
-                      ? translations.curator1Links[0]
-                      : "http://www.kaijima.arch.ethz.ch"
-                  }
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-500 underline hover:text-blue-700 ml-1"
-                >
-                  {translations
-                    ? translations.curator1Links[0]
-                    : "www.kaijima.arch.ethz.ch"}
-                </a>
-              </p>
-              <p className="text-smm">
-                {translations
-                  ? translations.curator2
-                  : "Prof. Laurent Stalder, Chair of the Theory of Architecture, Institute for the History and Theory of Architecture (gta), ETH Zurich, "}
-                <a
-                  href={
-                    translations
-                      ? translations.curator2Links[0]
-                      : "http://www.stalder.arch.ethz.ch"
-                  }
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-500 underline hover:text-blue-700 ml-1"
-                >
-                  {translations
-                    ? translations.curator2Links[0]
-                    : "www.stalder.arch.ethz.ch"}
-                </a>
-              </p>
-            </div>
-            <div>
-              <h3 className="text-smm font-semibold">
-                {translations ? translations.Collaborators : "Collaborators"}
-              </h3>
-              <p className="text-smm">
-                {translations
-                  ? translations.collaboratorsDescription
-                  : "Christoph Danuser, Architect at Atelier Danuser & Teaching and Research Assistant, ETH Zurich, Davide Spina, Postdoctoral Researcher, ETH Zurich, Federico Bertagna, Postdoctoral Researcher and Lecturer, ETH Zurich"}
-              </p>
-            </div>
-            <div>
-              <h3 className="text-smm font-semibold">
-                {translations ? translations.Drawingsby : "Drawings by"}
-              </h3>
-              <p className="text-smm">
-                {translations
-                  ? translations.drawingsDescription
-                  : "Christoph Danuser, ETH Zurich, Jan Aebi, Student Assistant, ETH Zurich, Dimitri Bleichenbacher, Student Assistant, ETH Zurich, Matthias Bisig, Student Assistant, ETH Zurich, Miriam Gabour, Student Assistant, ETH Zurich"}
-              </p>
-            </div>
-            <div>
-              <h3 className="text-smm font-semibold">
-                {translations ? translations.Webdesign : "Webdesign"}
-              </h3>
-              <p className="text-smm">
-                {translations
-                  ? translations.webdesignDescription
-                  : "Subham Jain, XR Vizion, "}
-                <a
-                  href={
-                    translations
-                      ? translations.webdesignLinks[0]
-                      : "http://www.xrvizion.com"
-                  }
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-500 underline hover:text-blue-700 ml-1"
-                >
-                  {translations
-                    ? translations.webdesignLinks[0]
-                    : "http://www.xrvizion.com"}
-                </a>
-              </p>
-            </div>
-            <div>
-              <h3 className="text-smm font-semibold">
-                {translations ? translations.Advisors : "Advisors"}
-              </h3>
-              <p className="text-smm">
-                {translations
-                  ? translations.advisorsDescription
-                  : "Hitoshi Abe, UCLA Professor, Architecture & Urban Design and Director of UCLA Terasaki Chair for Contemporary Japanese Studies, Shohei Shigematsu, Partner at OMA North America, "}
-                <a
-                  href={
-                    translations
-                      ? translations.advisorsLinks[0]
-                      : "https://www.oma.com/news/oma-new-york-office"
-                  }
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-500 underline hover:text-blue-700 ml-1"
-                >
-                  {translations
-                    ? translations.advisorsLinks[0]
-                    : "https://www.oma.com/news/oma-new-york-office"}
-                </a>
-                {", Toyo Ito, Toyo Ito & Associates, "}
-                <a
-                  href={
-                    translations
-                      ? translations.advisorsLinks[1]
-                      : "http://www.toyo-ito.co.jp"
-                  }
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-500 underline hover:text-blue-700 ml-1"
-                >
-                  {translations
-                    ? translations.advisorsLinks[1]
-                    : "http://www.toyo-ito.co.jp"}
-                </a>
-                {", Moises Gonzalez, Architect"}
-              </p>
-            </div>
-          </div>
-        </section>
 
-        <section className="mb-8 w-full max-w-3xl">
-          <h2 className="ff-xl font-bold mb-4 text-left">
-            {translations ? translations.Bibliography.title : "Bibliography"}
-          </h2>
-          <div className="space-y-4">
-            {translations && translations.Bibliography ? (
-              Object.keys(translations.Bibliography).map((shelter, index) => (
-                <div key={index}>
-                  <h3 className="text-smm font-semibold mb-2">{shelter}</h3>
-                  {translations.Bibliography[shelter].bibliography.map(
-                    (item, idx) => (
-                      <div key={idx} className="mb-4">
-                        <p className="font-semibold">{item.title}</p>
-                        {item.author && <p className="text-smm">{item.author}</p>}
-                        {item.publisher && <p className="text-smm">{item.publisher}</p>}
-                        {item.address && <p className="text-smm">{item.address}</p>}
-                        {item.year && <p className="text-smm">{item.year}</p>}
-                        {item.date && <p className="text-smm">{item.date}</p>}
-                        {item.source && <p className="text-smm">{item.source}</p>}
-                        {item.platform && <p className="text-smm">{item.platform}</p>}
-                        {item.links &&
-                          item.links.map((link, linkIdx) => (
-                            <a
-                              key={linkIdx}
-                              href={link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-blue-500 underline hover:text-blue-700 ml-1 block"
-                            >
-                              {link}
-                            </a>
-                          ))}
-                      </div>
-                    )
-                  )}
-                </div>
-              ))
-            ) : (
-              <div>
-                <p className="font-semibold">
-                  Transitional shelters - Eight designs
-                </p>
-                <p className="text-smm">
-                  International Federation of Red Cross and Red Crescent
-                  Societies
-                </p>
-                <p className="text-smm">Geneva</p>
-                <p className="text-smm">2011</p>
-              </div>
-            )}
+            {/* Project Leader */}
+            <div>
+              <h3 className="text-smm font-semibold">
+                {translations?.ProjectLeader || "Founders’ Project Leader"}
+              </h3>
+              <p className="text-smm">
+                {translations?.projectLeaderDescription ||
+                  "Kai Dal Bello, Home for Humanity Project, Fashion Girls for Humanity"}
+              </p>
+            </div>
+
+            {/* Curators Team */}
+            <div>
+              <h3 className="text-smm font-semibold">
+                {translations?.Curators || "Curators Team"}
+              </h3>
+              <p className="text-smm mb-1">
+                {translations?.curator1 ||
+                  "Prof. Momoyo Kaijima, Chair of Architectural Behaviorology, Institute for Architectural Design (IEA), ETH Zurich"}
+                <a
+                  href={translations?.curator1Links?.[0] ||
+                    "https://www.kaijima.arch.ethz.ch"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 underline hover:text-blue-700 ml-1"
+                >
+                  {translations?.curator1Links?.[0] ||
+                    "https://www.kaijima.arch.ethz.ch"}
+                </a>
+              </p>
+              <p className="text-smm">
+                {translations?.curator2 ||
+                  "Prof. Laurent Stalder, Chair of the Theory of Architecture, Institute for the History and Theory of Architecture (gta), ETH Zurich"}
+                <a
+                  href={translations?.curator2Links?.[0] ||
+                    "https://www.stalder.arch.ethz.ch"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 underline hover:text-blue-700 ml-1"
+                >
+                  {translations?.curator2Links?.[0] ||
+                    "https://www.stalder.arch.ethz.ch"}
+                </a>
+              </p>
+            </div>
+
+            {/* Curators’ Project Leaders */}
+            <div>
+              <h3 className="text-smm font-semibold">
+                {translations?.CuratorsProjectLeaders ||
+                  "Curators’ Project Leaders"}
+              </h3>
+              <p className="text-smm">
+                {translations?.curatorsProjectLeadersDescription ||
+                  "Christoph Danuser, Architect at Atelier Danuser & Teaching and Research Assistant at Chair of Architectural Behaviorology, IEA, ETH Zurich; Tazuru Harada, Architect and Research Assistant at Chair of Architectural Behaviorology, IEA, ETH Zurich"}
+              </p>
+            </div>
+
+            {/* Curatorial Research Collaborators */}
+            <div>
+              <h3 className="text-smm font-semibold">
+                {translations?.CuratorialResearchCollaborators ||
+                  "Curatorial Research Collaborators"}
+              </h3>
+              <p className="text-smm">
+                {translations?.curatorialResearchDescription ||
+                  "Davide Spina, Postdoctoral Researcher at Chair of the Theory of Architecture, gta, ETH Zurich; Federico Bertagna, Postdoctoral Researcher and Lecturer at Chair of the Structural Design, ITA, ETH Zurich"}
+              </p>
+            </div>
+
+            {/* Drafting / Drawings Collaborators */}
+            <div>
+              <h3 className="text-smm font-semibold">
+                {translations?.CuratorialDrawingsCollaborators ||
+                  "Curatorial Drawings Collaborators"}
+              </h3>
+              <p className="text-smm">
+                {translations?.curatorialDrawingsDescription ||
+                  "Christoph Danuser, Architect at Atelier Danuser & Teaching and Research Assistant at Chair of Architectural Behaviorology, IEA, ETH Zurich; Jan Aebi, Dimitri Bleichenbacher, Matthias Bisig and Miriam Gabour, Student Assistants, ETH Zurich"}
+              </p>
+            </div>
+
+            {/* Copy‑editor */}
+            <div>
+              <h3 className="text-smm font-semibold">
+                {translations?.CopyEditor || "Copy‑editor"}
+              </h3>
+              <p className="text-smm">
+                {translations?.copyEditorDescription ||
+                  "Thomas Skelton‑Robinson"}
+              </p>
+            </div>
+
+            {/* Web Designer */}
+            <div>
+              <h3 className="text-smm font-semibold">
+                {translations?.Webdesign || "Web designer"}
+              </h3>
+              <p className="text-smm">
+                {translations?.webdesignDescription ||
+                  "Subham Jain, XR Vizion"}
+                <a
+                  href={translations?.webdesignLinks?.[0] ||
+                    "https://www.xrvizion.com"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 underline hover:text-blue-700 ml-1"
+                >
+                  {translations?.webdesignLinks?.[0] ||
+                    "https://www.xrvizion.com"}
+                </a>
+              </p>
+            </div>
+
+            {/* Advisors */}
+            <div>
+              <h3 className="text-smm font-semibold">
+                {translations?.Advisors || "Advisors"}
+              </h3>
+              <p className="text-smm">
+                {translations?.advisorsDescription ||
+                  "Hitoshi Abe, Professor at UCLA, Architecture & Urban Design and Director of UCLA Terasaki Chair for Contemporary Japanese Studies; Shohei Shigematsu, Partner at OMA North America; Toyo Ito, Toyo Ito & Associates; Moises Gonzalez, Architect"}
+                <span className="ml-1">
+                  <a
+                    href={translations?.advisorsLinks?.[0] ||
+                      "https://www.oma.com/news/oma-new-york-office"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 underline hover:text-blue-700"
+                  >
+                    {translations?.advisorsLinks?.[0] ||
+                      "https://www.oma.com/news/oma-new-york-office"}
+                  </a>
+                  ,&nbsp;
+                  <a
+                    href={translations?.advisorsLinks?.[1] ||
+                      "http://www.toyo-ito.co.jp"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 underline hover:text-blue-700"
+                  >
+                    {translations?.advisorsLinks?.[1] ||
+                      "http://www.toyo-ito.co.jp"}
+                  </a>
+                </span>
+              </p>
+            </div>
           </div>
         </section>
       </div>

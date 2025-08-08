@@ -43,7 +43,7 @@ export const LanguageProvider = ({ children }) => {
             "default_instructions_en.json";
 
           const response = await fetch(
-            "https://api.homeforhumanity.xrvizion.com/shelter/gettranslation",
+            "https://api.diyhomes.ai/shelter/gettranslation",
             {
               method: "POST",
               headers: {

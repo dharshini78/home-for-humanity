@@ -27,10 +27,9 @@ const MaterialsList = () => {
           "Octagreen Shelter": "octagreenshelter_materials_en.json",
         };
         const fileName =
-          fileNameMapping[titleWithId.title] ||
-          "default_materials_en.json";
+          fileNameMapping[titleWithId.title] || "default_materials_en.json";
         const response = await fetch(
-          "https://api.homeforhumanity.xrvizion.com/shelter/gettranslation",
+          "https://api.diyhomes.ai/shelter/gettranslation",
           {
             method: "POST",
             headers: {
