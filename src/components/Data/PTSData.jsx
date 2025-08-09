@@ -929,7 +929,7 @@ const indo92 =
   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Bamboo_Shelter/temp/1_Bamboo+Shelter+Instructions_removed-92.png";
 
 const sup1 =
-  "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-1.jpg";
+  "https://hfh-data.s3.us-east-1.amazonaws.com/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-1.png";
 const sup2 =
   "https://d1au9pp4edftkp.cloudfront.net/HomeForHumanity/Resources/Superadobe_Shelter/temp/1_Superadobe+Instructions_removed-2.jpg";
 const sup3 =
@@ -1202,6 +1202,32 @@ import supMat15 from "../../assets/SS/supmat/15supmat.png";
 import supMat16 from "../../assets/SS/supmat/16supmat.png";
 import supMat17 from "../../assets/SS/supmat/17supmat.png";
 import supMat18 from "../../assets/SS/supmat/18supmat.png";
+
+
+
+
+
+
+
+
+const tim1 = "https://hfh-data.s3.us-east-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/Mat/1.png"
+const tim2 = "https://hfh-data.s3.us-east-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/Mat/2.png"
+const tim3 = "https://hfh-data.s3.us-east-1.amazonaws.com/HomeForHumanity/Resources/Timber_Shelter/Mat/3.png"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const data = [
   {

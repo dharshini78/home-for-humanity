@@ -285,99 +285,66 @@ const TextToTextChat = () => {
     );
     setInputMsg("");
   };
-
-  const startRecording = async () => {
-    if (isRecording) {
-      stopRecording();
-      return;
+const startRecording = async () => {
+  if (isRecording) {
+    stopRecording();
+    return;
+  }
+  if (!isConnected) {
+    alert("Cannot start recording due to connection issues. Please try again later.");
+    return;
+  }
+  try {
+    if (!audioContextRef.current) {
+      audioContextRef.current = new (window.AudioContext || window.webkitAudioContext)();
     }
-
-    if (!isConnected) {
-      alert(
-        "Cannot start recording due to connection issues. Please try again later."
-      );
-      return;
+    if (audioContextRef.current.state === "suspended") {
+      await audioContextRef.current.resume();
     }
+    streamRef.current = await navigator.mediaDevices.getUserMedia({ audio: true });
+    const source = audioContextRef.current.createMediaStreamSource(streamRef.current);
 
-    try {
-      if (!audioContextRef.current) {
-        audioContextRef.current = new (window.AudioContext ||
-          window.webkitAudioContext)();
-      }
-
-      if (audioContextRef.current.state === "suspended") {
-        await audioContextRef.current.resume();
-      }
-
-      streamRef.current = await navigator.mediaDevices.getUserMedia({
-        audio: true,
-      });
-
-      const source = audioContextRef.current.createMediaStreamSource(
-        streamRef.current
-      );
-
-      if (!processorRef.current) {
+    if (!processorRef.current) {
+      try {
         await audioContextRef.current.audioWorklet.addModule(
           "https://d1au9pp4edftkp.cloudfront.net/Butati/Resources/recorderWorkletProcessor.js"
         );
-
-        processorRef.current = new AudioWorkletNode(
-          audioContextRef.current,
-          "recorder.worklet"
-        );
-
-        processorRef.current.port.onmessage = (event) => {
-          const audioData = event.data;
-          socketRef.current.emit("send_audio_data", { audio: audioData });
-
-          // Update the last audio time
-          lastAudioTimeRef.current = Date.now();
-        };
+      } catch (error) {
+        console.error("Failed to load AudioWorklet module:", error);
+        alert("Failed to load audio processing module. Please check the console for more details.");
+        return;
       }
-
-      source.connect(processorRef.current);
-      processorRef.current.connect(audioContextRef.current.destination);
-
-      setIsRecording(true);
-      socketRef.current.emit(
-        "startStream",
-        currentLanguage,
-        sessionId,
-        "",
-        sessionId === 0
-      );
-
-      // Set the initial last audio time
-      lastAudioTimeRef.current = Date.now();
-
-      // Check for silence every second
-      const checkSilence = () => {
-        const now = Date.now();
-        if (now - lastAudioTimeRef.current > 5000) {
-          stopRecording();
-        } else {
-          timeoutRef.current = setTimeout(checkSilence, 1000);
-        }
+      processorRef.current = new AudioWorkletNode(audioContextRef.current, "recorder.worklet");
+      processorRef.current.port.onmessage = (event) => {
+        const audioData = event.data;
+        socketRef.current.emit("send_audio_data", { audio: audioData });
+        lastAudioTimeRef.current = Date.now();
       };
-
-      timeoutRef.current = setTimeout(checkSilence, 1000);
-    } catch (error) {
-      console.error("Error accessing microphone:", error);
-      if (
-        error.name === "NotAllowedError" ||
-        error.name === "PermissionDeniedError"
-      ) {
-        alert(
-          "Microphone access is necessary for the application to function. Please enable microphone access in your browser settings."
-        );
-      } else {
-        alert(
-          "An error occurred while accessing the microphone. Please try again later."
-        );
-      }
     }
-  };
+    source.connect(processorRef.current);
+    processorRef.current.connect(audioContextRef.current.destination);
+    setIsRecording(true);
+    socketRef.current.emit("startStream", currentLanguage, sessionId, "", sessionId === 0);
+    lastAudioTimeRef.current = Date.now();
+    const checkSilence = () => {
+      const now = Date.now();
+      if (now - lastAudioTimeRef.current > 5000) {
+        stopRecording();
+      } else {
+        timeoutRef.current = setTimeout(checkSilence, 1000);
+      }
+    };
+    timeoutRef.current = setTimeout(checkSilence, 1000);
+  } catch (error) {
+    console.error("Error accessing microphone:", error);
+    if (error.name === "NotAllowedError" || error.name === "PermissionDeniedError") {
+      alert("Microphone access is necessary for the application to function. Please enable microphone access in your browser settings.");
+    } else {
+      alert("An error occurred while accessing the microphone. Please try again later.");
+    }
+  }
+};
+
 
   const stopRecording = () => {
     if (isRecording) {
