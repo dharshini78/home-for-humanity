@@ -60,31 +60,26 @@ const TextToTextChat = () => {
     }, 100)
   ).current;
 
-  const toggleMute = () => {
-    setIsMuted((prevIsMuted) => {
-      const newIsMuted = !prevIsMuted;
+const toggleMute = () => {
+  setIsMuted((prevIsMuted) => {
+    const newIsMuted = !prevIsMuted;
 
-      if (audioElementRef.current) {
-        if (newIsMuted || audioElementRef.current.paused) {
-          // If muting or audio was paused, stop completely
-          audioElementRef.current.pause();
-          audioElementRef.current.src = "";
-          audioElementRef.current.load();
-          audioElementRef.current = null;
-          isPlayingRef.current = false;
-        } else {
-          // If unmuting and audio was playing, just pause
-          audioElementRef.current.pause();
-          isPlayingRef.current = false;
-        }
-      } else if (!newIsMuted && textToSpeechResponse) {
-        // Start new audio only if unmuting and no audio exists
-        debouncedPlayAudio(textToSpeechResponse);
-      }
+    if (audioElementRef.current) {
+      // Always stop and clear current audio when toggling
+      audioElementRef.current.pause();
+      audioElementRef.current.src = "";
+      audioElementRef.current.load();
+      audioElementRef.current = null;
+      isPlayingRef.current = false;
+    }
 
-      return newIsMuted;
-    });
-  };
+    // Clear the old textToSpeechResponse when muting/unmuting
+    // This prevents old audio from playing when unmuting
+    setTextToSpeechResponse(null);
+
+    return newIsMuted;
+  });
+};
 
   useEffect(() => {
     const socket = io("https://api.diyhomes.ai", {
@@ -285,176 +280,246 @@ const TextToTextChat = () => {
     );
     setInputMsg("");
   };
+
+// Add this at the top with your other refs
+
+
+
+
+// Add this at the top with your other refs
+const recognitionRef = useRef(null);
+const [currentTranscript, setCurrentTranscript] = useState('');
+
 const startRecording = async () => {
   if (isRecording) {
     stopRecording();
     return;
   }
-  if (!isConnected) {
-    alert("Cannot start recording due to connection issues. Please try again later.");
-    return;
-  }
+  
   try {
-    if (!audioContextRef.current) {
-      audioContextRef.current = new (window.AudioContext || window.webkitAudioContext)();
+    // Check if speech recognition is supported
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    
+    if (!SpeechRecognition) {
+      alert("Speech recognition not supported in this browser");
+      console.error("Speech recognition not supported");
+      return;
     }
-    if (audioContextRef.current.state === "suspended") {
-      await audioContextRef.current.resume();
-    }
-    streamRef.current = await navigator.mediaDevices.getUserMedia({ audio: true });
-    const source = audioContextRef.current.createMediaStreamSource(streamRef.current);
-
-    if (!processorRef.current) {
-      try {
-        await audioContextRef.current.audioWorklet.addModule(
-          "https://d1au9pp4edftkp.cloudfront.net/Butati/Resources/recorderWorkletProcessor.js"
-        );
-      } catch (error) {
-        console.error("Failed to load AudioWorklet module:", error);
-        alert("Failed to load audio processing module. Please check the console for more details.");
-        return;
+    
+    console.log("Starting speech recognition...");
+    
+    recognitionRef.current = new SpeechRecognition();
+    recognitionRef.current.continuous = true;
+    recognitionRef.current.interimResults = true;
+    recognitionRef.current.lang = 'en-US';
+    
+    recognitionRef.current.onstart = () => {
+      console.log("Speech recognition started");
+      setIsRecording(true);
+    };
+    
+    recognitionRef.current.onresult = (event) => {
+      console.log("Speech recognition result:", event);
+      
+      let interimTranscript = '';
+      let finalTranscript = '';
+      
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        const transcript = event.results[i][0].transcript;
+        console.log(`Result ${i}: "${transcript}" (final: ${event.results[i].isFinal})`);
+        
+        if (event.results[i].isFinal) {
+          finalTranscript += transcript;
+        } else {
+          interimTranscript += transcript;
+        }
       }
-      processorRef.current = new AudioWorkletNode(audioContextRef.current, "recorder.worklet");
-      processorRef.current.port.onmessage = (event) => {
-        const audioData = event.data;
-        socketRef.current.emit("send_audio_data", { audio: audioData });
-        lastAudioTimeRef.current = Date.now();
-      };
-    }
-    source.connect(processorRef.current);
-    processorRef.current.connect(audioContextRef.current.destination);
-    setIsRecording(true);
-    socketRef.current.emit("startStream", currentLanguage, sessionId, "", sessionId === 0);
-    lastAudioTimeRef.current = Date.now();
-    const checkSilence = () => {
-      const now = Date.now();
-      if (now - lastAudioTimeRef.current > 5000) {
-        stopRecording();
-      } else {
-        timeoutRef.current = setTimeout(checkSilence, 1000);
+      
+      console.log("Interim:", interimTranscript);
+      console.log("Final:", finalTranscript);
+      
+      // Show streaming text (interim results)
+      if (interimTranscript) {
+        console.log("Setting currentTranscript to:", interimTranscript);
+        setCurrentTranscript(interimTranscript);
+      }
+      
+      // When speech is finalized, add to chat and clear streaming text
+      if (finalTranscript) {
+        console.log("Adding final transcript to chat:", finalTranscript);
+        setCurrentTranscript(''); // Clear the streaming text
+        
+        // Add the final transcribed text to chat
+        setChatMessages((prevMessages) => [
+          ...prevMessages,
+          { from: "user", content: finalTranscript.trim() },
+        ]);
+        
+        // Send to server for bot response
+        socketRef.current.emit("startTextInput", currentLanguage, sessionId, finalTranscript.trim(), "", false);
       }
     };
-    timeoutRef.current = setTimeout(checkSilence, 1000);
-  } catch (error) {
-    console.error("Error accessing microphone:", error);
-    if (error.name === "NotAllowedError" || error.name === "PermissionDeniedError") {
-      alert("Microphone access is necessary for the application to function. Please enable microphone access in your browser settings.");
-    } else {
-      alert("An error occurred while accessing the microphone. Please try again later.");
+    
+    recognitionRef.current.onerror = (event) => {
+      console.error('Speech recognition error:', event.error);
+      alert(`Speech recognition error: ${event.error}`);
+    };
+    
+    recognitionRef.current.onend = () => {
+      console.log("Speech recognition ended");
+      setIsRecording(false);
+    };
+    
+    // Request microphone permission first
+    try {
+      await navigator.mediaDevices.getUserMedia({ audio: true });
+      console.log("Microphone permission granted");
+    } catch (permError) {
+      console.error("Microphone permission denied:", permError);
+      alert("Please allow microphone access for speech recognition");
+      return;
     }
+    
+    recognitionRef.current.start();
+    console.log("Speech recognition start called");
+    
+  } catch (error) {
+    console.error("Error starting speech recognition:", error);
+    alert("An error occurred while starting speech recognition: " + error.message);
   }
 };
 
+const stopRecording = () => {
+  console.log("Stopping speech recognition");
+  if (recognitionRef.current) {
+    recognitionRef.current.stop();
+  }
+  setCurrentTranscript(''); // Clear streaming text when stopping
+  setIsRecording(false);
+};
 
-  const stopRecording = () => {
-    if (isRecording) {
-      clearTimeout(timeoutRef.current);
-      setIsRecording(false);
-      socketRef.current.emit("endStream");
+// Add this to check the current state
+console.log("Current transcript state:", currentTranscript);
+console.log("Is recording:", isRecording);
 
-      if (processorRef.current) {
-        processorRef.current.disconnect();
-      }
-
-      if (streamRef.current) {
-        streamRef.current.getTracks().forEach((track) => track.stop());
-      }
-      console.log("Recording stopped");
-    }
-  };
-
-  return (
-    <div className="flex flex-col h-screen">
-      {!isChatOpen ? (
-        <button
-          onClick={startChatSession}
-          className=" fixed bottom-4 right-4 bg-gray-300 text-black p-4 rounded-full shadow-lg z-50"
-        >
-          <HiSparkles size={24} />
-        </button>
-      ) : (
-        <div className="chat-box fixed bottom-0 left-[25%] h-[300px] max-h-[80vh] w-[800px] flex flex-col bg-white border border-gray-300 rounded-lg overflow-hidden shadow-lg z-50 responsive-chat-box">
-          <div className="bg-gray-900 text-white p-4 flex justify-between items-center">
-            <h2 className="text-lg font-semibold">AI Chat</h2>
-            <button onClick={endChatSession} className="text-white">
-              Close
-            </button>
-          </div>
-          <div className="flex-1 p-4 overflow-y-auto bg-gray-100">
-            {chatMessages
-              .filter((message) => message.content.trim() !== "") // Filter out empty messages
-              .map((message, index) => (
-                <div
-                  key={index}
-                  className={`mb-4 ${
-                    message.from === "user" ? "text-right" : "text-left"
+return (
+  <div className="flex flex-col h-screen">
+    {!isChatOpen ? (
+      <button
+        onClick={startChatSession}
+        className=" fixed bottom-4 right-4 bg-gray-300 text-black p-4 rounded-full shadow-lg z-50"
+      >
+        <HiSparkles size={24} />
+      </button>
+    ) : (
+      <div className="chat-box fixed bottom-0 left-[25%] h-[300px] max-h-[80vh] w-[800px] flex flex-col bg-white border border-gray-300 rounded-lg overflow-hidden shadow-lg z-50 responsive-chat-box">
+        <div className="bg-gray-900 text-white p-4 flex justify-between items-center">
+          <h2 className="text-lg font-semibold">AI Chat</h2>
+          <button onClick={endChatSession} className="text-white">
+            Close
+          </button>
+        </div>
+        <div className="flex-1 p-4 overflow-y-auto bg-gray-100">
+          {chatMessages
+            .filter((message) => message.content.trim() !== "") // Filter out empty messages
+            .map((message, index) => (
+              <div
+                key={index}
+                className={`mb-4 ${
+                  message.from === "user" ? "text-right" : "text-left"
+                }`}
+              >
+                <span
+                  className={`inline-block p-2 rounded-lg ${
+                    message.from === "user"
+                      ? "bg-gray-950 text-white"
+                      : "bg-white text-gray-800"
                   }`}
                 >
-                  <span
-                    className={`inline-block p-2 rounded-lg ${
-                      message.from === "user"
-                        ? "bg-gray-950 text-white"
-                        : "bg-white text-gray-800"
-                    }`}
-                  >
-                    {message.content}
-                  </span>
-                </div>
-              ))}
-          </div>
-
-          <div className="bg-white p-4 border-t border-gray-300">
-            <div className="flex items-center">
-              <input
-                type="text"
-                value={inputMsg}
-                onChange={handleInputChange}
-                onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
-                placeholder="Type a message..."
-                className="flex-1 p-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <button
-                onClick={() => handleSendMessage()}
-                className="bg-black text-white p-2 rounded-r-md hover:bg-black focus:outline-none focus:ring-2 focus:ring-black"
-                disabled={!isConnected}
-              >
-                <Send size={20} />
-              </button>
-              <button
-                onClick={startRecording}
-                className="ml-2 bg-black text-white p-2 rounded-md focus:outline-none focus:ring-2"
-                disabled={!isConnected}
-              >
-                {isRecording ? <Mic size={20} /> : <MicOff size={20} />}
-              </button>
-              <button
-                onClick={toggleMute}
-                className="ml-2 bg-black text-white p-2 rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500"
-              >
-                {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
-              </button>
+                  {message.content}
+                </span>
+              </div>
+            ))}
+          
+          {/* Streaming text display */}
+          {currentTranscript && (
+            <div className="mb-4 text-right">
+              <span className="inline-block p-2 rounded-lg bg-gray-700 text-white streaming-text">
+                {currentTranscript}
+                <span className="cursor">|</span>
+              </span>
             </div>
+          )}
+        </div>
+
+        <div className="bg-white p-4 border-t border-gray-300">
+          <div className="flex items-center">
+            <input
+              type="text"
+              value={inputMsg}
+              onChange={handleInputChange}
+              onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
+              placeholder="Type a message..."
+              className="flex-1 p-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <button
+              onClick={() => handleSendMessage()}
+              className="bg-black text-white p-2 rounded-r-md hover:bg-black focus:outline-none focus:ring-2 focus:ring-black"
+              disabled={!isConnected}
+            >
+              <Send size={20} />
+            </button>
+            <button
+              onClick={startRecording}
+              className="ml-2 bg-black text-white p-2 rounded-md focus:outline-none focus:ring-2"
+              disabled={!isConnected}
+            >
+              {isRecording ? <Mic size={20} /> : <MicOff size={20} />}
+            </button>
+            <button
+              onClick={toggleMute}
+              className="ml-2 bg-black text-white p-2 rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500"
+            >
+              {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
+            </button>
           </div>
         </div>
-      )}
-      <footer className="fixed bottom-4 left-4 z-50 flex space-x-2"></footer>
-      <style jsx>{`
-        .responsive-chat-box {
-          width: 800px;
-          left: 25%;
-        }
+      </div>
+    )}
+    <footer className="fixed bottom-4 left-4 z-50 flex space-x-2"></footer>
+    <style jsx>{`
+      .responsive-chat-box {
+        width: 800px;
+        left: 25%;
+      }
 
-        @media (max-width: 768px) {
-          .responsive-chat-box {
-            width: 100%;
-            left: 0;
-            right: 0;
-            margin: 0 auto;
-          }
+      @media (max-width: 768px) {
+        .responsive-chat-box {
+          width: 100%;
+          left: 0;
+          right: 0;
+          margin: 0 auto;
         }
-      `}</style>
-    </div>
-  );
+      }
+
+      .streaming-text {
+        opacity: 0.8;
+        font-style: italic;
+        position: relative;
+      }
+      
+      .cursor {
+        animation: blink 1s infinite;
+        margin-left: 2px;
+      }
+      
+      @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+      }
+    `}</style>
+  </div>
+);
 };
 
 export default TextToTextChat;
